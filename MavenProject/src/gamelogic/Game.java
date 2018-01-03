@@ -8,7 +8,7 @@ import entity.TwoDice;
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
-
+	private static int NumberOfDeadPlayers;
 	static int FieldNumb = 24;
 	static int 	Attribute = 6;
 	/**
@@ -37,7 +37,7 @@ public class Game {
 
 		switch (GUI_GUI.getNumberOfPlayers()) {
 		case 2:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false) {
+			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
@@ -45,7 +45,7 @@ public class Game {
 			}
 			break;
 		case 3:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false) {
+			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
@@ -54,7 +54,7 @@ public class Game {
 			break;
 
 		case 4:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false && ListOfPlayers.getPlayers(4).isDead() == false) {
+			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
@@ -65,19 +65,19 @@ public class Game {
 		default:
 			break;
 		}
-		int temp = 0;
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
-				temp = ListOfPlayers.getPlayers(i).getBalance();
-		}
-
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() == temp) {
-				ListOfPlayers.getPlayers(i).setWinner(true);
-				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-			}	
-		}
+//		int temp = 0;
+//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+//			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
+//				temp = ListOfPlayers.getPlayers(i).getBalance();
+//		}
+//
+//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+//			if(ListOfPlayers.getPlayers(i).getBalance()== temp) {
+//				ListOfPlayers.getPlayers(i).setWinner(true);
+//				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
+//				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
+//			}	
+//		}
 	}
 	
 	
@@ -96,20 +96,23 @@ public class Game {
 
 	//Everything needed between each turn
 	public void updateTurn (int diceSum, Player player) {
-		movePlayer(player, diceSum);
-		handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
-		goToJail();
+		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+			movePlayer(player, diceSum);
+			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
+			goToJail();
 
-		if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
-			ListOfPlayers.getPlayers(whosTurn).setDead(true);
+			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
+				ListOfPlayers.getPlayers(whosTurn).setDead(true);
+				NumberOfDeadPlayers++;
+			}
 		}
-
 		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
 			whosTurn = 1;
 		}
 		else {
 			whosTurn++;
 		}
+
 	}
 
 	public static void movePlayer(Player player, int diceSum) {
@@ -246,9 +249,10 @@ public class Game {
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				} else {
 					//Pay normal rent
-					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
-					
+					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
+						ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+						ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
+					}
 					//Update recievers balance on GUI
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				}
