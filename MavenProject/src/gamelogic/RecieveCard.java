@@ -13,6 +13,5 @@ public class RecieveCard extends Chancecard {
 	@Override
 	public void drawCard(Player player) {
 		// TODO Auto-generated method stub
-
 	}
 }
