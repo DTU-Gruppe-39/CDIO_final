@@ -7,6 +7,7 @@ public class Player {
 	private boolean isDead;
 	private boolean isWinner;
 	private boolean isJailed;
+	private int haveJailCard = 0;
 	private int currentField = 0;
 
 	
@@ -73,5 +74,13 @@ public class Player {
 
 	public void setWinner(boolean Winner) {
 		this.isWinner = Winner;
+	}
+
+	public int getHaveJailCard() {
+		return haveJailCard;
+	}
+
+	public void setHaveJailCard(int haveJailCard) {
+		this.haveJailCard = haveJailCard;
 	}
 }
