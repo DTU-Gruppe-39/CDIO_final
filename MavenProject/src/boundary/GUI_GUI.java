@@ -43,8 +43,8 @@ public class GUI_GUI {
 		long t0 = System.currentTimeMillis();
 		readText();
 
-		 fields = new GUI_Field[24];
-		 street = new GUI_Street[24];
+		 fields = new GUI_Field[40];
+		 street = new GUI_Street[40];
 
 		//	Opretter alle felterne
 
@@ -55,27 +55,20 @@ public class GUI_GUI {
 		fields[0].setSubText("");
 
 		fields[1] = new GUI_Street(titles[1], "M1" , titles[1], "M1", Color.GRAY, Color.white);
-//		street[1] = new GUI_Street(titles[1], "M1" , titles[1], "M1", Color.GRAY, Color.white);
 
 		fields[2] = new GUI_Street(titles[2], "M1", titles[2], "M1", Color.GRAY, Color.WHITE);
-//		street[2] = new GUI_Street(titles[2], "M1", titles[2], "M1", Color.GRAY, Color.WHITE);
 		
 		fields[3] = new GUI_Chance(titles[3], "", titles[3], Color.white, Color.BLACK);
 
 		fields[4] = new GUI_Street(titles[4], "M1", titles[4], "M1", Color.cyan, Color.BLACK);
-//		street[4] = new GUI_Street(titles[4], "M1", titles[4], "M1", Color.cyan, Color.BLACK);
 
 		fields[5] = new GUI_Street(titles[5], "M1", titles[5], "M1", Color.cyan, Color.BLACK);
-//		street[5] = new GUI_Street(titles[5], "M1", titles[5], "M1", Color.cyan, Color.BLACK);
 
 		fields[6] = new GUI_Street(titles[6], "", titles[6], "", Color.WHITE, Color.BLACK);
-//		street[6] = new GUI_Street(titles[6], "", titles[6], "", Color.WHITE, Color.BLACK);
 
 		fields[7] = new GUI_Street(titles[7], "M2", titles[7], "M2", Color.MAGENTA, Color.BLACK);
-//		street[7] = new GUI_Street(titles[7], "M2", titles[7], "M2", Color.MAGENTA, Color.BLACK);
 
 		fields[8] = new GUI_Street(titles[8], "M2", titles[8], "M2", Color.magenta, Color.BLACK);
-//		street[8] = new GUI_Street(titles[8], "M2", titles[8], "M2", Color.magenta, Color.BLACK);
 
 		fields[9] = new GUI_Chance(titles[9], "", titles[9], Color.white, Color.BLACK);
 
@@ -106,6 +99,40 @@ public class GUI_GUI {
 		fields[22] = new GUI_Street(titles[22], "M5", titles[22], "M5", Color.BLUE, Color.WHITE);
 
 		fields[23] = new GUI_Street(titles[23], "M5", titles[23], "M5", Color.BLUE, Color.WHITE);
+		
+		fields[24] = new GUI_Street(titles[24], "M1" , titles[24], "M1", Color.GRAY, Color.white);
+
+		fields[25] = new GUI_Street(titles[25], "M1", titles[25], "M1", Color.GRAY, Color.WHITE);
+		
+		fields[26] = new GUI_Chance(titles[26], "", titles[26], Color.white, Color.BLACK);
+
+		fields[27] = new GUI_Street(titles[27], "M1", titles[27], "M1", Color.cyan, Color.BLACK);
+
+		fields[28] = new GUI_Street(titles[28], "M1", titles[28], "M1", Color.cyan, Color.BLACK);
+
+		fields[29] = new GUI_Street(titles[29], "", titles[29], "", Color.WHITE, Color.BLACK);
+
+		fields[30] = new GUI_Street(titles[30], "M2", titles[30], "M2", Color.MAGENTA, Color.BLACK);
+
+		fields[31] = new GUI_Street(titles[31], "M2", titles[31], "M2", Color.magenta, Color.BLACK);
+
+		fields[32] = new GUI_Chance(titles[32], "", titles[32], Color.white, Color.BLACK);
+
+		fields[33] = new GUI_Street(titles[33], "M2", titles[33], "M2", Color.orange, Color.BLACK);
+
+		fields[34] = new GUI_Street(titles[34], "M2", titles[34], "M2", Color.orange, Color.BLACK);
+
+		fields[35] = new GUI_Street(titles[35], "", titles[35], "", Color.WHITE, Color.RED);
+
+		fields[36] = new GUI_Street(titles[36], "M3", titles[36], "M3", Color.red, Color.BLACK);
+
+		fields[37] = new GUI_Street(titles[37], "M3", titles[37], "M3", Color.red, Color.BLACK);
+
+		fields[38] = new GUI_Chance(titles[38], "", titles[38], Color.white, Color.BLACK);
+		
+		fields[39] = new GUI_Chance(titles[39], "", titles[39], Color.white, Color.BLACK);
+
+		
 		gui = new GUI(fields, Color.LIGHT_GRAY);			
 
 		long t1 = System.currentTimeMillis();
@@ -210,9 +237,9 @@ public class GUI_GUI {
 		String file = "../textFile.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String [] title;
-		title = new String[24];
+		title = new String[40];
 
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
 			title[i] = currentLine;
 		}
