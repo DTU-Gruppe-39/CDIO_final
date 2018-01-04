@@ -55,83 +55,83 @@ public class GUI_GUI {
 		fields[0].setTitle("START");
 		fields[0].setSubText("");
 
-		fields[1] = new GUI_Street(titles[1], "" , titles[1], "", Color.cyan, Color.black);
+		fields[1] = new GUI_Street(titles[1], "" , disc[1], "", Color.cyan, Color.black);
 
-		fields[2] = new GUI_Chance(titles[2], "", titles[2], Color.white, Color.BLACK);
+		fields[2] = new GUI_Chance(titles[2], "", disc[2], Color.white, Color.BLACK);
 		
-		fields[3] = new GUI_Street(titles[3], "", titles[3], "", Color.cyan, Color.BLACK);
+		fields[3] = new GUI_Street(titles[3], "", disc[3], "", Color.cyan, Color.BLACK);
 
-		fields[4] = new GUI_Street(titles[4], "", titles[4], "", Color.white, Color.BLACK);
+		fields[4] = new GUI_Street(titles[4], "", disc[4], "", Color.white, Color.BLACK);
 
-		fields[5] = new GUI_Street(titles[5], "", titles[5], "", Color.white, Color.BLACK);
+		fields[5] = new GUI_Street(titles[5], "", disc[5], "", Color.white, Color.BLACK);
 
-		fields[6] = new GUI_Street(titles[6], "", titles[6], "", Color.pink, Color.BLACK);
+		fields[6] = new GUI_Street(titles[6], "", disc[6], "", Color.pink, Color.BLACK);
 
-		fields[7] = new GUI_Chance(titles[7], "", titles[7], Color.white, Color.BLACK);
+		fields[7] = new GUI_Chance(titles[7], "", disc[7], Color.white, Color.BLACK);
 
-		fields[8] = new GUI_Street(titles[8], "", titles[8], "", Color.pink, Color.BLACK);
+		fields[8] = new GUI_Street(titles[8], "", disc[8], "", Color.pink, Color.BLACK);
 
-		fields[9] = new GUI_Street(titles[9], "", titles[9], "", Color.pink, Color.BLACK);
+		fields[9] = new GUI_Street(titles[9], "", disc[9], "", Color.pink, Color.BLACK);
 
-		fields[10] = new GUI_Street(titles[10], "", titles[10], "", Color.orange, Color.BLACK);
+		fields[10] = new GUI_Street(titles[10], "", disc[10], "", Color.orange, Color.BLACK);
 
-		fields[11] = new GUI_Street(titles[11], "", titles[11], "", Color.green, Color.BLACK);
+		fields[11] = new GUI_Street(titles[11], "", disc[11], "", Color.green, Color.BLACK);
 
-		fields[12] = new GUI_Street(titles[12], "", titles[12], "", Color.WHITE, Color.black);
+		fields[12] = new GUI_Street(titles[12], "", disc[12], "", Color.WHITE, Color.black);
 
-		fields[13] = new GUI_Street(titles[13], "", titles[13], "", Color.green, Color.BLACK);
+		fields[13] = new GUI_Street(titles[13], "", disc[13], "", Color.green, Color.BLACK);
 
-		fields[14] = new GUI_Street(titles[14], "", titles[14], "", Color.green, Color.BLACK);
+		fields[14] = new GUI_Street(titles[14], "", disc[14], "", Color.green, Color.BLACK);
 
-		fields[15] = new GUI_Street(titles[15], "", titles[15], "", Color.white, Color.BLACK);
+		fields[15] = new GUI_Street(titles[15], "", disc[15], "", Color.white, Color.BLACK);
 
-		fields[16] = new GUI_Street(titles[16], "", titles[16], "", Color.gray, Color.white);
+		fields[16] = new GUI_Street(titles[16], "", disc[16], "", Color.gray, Color.white);
 
-		fields[17] = new GUI_Chance(titles[17], "", titles[17], Color.white, Color.BLACK);
+		fields[17] = new GUI_Chance(titles[17], "", disc[17], Color.white, Color.BLACK);
 
-		fields[18] = new GUI_Street(titles[18], "", titles[18],"", Color.gray, Color.white);
+		fields[18] = new GUI_Street(titles[18], "", disc[18],"", Color.gray, Color.white);
 
-		fields[19] = new GUI_Street(titles[19], "", titles[19], "", Color.gray, Color.white);
+		fields[19] = new GUI_Street(titles[19], "", disc[19], "", Color.gray, Color.white);
 
-		fields[20] = new GUI_Street(titles[20], "", titles[20], "", Color.white, Color.BLACK);
+		fields[20] = new GUI_Street(titles[20], "", disc[20], "", Color.white, Color.BLACK);
 
-		fields[21] = new GUI_Street(titles[21], "", titles[21],"", Color.red, Color.white);
+		fields[21] = new GUI_Street(titles[21], "", disc[21],"", Color.red, Color.white);
 
-		fields[22] = new GUI_Chance(titles[22], "", titles[22], Color.white, Color.black);
+		fields[22] = new GUI_Chance(titles[22], "", disc[22], Color.white, Color.black);
 
-		fields[23] = new GUI_Street(titles[23], "", titles[23], "", Color.red, Color.WHITE);
+		fields[23] = new GUI_Street(titles[23], "", disc[23], "", Color.red, Color.WHITE);
 		
-		fields[24] = new GUI_Street(titles[24], "" , titles[24], "", Color.red, Color.white);
+		fields[24] = new GUI_Street(titles[24], "" , disc[24], "", Color.red, Color.white);
 
-		fields[25] = new GUI_Street(titles[25], "", titles[25], "", Color.white, Color.black);
+		fields[25] = new GUI_Street(titles[25], "", disc[25], "", Color.white, Color.black);
 		
-		fields[26] = new GUI_Street(titles[26], "", titles[26],"", Color.white, Color.BLACK);
+		fields[26] = new GUI_Street(titles[26], "", disc[26],"", Color.white, Color.BLACK);
 
-		fields[27] = new GUI_Street(titles[27], "", titles[27], "", Color.white, Color.BLACK);
+		fields[27] = new GUI_Street(titles[27], "", disc[27], "", Color.white, Color.BLACK);
 
-		fields[28] = new GUI_Street(titles[28], "", titles[28], "", Color.white, Color.BLACK);
+		fields[28] = new GUI_Street(titles[28], "", disc[28], "", Color.white, Color.BLACK);
 
-		fields[29] = new GUI_Street(titles[29], "", titles[29], "", Color.WHITE, Color.BLACK);
+		fields[29] = new GUI_Street(titles[29], "", disc[29], "", Color.WHITE, Color.BLACK);
 
-		fields[30] = new GUI_Street(titles[30], "", titles[30], "", Color.white, Color.BLACK);
+		fields[30] = new GUI_Street(titles[30], "", disc[30], "", Color.white, Color.BLACK);
 
-		fields[31] = new GUI_Street(titles[31], "", titles[31], "", Color.yellow, Color.BLACK);
+		fields[31] = new GUI_Street(titles[31], "", disc[31], "", Color.yellow, Color.BLACK);
 
-		fields[32] = new GUI_Street(titles[32], "", titles[32],"", Color.yellow, Color.BLACK);
+		fields[32] = new GUI_Street(titles[32], "", disc[32],"", Color.yellow, Color.BLACK);
 
-		fields[33] = new GUI_Chance(titles[33], "", titles[33], Color.white, Color.BLACK);
+		fields[33] = new GUI_Chance(titles[33], "", disc[33], Color.white, Color.BLACK);
 
-		fields[34] = new GUI_Street(titles[34], "", titles[34], "", Color.yellow, Color.BLACK);
+		fields[34] = new GUI_Street(titles[34], "", disc[34], "", Color.yellow, Color.BLACK);
 
-		fields[35] = new GUI_Street(titles[35], "", titles[35], "", Color.WHITE, Color.black);
+		fields[35] = new GUI_Street(titles[35], "", disc[35], "", Color.WHITE, Color.black);
 
-		fields[36] = new GUI_Chance(titles[36], "", titles[36], Color.white, Color.BLACK);
+		fields[36] = new GUI_Chance(titles[36], "", disc[36], Color.white, Color.BLACK);
 
-		fields[37] = new GUI_Street(titles[37], "", titles[37], "", Color.red, Color.BLACK);
+		fields[37] = new GUI_Street(titles[37], "", disc[37], "", Color.red, Color.BLACK);
 
-		fields[38] = new GUI_Street(titles[38], "", titles[38],"", Color.white, Color.BLACK);
+		fields[38] = new GUI_Street(titles[38], "", disc[38],"", Color.white, Color.BLACK);
 		
-		fields[39] = new GUI_Street(titles[39], "", titles[39],"", Color.red, Color.BLACK);
+		fields[39] = new GUI_Street(titles[39], "", disc[39],"", Color.red, Color.BLACK);
 
 		
 		gui = new GUI(fields, Color.LIGHT_GRAY);			
