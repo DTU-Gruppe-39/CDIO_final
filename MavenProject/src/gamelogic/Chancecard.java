@@ -12,15 +12,16 @@ public abstract class Chancecard {
 	
 
 
-	public Chancecard(String text) {
+	public void setChancecardText(String text) {
 		this.text = text;
 	}
 
 	abstract public void drawCard(Player player);
 
 	
-	public String Chance() {
+	public String getChanceCardText() {
 		return text;
+	}
 		
 		
 		/*	public static void readText() throws IOException {
@@ -37,6 +38,5 @@ public abstract class Chancecard {
 		setTitles(title);
 		
 		*/
-	}
 	
 }
