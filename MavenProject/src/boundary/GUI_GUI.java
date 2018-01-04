@@ -54,6 +54,7 @@ public class GUI_GUI {
 		fields[0].setForeGroundColor(Color.white);
 		fields[0].setTitle("START");
 		fields[0].setSubText("");
+		fields[0].setDescription(disc[0]);
 
 		fields[1] = new GUI_Street(titles[1], "" , disc[1], "", Color.cyan, Color.black);
 
