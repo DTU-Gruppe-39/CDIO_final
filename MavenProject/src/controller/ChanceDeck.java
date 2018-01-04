@@ -56,10 +56,12 @@ public class ChanceDeck {
 	
 	public void shuffle() {
 		for(int i = 0; i < Cards.length; i++) {
-			int j  = (int) (Math.random() * Cards.length);
-			Chancecard temp  = Cards[i];
-			int Cards[i] = Cards[];
+			int j  = (int) ((Math.random()) * (Cards.length - i));
+			Chancecard temp  = Cards[j];
+			Cards[j] = Cards[i];
+			Cards[i] = temp;
 		}
+	}
 		
 	public static void readText() throws IOException {
 		String file = "../CardText.txt";

@@ -270,6 +270,8 @@ public class Game {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 	}
+	
+	
 
 
 	//Updates the GUI
