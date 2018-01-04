@@ -56,7 +56,7 @@ public class GUI_GUI {
 		fields[0].setSubText("");
 		fields[0].setDescription(disc[0]);
 
-		fields[1] = new GUI_Street(titles[1], "" , disc[1], "", Color.cyan, Color.black);
+		fields[1] = new GUI_Street(titles[1], "" , titles[1] + disc[1], "", Color.cyan, Color.black);
 
 		fields[2] = new GUI_Chance(titles[2], "", disc[2], Color.white, Color.BLACK);
 		
