@@ -1,11 +1,11 @@
 Start
 Rødovrevej
-Prøv Lykken
+?
 Hvidovre
 Betal Indkomstskat
 Rederiet Lindinger A/S
 Roskildevej
-Prøv Lykken
+?
 Valby Langgade
 Allégade
 På Besøg
@@ -15,12 +15,12 @@ Büllowsvej
 GL. Kongevej
 Grenaa-Hundested
 Bernstorffsvej
-Prøv Lykken
+?
 Hellerupvej
 Strandvej
 Parkering
 Trianglen
-Prøv Lykken
+?
 Østerbrogade
 Grønningen
 Mols-Linjen A/S
@@ -31,10 +31,10 @@ Faxe Bryggeri
 De Fængsles
 Amagertorv
 Vimmelskaftet
-Prøv Lykken
+?
 Nygade
 Skandinavisk Linjetrafik
-Prøv Lykken
+?
 Frederiksberggade
 Ekstraordinær statsskat
 Rådhuspladsen
