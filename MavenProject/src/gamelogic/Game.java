@@ -35,49 +35,13 @@ public class Game {
 		TwoDice dice = new TwoDice();
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
 
-		switch (GUI_GUI.getNumberOfPlayers()) {
-		case 2:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-		case 3:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-
-		case 4:
+		
 			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false && ListOfPlayers.getPlayers(4).isDead() == false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
 				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
 			}
-			break;
-
-		default:
-			break;
-		}
-		int temp = 0;
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
-				temp = ListOfPlayers.getPlayers(i).getBalance();
-		}
-
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() == temp) {
-				ListOfPlayers.getPlayers(i).setWinner(true);
-				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-			}	
-		}
 	}
 	
 	
@@ -96,6 +60,7 @@ public class Game {
 
 	//Everything needed between each turn
 	public void updateTurn (int diceSum, Player player) {
+		ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 		movePlayer(player, diceSum);
 		handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 		goToJail();
