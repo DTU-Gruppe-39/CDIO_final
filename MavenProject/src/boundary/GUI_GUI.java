@@ -139,7 +139,7 @@ public class GUI_GUI {
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
 		
 //		System.out.println(Arrays.toString(titles));
-		numberOfPlayers = gui.getUserInteger("Indtast antal spillere", 2, 4);
+		numberOfPlayers = gui.getUserInteger("Indtast antal spillere", 2, 6);
 //		System.out.println(numberOfPlayers);
 		
 		names = new String [numberOfPlayers];
@@ -156,13 +156,13 @@ public class GUI_GUI {
 			case 2: 
 				GUI_Car one = new GUI_Car();
 				one.setPrimaryColor(Color.RED);
-				guiPlayers[0] = new GUI_Player(names[0],20, one);
+				guiPlayers[0] = new GUI_Player(names[0],30000, one);
 				gui.addPlayer(guiPlayers[0]);
 				fields[0].setCar(guiPlayers[0], true);
 				
 				GUI_Car two = new GUI_Car();
 				two.setPrimaryColor(Color.yellow);
-				guiPlayers[1] = new GUI_Player(names[1],20, two);
+				guiPlayers[1] = new GUI_Player(names[1],30000, two);
 				gui.addPlayer(guiPlayers[1]);
 				fields[0].setCar(guiPlayers[1], true);
 				break;
@@ -170,19 +170,19 @@ public class GUI_GUI {
 			case 3:
 				GUI_Car three = new GUI_Car();
 				three.setPrimaryColor(Color.RED);
-				guiPlayers[0] = new GUI_Player(names[0],18, three);
+				guiPlayers[0] = new GUI_Player(names[0],30000, three);
 				gui.addPlayer(guiPlayers[0]);
 				fields[0].setCar(guiPlayers[0], true);
 				
 				GUI_Car four = new GUI_Car();
 				four.setPrimaryColor(Color.yellow);
-				guiPlayers[1] = new GUI_Player(names[1],18, four);
+				guiPlayers[1] = new GUI_Player(names[1],30000, four);
 				gui.addPlayer(guiPlayers[1]);
 				fields[0].setCar(guiPlayers[1], true);
 				
 				GUI_Car five = new GUI_Car();
 				five.setPrimaryColor(Color.WHITE);
-				guiPlayers[2] = new GUI_Player(names[2],18, five);
+				guiPlayers[2] = new GUI_Player(names[2],30000, five);
 				gui.addPlayer(guiPlayers[2]);
 				fields[0].setCar(guiPlayers[2], true);
 
@@ -191,27 +191,99 @@ public class GUI_GUI {
 			case 4:
 				GUI_Car six = new GUI_Car();
 				six.setPrimaryColor(Color.RED);
-				guiPlayers[0] = new GUI_Player(names[0],16, six);
+				guiPlayers[0] = new GUI_Player(names[0],30000, six);
 				gui.addPlayer(guiPlayers[0]);
 				fields[0].setCar(guiPlayers[0], true);
 				
 				GUI_Car seven = new GUI_Car();
 				seven.setPrimaryColor(Color.yellow);
-				guiPlayers[1] = new GUI_Player(names[1],16, seven);
+				guiPlayers[1] = new GUI_Player(names[1],30000, seven);
 				gui.addPlayer(guiPlayers[1]);
 				fields[0].setCar(guiPlayers[1], true);
 				
 				GUI_Car eight = new GUI_Car();
 				eight.setPrimaryColor(Color.WHITE);
-				guiPlayers[2] = new GUI_Player(names[2],16, eight);
+				guiPlayers[2] = new GUI_Player(names[2],30000, eight);
 				gui.addPlayer(guiPlayers[2]);
 				fields[0].setCar(guiPlayers[2], true);
 				
 				GUI_Car nine = new GUI_Car();
 				nine.setPrimaryColor(Color.cyan);
-				guiPlayers[3] = new GUI_Player(names[3],16, nine);
+				guiPlayers[3] = new GUI_Player(names[3],30000, nine);
 				gui.addPlayer(guiPlayers[3]);
 				fields[0].setCar(guiPlayers[3], true);
+				
+				break;
+			
+			case 5:
+				GUI_Car ten = new GUI_Car();
+				ten.setPrimaryColor(Color.RED);
+				guiPlayers[0] = new GUI_Player(names[0],30000, ten);
+				gui.addPlayer(guiPlayers[0]);
+				fields[0].setCar(guiPlayers[0], true);
+				
+				GUI_Car eleven = new GUI_Car();
+				eleven.setPrimaryColor(Color.yellow);
+				guiPlayers[1] = new GUI_Player(names[1],30000, eleven);
+				gui.addPlayer(guiPlayers[1]);
+				fields[0].setCar(guiPlayers[1], true);
+				
+				GUI_Car twelve = new GUI_Car();
+				twelve.setPrimaryColor(Color.WHITE);
+				guiPlayers[2] = new GUI_Player(names[2],30000, twelve);
+				gui.addPlayer(guiPlayers[2]);
+				fields[0].setCar(guiPlayers[2], true);
+				
+				GUI_Car thirteen = new GUI_Car();
+				thirteen.setPrimaryColor(Color.cyan);
+				guiPlayers[3] = new GUI_Player(names[3],30000, thirteen);
+				gui.addPlayer(guiPlayers[3]);
+				fields[0].setCar(guiPlayers[3], true);
+				
+				GUI_Car fourteen = new GUI_Car();
+				fourteen.setPrimaryColor(Color.black);
+				guiPlayers[4] = new GUI_Player(names[4],30000, fourteen);
+				gui.addPlayer(guiPlayers[4]);
+				fields[0].setCar(guiPlayers[4], true);
+				
+				break;
+				
+			case 6:
+				GUI_Car fifteen = new GUI_Car();
+				fifteen.setPrimaryColor(Color.RED);
+				guiPlayers[0] = new GUI_Player(names[0],30000, fifteen);
+				gui.addPlayer(guiPlayers[0]);
+				fields[0].setCar(guiPlayers[0], true);
+				
+				GUI_Car sixteen = new GUI_Car();
+				sixteen.setPrimaryColor(Color.yellow);
+				guiPlayers[1] = new GUI_Player(names[1],30000, sixteen);
+				gui.addPlayer(guiPlayers[1]);
+				fields[0].setCar(guiPlayers[1], true);
+				
+				GUI_Car seventeen = new GUI_Car();
+				seventeen.setPrimaryColor(Color.WHITE);
+				guiPlayers[2] = new GUI_Player(names[2],30000, seventeen);
+				gui.addPlayer(guiPlayers[2]);
+				fields[0].setCar(guiPlayers[2], true);
+				
+				GUI_Car eighteen = new GUI_Car();
+				eighteen.setPrimaryColor(Color.cyan);
+				guiPlayers[3] = new GUI_Player(names[3],30000, eighteen);
+				gui.addPlayer(guiPlayers[3]);
+				fields[0].setCar(guiPlayers[3], true);
+				
+				GUI_Car nineteen = new GUI_Car();
+				nineteen.setPrimaryColor(Color.black);
+				guiPlayers[4] = new GUI_Player(names[4],30000, nineteen);
+				gui.addPlayer(guiPlayers[4]);
+				fields[0].setCar(guiPlayers[4], true);
+				
+				GUI_Car twenty = new GUI_Car();
+				twenty.setPrimaryColor(Color.yellow);
+				guiPlayers[5] = new GUI_Player(names[5],30000, twenty);
+				gui.addPlayer(guiPlayers[5]);
+				fields[0].setCar(guiPlayers[5], true);
 				
 				break;
 			
