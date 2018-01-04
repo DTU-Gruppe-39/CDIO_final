@@ -1,18 +1,11 @@
 package gamelogic;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 import entity.Player;
 
 public abstract class Chancecard {
-	protected String text;
+	private String text;
 
-	
-
-
-	public void setChancecardText(String text) {
+	public Chancecard(String text) {
 		this.text = text;
 	}
 

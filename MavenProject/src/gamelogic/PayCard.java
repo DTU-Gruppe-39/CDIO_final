@@ -9,8 +9,8 @@ public class PayCard extends Chancecard {
 		super(text);
 		this.amount = amount;
 	}
+	
 	@Override
 	public void drawCard(Player player) {
-		// TODO Auto-generated method stub
 	}
 }

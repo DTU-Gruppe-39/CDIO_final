@@ -2,7 +2,6 @@ package gamelogic;
 
 import entity.Player;
 
-
 public class RecieveCard extends Chancecard {
 	private int amount;
 
@@ -10,8 +9,13 @@ public class RecieveCard extends Chancecard {
 		super(text);
 		this.amount = amount;
 	}
+
 	@Override
 	public void drawCard(Player player) {
-		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public String getChanceCardText() {
+		return super.getChanceCardText();
 	}
 }
