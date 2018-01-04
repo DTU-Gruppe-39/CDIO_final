@@ -22,21 +22,5 @@ public abstract class Chancecard {
 	public String getChanceCardText() {
 		return text;
 	}
-		
-		
-		/*	public static void readText() throws IOException {
-		String file = "../textFile.txt";
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String [] title;
-		title = new String[24];
-
-		for (int i = 0; i < 24; i++) {
-			String currentLine = reader.readLine();
-			title[i] = currentLine;
-		}
-		reader.close();
-		setTitles(title);
-		
-		*/
 	
 }
