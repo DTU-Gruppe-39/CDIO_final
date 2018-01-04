@@ -1,5 +1,7 @@
 package gamelogic;
 
+import java.util.Arrays;
+
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -65,22 +67,22 @@ public class Game {
 		default:
 			break;
 		}
-//		int temp = 0;
-//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-//			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
-//				temp = ListOfPlayers.getPlayers(i).getBalance();
-//		}
-//
-//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-//			if(ListOfPlayers.getPlayers(i).getBalance()== temp) {
-//				ListOfPlayers.getPlayers(i).setWinner(true);
-//				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-//				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-//			}	
-//		}
+		//		int temp = 0;
+		//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+		//			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
+		//				temp = ListOfPlayers.getPlayers(i).getBalance();
+		//		}
+		//
+		//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+		//			if(ListOfPlayers.getPlayers(i).getBalance()== temp) {
+		//				ListOfPlayers.getPlayers(i).setWinner(true);
+		//				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
+		//				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
+		//			}	
+		//		}
 	}
-	
-	
+
+
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==18) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(true);
@@ -97,13 +99,14 @@ public class Game {
 	//Everything needed between each turn
 	public void updateTurn (int diceSum, Player player) {
 		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			movePlayer(player, diceSum);
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 			goToJail();
 
 			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
 				ListOfPlayers.getPlayers(whosTurn).setDead(true);
-				NumberOfDeadPlayers++;
+				NumberOfDeadPlayers++;	
 			}
 		}
 		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
@@ -131,7 +134,7 @@ public class Game {
 		}
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
-		
+
 		//Move player on GUI
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
@@ -241,15 +244,42 @@ public class Game {
 			else {
 				if (ownsBothFields()) {
 					//Multiply rent by 2
-
+					for (int i=0; i<24; i++) {
+						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+							if(whosTurn==Fields[i][4]) {
+								Fields[i][4]=0;
+								Fields[i][3]=0;
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
+								removeOwner(i);
+							}
+						}
+						else {
+							break;
+						}
+					}
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-					
+
 					//Update recievers balance on GUI
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				} else {
 					//Pay normal rent
 					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
+						for (int i=0; i<24; i++) {
+							if(ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+								if(whosTurn==Fields[i][4]) {
+									Fields[i][4]=0;
+									Fields[i][3]=0;
+									ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
+									removeOwner(i);
+								}
+							}
+							else {
+								
+								break;
+							}
+						}
+
 						ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 						ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
 					}
@@ -257,8 +287,9 @@ public class Game {
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				}
 			}
+		}
 
-		} else {
+		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
@@ -274,22 +305,25 @@ public class Game {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 	}
-
+	public void removeOwner(int fieldnumber) {
+		GUI_GUI.getFields(fieldnumber).setDescription("");
+	}
+	
 
 	//Updates the GUI
-//			public void updateGUI (int field, Player player, int dice) {
-//				GUI_Test.gui.removeAllCars(player.getName());
-//				GUI_Test.gui.setCar(field, player.getName());
-//				GUI_Test.gui.setBalance(player.getName(), player.getBalance());
-//				GUI_Test.gui.setDie(dice);
-				
-				//Print text to GUI
-//				try {
-//					printText(field);
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
+	//			public void updateGUI (int field, Player player, int dice) {
+	//				GUI_Test.gui.removeAllCars(player.getName());
+	//				GUI_Test.gui.setCar(field, player.getName());
+	//				GUI_Test.gui.setBalance(player.getName(), player.getBalance());
+	//				GUI_Test.gui.setDie(dice);
+
+	//Print text to GUI
+	//				try {
+	//					printText(field);
+	//				} catch (IOException e) {
+	//					// TODO Auto-generated catch block
+	//					e.printStackTrace();
+	//				}
+	//			}
 
 }
