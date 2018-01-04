@@ -11,7 +11,7 @@ public class Player {
 	private boolean isJailed;
 	private int currentField = 0;
 	private int netWorth;
-	private int propertyValue;
+	public int propertyValue;
 
 
 	public Player () {
@@ -80,34 +80,18 @@ public class Player {
 		this.isWinner = Winner;
 	}
 
-	public int getNetWorth() {
-		netWorth = getBalance() + getPropertyValue() ;
-		return netWorth;
+	public int getNetWorth() { //adds together players balance and property value
+		this.netWorth = getBalance() + getPropertyValue();
+		return this.netWorth;
 	}
 	public int getPropertyValue() { //method that gets a players property value
 		for (int i=0; i<40; i++) {
-			
-		
-		
+			if (Game.getWhosTurn()==Game.getFields()[i][4]) {
+				this.propertyValue += Game.getFields()[i][1];
+			}
 		}
+		return this.propertyValue;
 
-
-
-
-
-
-			//		for (int i=0; i<40; i++) {
-			//			//			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]))
-			//			if (whosTurn==Fields[i][4]) {
-			//				Fields[i][4]=0;
-			//				Fields[i][3]=0;
-			//				ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
-			//				removeOwner(i);
-			//
-							return propertyValue;
-			//			}
-			//		}
-			//	}
-		
 	}
 }
+
