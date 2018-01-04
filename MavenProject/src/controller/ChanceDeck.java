@@ -94,9 +94,9 @@ public class ChanceDeck {
 		for (int i = 0; i < 18; i++) {
 			String currentLine = reader.readLine();
 			mmoney[i] = currentLine;
-			System.out.print(mmoney[i]);
+//			System.out.print(mmoney[i]);
 			amount[i] = (Integer.parseInt(mmoney[i]));
-			System.out.println(amount[i]);
+//			System.out.println(amount[i]);
 		}
 		reader.close();
 		setAmount(amount);
