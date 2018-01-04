@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class ChanceDeck {
 	private static String[] text;
+	private static int[] amount;
 	private Chancecard[] Cards;
 	private Random rand;
 	
@@ -42,6 +43,32 @@ public class ChanceDeck {
 
 	public static void setText(String[] text) {
 		ChanceDeck.text = text;
+	}
+	
+	public static void readAmaount() throws IOException {
+		String file = "../ChanceBalanceCards.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] mmoney;
+		mmoney = new String[18];
+		amount = new int[18];
+
+		for (int i = 0; i < 18; i++) {
+			String currentLine = reader.readLine();
+			mmoney[i] = currentLine;
+			System.out.print(mmoney[i]);
+			amount[i] = (Integer.parseInt(mmoney[i]));
+			System.out.println(amount[i]);
+		}
+		reader.close();
+		setAmount(amount);
+	}
+
+	public static int[] getAmount() {
+		return amount;
+	}
+
+	public static void setAmount(int[] amount) {
+		ChanceDeck.amount = amount;
 	}
 	
 }
