@@ -13,6 +13,7 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 public class GUI_GUI {
 	private static String [] titles;
+	private static String [] disc;
 	private static String [] names;
 	private static int numberOfPlayers;
 	public static GUI gui;
@@ -317,6 +318,29 @@ public class GUI_GUI {
 		}
 		reader.close();
 		setTitles(title);
+	}
+
+	public static void readDisc() throws IOException {
+		String file = "../FieldDescription.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] discText;
+		discText = new String[40];
+		
+		for (int i = 0; i < 40; i++) {
+			String currentLine = reader.readLine();
+			discText[i] = currentLine;
+			System.out.println(discText[i]);
+		}
+		reader.close();
+		setDisc(discText);
+	}
+
+	public static String[] getDisc() {
+		return disc;
+	}
+
+	public static void setDisc(String[] disc) {
+		GUI_GUI.disc = disc;
 	}
 
 	public static GUI_Player getGuiPlayers(int index) {
