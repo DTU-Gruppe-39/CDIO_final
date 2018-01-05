@@ -6,6 +6,8 @@ import gamelogic.Game;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
+//		new GameController().playGame();
+		GUI_GUI.readDisc();
 		GUI_GUI.GUILauncher();
 		Game.fillFields();
 		ListOfPlayers list = new ListOfPlayers((GUI_GUI.getNumberOfPlayers() + 1)); //Players index in array needs to start at 1, because 0 = to no owner on a field

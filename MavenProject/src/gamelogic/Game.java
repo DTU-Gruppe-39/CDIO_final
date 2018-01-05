@@ -36,50 +36,13 @@ public class Game {
 		//Create dice
 		TwoDice dice = new TwoDice();
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-
-		switch (GUI_GUI.getNumberOfPlayers()) {
-		case 2:
+		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
 				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
 			}
-			break;
-		case 3:
-			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-
-		case 4:
-			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-
-		default:
-			break;
-		}
-		//		int temp = 0;
-		//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-		//			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
-		//				temp = ListOfPlayers.getPlayers(i).getBalance();
-		//		}
-		//
-		//		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-		//			if(ListOfPlayers.getPlayers(i).getBalance()== temp) {
-		//				ListOfPlayers.getPlayers(i).setWinner(true);
-		//				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-		//				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-		//			}	
-		//		}
 	}
 
 
@@ -305,6 +268,25 @@ public class Game {
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
+	private void payRent() {
+		if (ownsBothFields()) {
+			//Multiply rent by 2
+
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+			
+			//Update recievers balance on GUI
+			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
+		} else {
+			//Pay normal rent
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
+			
+			//Update recievers balance on GUI
+			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
+		}
+	}
+
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
@@ -314,6 +296,10 @@ public class Game {
 		GUI_GUI.getFields(fieldnumber).setDescription("");
 	}
 	
+	
+	public static int getWhosTurn() {
+		return whosTurn;
+	}
 
 	//Updates the GUI
 	//			public void updateGUI (int field, Player player, int dice) {
