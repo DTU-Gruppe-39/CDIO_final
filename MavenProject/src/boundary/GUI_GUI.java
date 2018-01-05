@@ -331,7 +331,7 @@ public class GUI_GUI {
 		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
 			discText[i] = currentLine;
-			System.out.println(discText[i]);
+//			System.out.println(discText[i]);
 		}
 		reader.close();
 		setDisc(discText);
@@ -340,13 +340,13 @@ public class GUI_GUI {
 	public static void readSubText() throws IOException {
 		String file = "../Subtext.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String [] subText;
-		subText = new String[40];
+		String [] subtext;
+		subtext = new String[40];
 		
 		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
-			subText[i] = currentLine;
-			System.out.println(subText[i]);
+			subtext[i] = currentLine;
+			System.out.println(subtext[i]);
 		}
 		reader.close();
 		setSubText(subText);
