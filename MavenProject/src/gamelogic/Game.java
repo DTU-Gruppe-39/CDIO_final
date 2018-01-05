@@ -50,10 +50,10 @@ public class Game {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(true);
 			ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1);
-			GUI_GUI.getFields(18).removeAllCars();
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
+			GUI_GUI.getFields(30).removeAllCars();
 			//Move player on GUI to prison
-			GUI_GUI.getFields(6).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 
 		}
 	}
