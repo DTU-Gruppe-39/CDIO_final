@@ -81,6 +81,6 @@ public class Player {
 	}
 
 	public void setHaveJailCard(int haveJailCard) {
-		this.haveJailCard = haveJailCard;
+		this.haveJailCard += haveJailCard;
 	}
 }
