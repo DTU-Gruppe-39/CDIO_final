@@ -240,7 +240,7 @@ public class Game {
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 	}
 	
-	public int getWhosTurn() {
+	public static int getWhosTurn() {
 		return whosTurn;
 	}
 
