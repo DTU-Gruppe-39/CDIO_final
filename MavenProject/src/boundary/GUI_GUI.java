@@ -347,4 +347,8 @@ public class GUI_GUI {
 	public static GUI_Player getGuiPlayers(int index) {
 		return guiPlayers[index -1];
 	}
+	
+	public void displayOwner(GUI_Field field, String name) {
+		
+	}
 }
