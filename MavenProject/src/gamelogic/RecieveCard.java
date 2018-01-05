@@ -3,10 +3,18 @@ package gamelogic;
 import entity.Player;
 
 public class RecieveCard extends Chancecard {
-	private int amount;
+	private static int amount;
 
 	public RecieveCard(String text, int amount)  {
 		super(text);
+		this.amount = amount;
+	}
+
+	public static int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 

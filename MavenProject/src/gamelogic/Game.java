@@ -272,6 +272,34 @@ public class Game {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static int getWhosTurn() {
+		return whosTurn;
+	}
 
 
 	//Updates the GUI

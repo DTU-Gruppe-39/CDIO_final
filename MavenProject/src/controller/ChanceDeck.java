@@ -17,6 +17,7 @@ public class ChanceDeck {
 	private Chancecard[] subCards;
 	private int nextDraw;
 
+
 	//	public ChanceDeck(String[] text) {
 	//		this.text = text;
 	//	}
@@ -64,7 +65,7 @@ public class ChanceDeck {
 		nextDraw = 0;
 	}
 
-	public drawCard(Player player) {
+	public Chancecard drawCard(Player player) {
 
 		if (Cards.length == nextDraw)
 			shuffle();
@@ -73,26 +74,31 @@ public class ChanceDeck {
 		nextDraw++;
 			
 		if(draw.getClass() == RecieveCard.class)
-			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(amount);
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(RecieveCard.getAmount());
 		
-		
-
-		if	(draw.getClass() == JailCard.class) {
-			if(JailInDeck == 0) {
-				if (Cards.length == nextDraw) { 
-					while (draw ==  JailCard) {
-						shuffle();			
-						draw = Cards[nextDraw];
-						nextDraw++;
-					}
-				} else {
-					draw = Cards[nextDraw];
-					nextDraw++;
-				}
-			} else {
-				Player.hold += 1;
-			}
+		else if(draw.getClass() == PayCard.class) {
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(PayCard.getAmount());
+			
+		}else if(draw.getClass() == MoveCard.class) {
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(MoveCard.getMoveTo());
 		}
+
+//		else if	(draw.getClass() == JailCard.class) {
+//			if(JailInDeck == 0) {
+//				if (Cards.length == nextDraw) { 
+//					while (draw ==  JailCard) {
+//						shuffle();			
+//						draw = Cards[nextDraw];
+//						nextDraw++;
+//					}
+//				} else {
+//					draw = Cards[nextDraw];
+//					nextDraw++;
+//				}
+//			} else {
+//				Player.hold += 1;
+//			}
+//		}
 		return draw;
 	}
 

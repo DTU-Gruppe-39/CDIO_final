@@ -4,11 +4,19 @@ import entity.Player;
 
 
 public class MoveCard extends Chancecard {
-	private int MoveTo;
+	private static int MoveTo;
 
 	public MoveCard(String text, int MoveTo) {
 		super(text);
 		this.MoveTo = MoveTo;
+	}
+
+	public static int getMoveTo() {
+		return MoveTo;
+	}
+
+	public void setMoveTo(int moveTo) {
+		MoveTo = moveTo;
 	}
 
 	@Override
