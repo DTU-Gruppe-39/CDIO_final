@@ -435,6 +435,7 @@ public class Game {
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 				setOwner(ListOfPlayers.getPlayers(whosTurn));
+				
 			}
 		}
 		//Update whosTurn's players balance on GUI
@@ -464,6 +465,7 @@ public class Game {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), ListOfPlayers.getPlayers(whosTurn).getName());
 	}
 	public void removeOwner(int fieldnumber) {
 		GUI_GUI.getFields(fieldnumber).setDescription("");
