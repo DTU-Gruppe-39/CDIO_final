@@ -53,7 +53,7 @@ public class GUI_GUI {
 		fields[0] = new GUI_Start();
 		fields[0].setBackGroundColor(Color.RED);
 		fields[0].setForeGroundColor(Color.white);
-		fields[0].setTitle("START");
+		fields[0].setTitle(titles[0]);
 		fields[0].setSubText(subText[0]);
 		fields[0].setDescription(disc[0]);
 
