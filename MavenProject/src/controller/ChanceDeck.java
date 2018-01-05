@@ -13,6 +13,7 @@ public class ChanceDeck {
 	private static int[] amount;
 	private Chancecard[] Cards;
 	private int nextDraw;
+	private int jailInDeck = 2;
 
 
 	//	public ChanceDeck(String[] text) {
@@ -28,15 +29,15 @@ public class ChanceDeck {
 		Cards[5] = new RecieveCard("Chance5", 1000);
 		Cards[6] = new RecieveCard("Chance6", 1000);
 		Cards[7] = new RecieveCard("Chance7", 1000);
-		Cards[8] = new PayCard("Chance8", 200);
-		Cards[9] = new PayCard("Chance9", 200);
-		Cards[10] = new PayCard("Chance10", 1000);	
-		Cards[11] = new PayCard("Chance11", 1000);
-		Cards[12] = new PayCard("Chance12", 2000);
-		Cards[13] = new PayCard("Chance13", 2000);
-		Cards[14] = new PayCard("Chance14", 200);
-		Cards[15] = new PayCard("Chance15", 200);
-		Cards[16] = new PayCard("Chance16", 1000);
+		Cards[8] = new PayCard("Chance8", -200);
+		Cards[9] = new PayCard("Chance9", -200);
+		Cards[10] = new PayCard("Chance10", -1000);	
+		Cards[11] = new PayCard("Chance11", -1000);
+		Cards[12] = new PayCard("Chance12", -2000);
+		Cards[13] = new PayCard("Chance13", -2000);
+		Cards[14] = new PayCard("Chance14", -200);
+		Cards[15] = new PayCard("Chance15", -200);
+		Cards[16] = new PayCard("Chance16", -1000);
 		Cards[17] = new JailCard("Chance17");
 		Cards[18] = new JailCard("Chance18");
 		Cards[19] = new MoveCard("Chance19", 30);
@@ -79,22 +80,23 @@ public class ChanceDeck {
 			ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(MoveCard.getMoveTo());
 		}
 
-//		else if	(draw.getClass() == JailCard.class) {
-//			if(JailInDeck == 0) {
-//				if (Cards.length == nextDraw) { 
-//					while (draw ==  JailCard) {
-//						shuffle();			
-//						draw = Cards[nextDraw];
-//						nextDraw++;
-//					}
-//				} else {
-//					draw = Cards[nextDraw];
-//					nextDraw++;
-//				}
-//			} else {
-//				Player.hold += 1;
-//			}
-//		}
+		else if	(draw.getClass() == JailCard.class) {
+			if(jailInDeck == 0) {
+				if (Cards.length == nextDraw) { 
+					while (draw.getClass() ==  JailCard.class) {
+						shuffle();			
+						draw = Cards[nextDraw];
+						nextDraw++;
+					}
+				} else {
+					draw = Cards[nextDraw];
+					nextDraw++;
+				}
+			} else {
+				ListOfPlayers.getPlayers(Game.getWhosTurn()).setHaveJailCard(1);
+				jailInDeck--;
+			}
+		}
 		return draw;
 	}
 
