@@ -1,7 +1,6 @@
 package gamelogic;
 
 import java.util.Arrays;
-
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -41,7 +40,7 @@ public class Game {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
+				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
 	}
 
@@ -60,10 +59,10 @@ public class Game {
 
 
 	//Everything needed between each turn
-	public void updateTurn (int diceSum, Player player) {
+	public void updateTurn (int die1, int die2, Player player) {
 		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
-			movePlayer(player, diceSum);
+			movePlayer(player, die1 + die2);
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 			goToJail();
 
@@ -82,7 +81,7 @@ public class Game {
 	}
 
 	public static void movePlayer(Player player, int diceSum) {
-		GUI_GUI.gui.setDie(diceSum);
+		GUI_GUI.gui.setDice(TwoDice.getdie1(), TwoDice.getdie2());
 		int nextField = 0;
 		int currField;
 		//Get current field of player
@@ -435,6 +434,7 @@ public class Game {
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 				setOwner(ListOfPlayers.getPlayers(whosTurn));
+				
 			}
 		}
 		//Update whosTurn's players balance on GUI
@@ -463,7 +463,8 @@ public class Game {
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
-		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), ListOfPlayers.getPlayers(whosTurn).getName());
 	}
 	public void removeOwner(int fieldnumber) {
 		GUI_GUI.getFields(fieldnumber).setDescription("");

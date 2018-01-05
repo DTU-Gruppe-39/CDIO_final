@@ -372,7 +372,7 @@ public class GUI_GUI {
 		return guiPlayers[index -1];
 	}
 	
-	public void displayOwner(GUI_Street field, String name) {
-		field.setSubText(name);
+	public static void displayOwner(int field, String name) {
+		fields[field].setSubText(name);
 	}
 }

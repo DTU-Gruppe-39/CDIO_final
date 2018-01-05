@@ -24,10 +24,10 @@ public class TwoDice {
 		die2 = (int)Math.ceil(d4);			// [1-6] integer
 
 	} 
-	public int getdie1() {	//Returns value of die 1.
+	public static int getdie1() {	//Returns value of die 1.
 		return die1;
 	}
-	public int getdie2() {	//Returns value of die 2.
+	public static int getdie2() {	//Returns value of die 2.
 		return die2;
 	}
 	public int getDiceTotal() {	//Returns the values of the two dice added together.
