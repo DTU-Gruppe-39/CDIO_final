@@ -75,7 +75,7 @@ public class GUI_GUI {
 
 		fields[9] = new GUI_Street(titles[9], subText[9], titles[9] + disc[9], "", Color.pink, Color.BLACK);
 
-		fields[10] = new GUI_Street(titles[10], subText[10], titles[10] + disc[10], "", Color.orange, Color.BLACK);
+		fields[10] = new GUI_Street(titles[10], subText[10], titles[10], "", Color.lightGray, Color.BLACK);
 
 		fields[11] = new GUI_Street(titles[11], subText[11], titles[11] + disc[11], "", Color.green, Color.BLACK);
 
