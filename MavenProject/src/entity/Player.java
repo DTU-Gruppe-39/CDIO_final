@@ -7,9 +7,8 @@ public class Player {
 	private boolean isDead;
 	private boolean isWinner;
 	private boolean isJailed;
-	private int haveJailCard = 0;
+	private int haveJailCard;
 	private int currentField = 0;
-
 	
 	public Player () {
 //		TwoDice dice = new TwoDice();
@@ -18,6 +17,7 @@ public class Player {
 		isDead = false;
 		isWinner = false;
 		isJailed = false;
+		this.haveJailCard = 0;
 	}
 
 	public int getCurrentField() {

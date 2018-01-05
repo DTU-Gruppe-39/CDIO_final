@@ -1,20 +1,17 @@
 package controller;
 
-import gamelogic.Chancecard; 
 import entity.*;
+import gamelogic.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 
-import gamelogic.*;
 
 public class ChanceDeck {
 	private static String[] text;
 	private static int[] amount;
 	private Chancecard[] Cards;
-	private Chancecard[] subCards;
 	private int nextDraw;
 
 
@@ -66,7 +63,6 @@ public class ChanceDeck {
 	}
 
 	public Chancecard drawCard(Player player) {
-
 		if (Cards.length == nextDraw)
 			shuffle();
 		
