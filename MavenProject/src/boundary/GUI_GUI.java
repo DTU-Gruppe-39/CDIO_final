@@ -75,7 +75,7 @@ public class GUI_GUI {
 
 		fields[9] = new GUI_Street(titles[9], subText[9], titles[9] + disc[9], "", Color.pink, Color.BLACK);
 
-		fields[10] = new GUI_Street(titles[10], subText[10], titles[10], "", Color.lightGray, Color.BLACK);
+		fields[10] = new GUI_Street(titles[10], subText[10], titles[10], "", Color.white, Color.BLACK);
 
 		fields[11] = new GUI_Street(titles[11], subText[11], titles[11] + disc[11], "", Color.green, Color.BLACK);
 
@@ -107,15 +107,15 @@ public class GUI_GUI {
 
 		fields[25] = new GUI_Street(titles[25], subText[25], titles[25] + disc[25], "", Color.white, Color.black);
 		
-		fields[26] = new GUI_Street(titles[26], subText[26], titles[26] + disc[26],"", Color.white, Color.BLACK);
+		fields[26] = new GUI_Street(titles[26], subText[26], titles[26] + disc[26],"", Color.lightGray, Color.BLACK);
 
-		fields[27] = new GUI_Street(titles[27], subText[27], titles[27] + disc[27], "", Color.white, Color.BLACK);
+		fields[27] = new GUI_Street(titles[27], subText[27], titles[27] + disc[27], "", Color.lightGray, Color.BLACK);
 
 		fields[28] = new GUI_Street(titles[28], subText[28], titles[28] + disc[28], "", Color.white, Color.BLACK);
 
-		fields[29] = new GUI_Street(titles[29], subText[29], titles[29] + disc[29], "", Color.WHITE, Color.BLACK);
+		fields[29] = new GUI_Street(titles[29], subText[29], titles[29] + disc[29], "", Color.lightGray, Color.BLACK);
 
-		fields[30] = new GUI_Street(titles[30], subText[30], titles[30] + disc[30], "", Color.white, Color.BLACK);
+		fields[30] = new GUI_Street(titles[30], subText[30], disc[30], "", Color.white, Color.BLACK);
 
 		fields[31] = new GUI_Street(titles[31], subText[31], titles[31] + disc[31], "", Color.yellow, Color.BLACK);
 
