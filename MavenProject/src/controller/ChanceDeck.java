@@ -1,7 +1,7 @@
 package controller;
 
-import gamelogic.Chancecard;
-import entity.Player;
+import gamelogic.Chancecard; 
+import entity.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -66,14 +66,19 @@ public class ChanceDeck {
 
 	public drawCard(Player player) {
 
-		if (Cards.length == nextDraw) 
+		if (Cards.length == nextDraw)
 			shuffle();
-
+		
 		Chancecard draw = Cards[nextDraw];
 		nextDraw++;
+			
+		if(draw.getClass() == RecieveCard.class)
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(amount);
+		
+		
 
-		if	(draw ==  JailCard) {
-			if(JailInDeck == 0) {		
+		if	(draw.getClass() == JailCard.class) {
+			if(JailInDeck == 0) {
 				if (Cards.length == nextDraw) { 
 					while (draw ==  JailCard) {
 						shuffle();			
@@ -84,61 +89,61 @@ public class ChanceDeck {
 					draw = Cards[nextDraw];
 					nextDraw++;
 				}
-				else 			
-					Player.hold += 1;
+			} else {
+				Player.hold += 1;
 			}
 		}
 		return draw;
 	}
 
 
-		public static void readText() throws IOException {
-			String file = "../CardText.txt";
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String [] title;
-			title = new String[32];
+	public static void readText() throws IOException {
+		String file = "../CardText.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] title;
+		title = new String[32];
 
-			for (int i = 0; i < 32; i++) {
-				String currentLine = reader.readLine();
-				title[i] = currentLine;
-				//			System.out.println(title[i]);
-			}
-			reader.close();
-			setText(title);
+		for (int i = 0; i < 32; i++) {
+			String currentLine = reader.readLine();
+			title[i] = currentLine;
+			//			System.out.println(title[i]);
 		}
-
-		public String[] getText() {
-			return text;
-		}
-
-		public static void setText(String[] text) {
-			ChanceDeck.text = text;
-		}
-
-		public static void readAmaount() throws IOException {
-			String file = "../ChanceBalanceCards.txt";
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String [] mmoney;
-			mmoney = new String[18];
-			amount = new int[18];
-
-			for (int i = 0; i < 18; i++) {
-				String currentLine = reader.readLine();
-				mmoney[i] = currentLine;
-				//			System.out.print(mmoney[i]);
-				amount[i] = (Integer.parseInt(mmoney[i]));
-				//			System.out.println(amount[i]);
-			}
-			reader.close();
-			setAmount(amount);
-		}
-
-		public static int[] getAmount() {
-			return amount;
-		}
-
-		public static void setAmount(int[] amount) {
-			ChanceDeck.amount = amount;
-		}
-
+		reader.close();
+		setText(title);
 	}
+
+	public String[] getText() {
+		return text;
+	}
+
+	public static void setText(String[] text) {
+		ChanceDeck.text = text;
+	}
+
+	public static void readAmaount() throws IOException {
+		String file = "../ChanceBalanceCards.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] mmoney;
+		mmoney = new String[18];
+		amount = new int[18];
+
+		for (int i = 0; i < 18; i++) {
+			String currentLine = reader.readLine();
+			mmoney[i] = currentLine;
+			//			System.out.print(mmoney[i]);
+			amount[i] = (Integer.parseInt(mmoney[i]));
+			//			System.out.println(amount[i]);
+		}
+		reader.close();
+		setAmount(amount);
+	}
+
+	public static int[] getAmount() {
+		return amount;
+	}
+
+	public static void setAmount(int[] amount) {
+		ChanceDeck.amount = amount;
+	}
+
+}
