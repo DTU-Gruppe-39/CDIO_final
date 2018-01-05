@@ -349,7 +349,7 @@ public class GUI_GUI {
 			System.out.println(subtext[i]);
 		}
 		reader.close();
-		setSubText(subText);
+		setSubText(subtext);
 	}
 
 	public static String[] getSubText() {
