@@ -6,6 +6,7 @@ import gamelogic.Game;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
+//		new GameController().playGame();
 		GUI_GUI.readDisc();
 		GUI_GUI.GUILauncher();
 		Game.fillFields();
