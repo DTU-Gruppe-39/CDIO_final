@@ -1,9 +1,9 @@
 \n Hver gang De passerer, modtag kr. 4.000
 \n \n Leje af grund: 50, 250, 750, 2.250, 4.000, 6.000 \n \n  Pantsætningsværdi: 600.
-\n \n Prøv Lykken
+\n Prøv Lykken
 \n \n Leje af grund: 50, 250, 750, 2.250, 4.000, 6.000.\n \n  Pantsætningsværdi: 600. 
 
-\n \n Leje: 500 hvis 1 rederier ejes, \n \n  1.000 hvis 2 rederier ejes, \n \n  2.000 hvis 3 rederier ejes, \n \n  4.000 hvis 4 rederier ejes. \n \n  Pantsætningsværdi: 2.000
+\n \n Leje: 500 hvis 1 rederier ejes, \n  1.000 hvis 2 rederier ejes, \n  2.000 hvis 3 rederier ejes, \n  4.000 hvis 4 rederier ejes. \n  Pantsætningsværdi: 2.000
 \n \n Leje af grund: 100, 600, 1.800, 5.400, 8.000, 11.000.\n \n  Pantsætningsværdi: 1.000.
 \n \n Prøv Lykken
 \n \n Leje af grund: 100, 600, 1.800, 5.400, 8.000, 11.000.\n \n  Pantsætningsværdi: 1.000.
