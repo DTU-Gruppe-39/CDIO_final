@@ -14,6 +14,7 @@ import gui_main.GUI;
 public class GUI_GUI {
 	private static String [] titles;
 	private static String [] disc;
+	private static String [] subText;
 	private static String [] names;
 	private static int numberOfPlayers;
 	public static GUI gui;
@@ -336,6 +337,29 @@ public class GUI_GUI {
 		setDisc(discText);
 	}
 
+	public static void readSubText() throws IOException {
+		String file = "../Subtext.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] subText;
+		subText = new String[40];
+		
+		for (int i = 0; i < 40; i++) {
+			String currentLine = reader.readLine();
+			subText[i] = currentLine;
+			System.out.println(subText[i]);
+		}
+		reader.close();
+		setSubText(subText);
+	}
+
+	public static String[] getSubText() {
+		return subText;
+	}
+
+	public static void setSubText(String[] subText) {
+		GUI_GUI.subText = subText;
+	}
+
 	public static String[] getDisc() {
 		return disc;
 	}
@@ -348,7 +372,7 @@ public class GUI_GUI {
 		return guiPlayers[index -1];
 	}
 	
-	public void displayOwner(GUI_Field field, String name) {
-		
+	public void displayOwner(GUI_Street field, String name) {
+		field.setSubText(name);
 	}
 }
