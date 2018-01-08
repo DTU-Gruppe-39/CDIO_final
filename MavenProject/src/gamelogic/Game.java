@@ -90,11 +90,13 @@ public class Game {
 				NumberOfDeadPlayers++;	
 			}
 		}
-		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
-			whosTurn = 1;
-		}
-		else {
-			whosTurn++;
+		if (die1 != die2) {
+			if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
+				whosTurn = 1;
+			}
+			else {
+				whosTurn++;
+			}			
 		}
 
 	}
