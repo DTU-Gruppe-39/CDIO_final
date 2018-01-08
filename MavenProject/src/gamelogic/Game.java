@@ -12,9 +12,9 @@ public class Game {
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
 	static int FieldNumb = 40;
-	static int 	Attribute = 8;
+	static int 	Attribute = 9;
 	/**
-	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice]
+	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice, isPawned]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
 
@@ -163,18 +163,8 @@ public class Game {
 			else {
 				if (ownsBothFields()) {
 					//Multiply rent by 2
-					for (int i=0; i<24; i++) {
-						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-							if(whosTurn==Fields[i][4]) {
-								Fields[i][4]=0;
-								Fields[i][3]=0;
-								ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
-								removeOwner(i);
-							}
-						}
-						else {
-							break;
-						}
+					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+						pawn();							
 					}
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
@@ -184,19 +174,8 @@ public class Game {
 				} else {
 					//Pay normal rent
 					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
-						for (int i=0; i<24; i++) {
-							if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-								if(whosTurn==Fields[i][4]) {
-									Fields[i][4]=0;
-									Fields[i][3]=0;
-									ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
-									removeOwner(i);
-								}
-							}
-							else {
-								
-								break;
-							}
+						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+							pawn();							
 						}
 						if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
 							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
@@ -225,6 +204,22 @@ public class Game {
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
+	public void pawn() {
+		for (int i=0; i<40; i++) {
+			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+				if(whosTurn==Fields[i][4]) {
+					Fields[i][8] = 1;
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][8]);
+					setPawned(i);
+				}
+			}
+			else {
+				
+				break;
+			}
+		}
+	}
+
 //	private void payRent() {
 //		if (ownsBothFields()) {
 //			//Multiply rent by 2
@@ -250,6 +245,12 @@ public class Game {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), ListOfPlayers.getPlayers(whosTurn).getName());
 	}
+	
+	public void setPawned(int fieldnumber) {
+//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), (ListOfPlayers.getPlayers(whosTurn).getName()));
+	}
+	
 	public void removeOwner(int fieldnumber) {
 		GUI_GUI.getFields(fieldnumber).setDescription("");
 	}
