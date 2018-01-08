@@ -39,7 +39,9 @@ public class Game {
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
+				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
+					GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");					
+				}
 				TwoDice.roll();
 				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
@@ -213,7 +215,7 @@ public class Game {
 
 		else {
 			//Buy field if it is ownable
-			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
+			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
 				setOwner(ListOfPlayers.getPlayers(whosTurn));
 				
