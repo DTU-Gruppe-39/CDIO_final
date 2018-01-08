@@ -252,4 +252,10 @@ public class GameBoard {
 		}
 		Game.setFields(field);
 	}
+	
+	public static void adjustPrices() {
+		for (int i = 0; i < 40; i++) {
+			Game.getFields()[i][1] = Game.getFields()[i][1] * 10; 
+		}
+	}
 }
