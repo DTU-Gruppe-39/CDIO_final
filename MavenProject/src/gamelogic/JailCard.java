@@ -8,7 +8,7 @@ public class JailCard extends Chancecard {
 		super(text);
 	}
 	
-	@Override
-	public void drawCard(Player player) {
-	}
+//	@Override
+//	public void drawCard(Player player) {
+//	} 
 }

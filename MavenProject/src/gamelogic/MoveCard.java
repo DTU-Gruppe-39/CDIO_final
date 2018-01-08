@@ -19,10 +19,8 @@ public class MoveCard extends Chancecard {
 		MoveTo = moveTo;
 	}
 
-	@Override
-	public void drawCard(Player player) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public void drawCard(Player player) {
+//	}
 }
 

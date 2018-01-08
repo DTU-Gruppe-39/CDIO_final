@@ -1,7 +1,7 @@
 package gamelogic;
 
 
-import boundary.GUI_GUI;  
+import boundary.GUI_GUI;   
 
 import java.util.Arrays;
 import boundary.GUI_GUI;
@@ -15,8 +15,10 @@ public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
+	
 	static int FieldNumb = 40;
 	static int 	Attribute = 8;
+	ChanceDeck deck = new ChanceDeck();
 	/**
 	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice]
 	 */
@@ -29,7 +31,6 @@ public class Game {
 	public static void setFields(int[][] fields) {
 		Fields = fields;
 	}
-
 
 	public static void gameLogic() {
 		//Game logic
@@ -48,7 +49,6 @@ public class Game {
 				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
 	}
-
 
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
@@ -97,7 +97,7 @@ public class Game {
 		nextField += currField + diceSum;
 		if (nextField > 39) {
 			nextField = (currField + diceSum) % 40;
-			player.setNewBalance(0);
+			player.setNewBalance(4000);
 		}
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
@@ -122,6 +122,7 @@ public class Game {
 				field[i][7] = 600;
 				break;
 			case 2:
+// 				Chance kort
 				break;
 			case 3:
 				field[i][1] = 50;
@@ -434,6 +435,33 @@ public class Game {
 			}
 		}
 
+		else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 0) {
+			
+			switch (ListOfPlayers.getPlayers(whosTurn).getCurrentField()) {
+			case 0: break;
+			case 2: this.deck.drawCard();
+					break;
+			case 4:  //betal 10% eller 4000;
+					break;
+			case 7:	this.deck.drawCard();
+					break;
+			case 10:break;
+			case 17:this.deck.drawCard();
+					break;
+			case 20:break;
+			case 22:this.deck.drawCard();
+					break;
+			case 33:this.deck.drawCard();
+					break;
+			case 36:this.deck.drawCard();
+					break;
+			case 38: //betal skat
+				break;
+			default:
+				break;
+			}
+		}
+		
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
@@ -465,6 +493,7 @@ public class Game {
 //		}
 //	}
 
+	
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
