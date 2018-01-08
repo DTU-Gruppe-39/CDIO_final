@@ -5,7 +5,7 @@ import gamelogic.Game;
 public class GameBoard {
 	public static void fillFields() {
 		int field[][];
-		field = new int [40][8];
+		field = new int [40][9];
 		for (int i = 0; i < 40; i++) {
 			field[i][0] = i; 
 			switch (i) {
