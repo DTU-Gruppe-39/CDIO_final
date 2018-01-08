@@ -39,7 +39,7 @@ public class Game {
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
-				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
+				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false && ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 					GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");					
 				}
 				TwoDice.roll();
@@ -96,6 +96,15 @@ public class Game {
 
 			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
 				ListOfPlayers.getPlayers(whosTurn).setDead(true);
+				for (int i=0; i<40; i++) {
+					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6])) {
+						if(whosTurn==Fields[i][4]) {
+							Fields[i][4] = 0;
+							Fields[i][3] = 0;
+							removeOwner(i);
+						}
+					}
+				}
 				NumberOfDeadPlayers++;	
 			}
 		}
@@ -164,7 +173,7 @@ public class Game {
 				if (ownsBothFields()) {
 					//Multiply rent by 2
 					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-						pawn();							
+						pawnToPayDebt();							
 					}
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
@@ -175,13 +184,14 @@ public class Game {
 					//Pay normal rent
 					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
 						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-							pawn();							
+							pawnToPayDebt();							
 						}
 						if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
 							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 							ListOfPlayers.getPlayers(whosTurn).setBalance(0);
+//							changeOwnerToCreditor();
 						}
-						else {
+						else if(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
 							ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);							
 						}
@@ -195,27 +205,48 @@ public class Game {
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
-				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
-				setOwner(ListOfPlayers.getPlayers(whosTurn));
-				
+				if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]) {
+					pawnToBuyField();
+				}
+				else {
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
+					setOwner(ListOfPlayers.getPlayers(whosTurn));					
+				}
 			}
 		}
 		//Update whosTurn's players balance on GUI
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
-	public void pawn() {
+//	public void changeOwnerToCreditor() {
+//		for (int i=0; i<40; i++) {			
+//				if(whosTurn==Fields[i][4]) {
+//					Fields[i][4] = Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4];
+//					setCreditorOwner(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]));
+//				}							
+//		}
+//	}
+
+	public void pawnToPayDebt() {
 		for (int i=0; i<40; i++) {
 			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-				if(whosTurn==Fields[i][4]) {
+				if(whosTurn==Fields[i][4] && Fields[i][8]==0) {
 					Fields[i][8] = 1;
-					ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][8]);
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][7]);
 					setPawned(i);
 				}
 			}
-			else {
-				
-				break;
+		}
+	}
+	
+	public void pawnToBuyField() {
+		for (int i=0; i<40; i++) {
+			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6])) {
+				if(whosTurn==Fields[i][4] && Fields[i][8]==0) {
+					Fields[i][8] = 1;
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][7]);
+					setPawned(i);
+				}
 			}
 		}
 	}
@@ -243,16 +274,23 @@ public class Game {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
 	}
+	
+//	public void setCreditorOwner(Player player) {
+//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
+//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
+////		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+//		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
+//	}
 	
 	public void setPawned(int fieldnumber) {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), (ListOfPlayers.getPlayers(whosTurn).getName()));
+		GUI_GUI.displayOwner(fieldnumber, "( "+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 	}
 	
 	public void removeOwner(int fieldnumber) {
-		GUI_GUI.getFields(fieldnumber).setDescription("");
+		GUI_GUI.displayOwner(fieldnumber, " ");
 	}
 	
 	
