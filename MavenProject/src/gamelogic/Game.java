@@ -96,6 +96,7 @@ public class Game {
 
 			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
 				ListOfPlayers.getPlayers(whosTurn).setDead(true);
+				GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 				NumberOfDeadPlayers++;	
 			}
 		}

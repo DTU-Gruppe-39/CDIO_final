@@ -283,7 +283,7 @@ public class GUI_GUI {
 				fields[0].setCar(guiPlayers[4], true);
 				
 				GUI_Car twenty = new GUI_Car();
-				twenty.setPrimaryColor(Color.yellow);
+				twenty.setPrimaryColor(Color.green);
 				guiPlayers[5] = new GUI_Player(names[5],30000, twenty);
 				gui.addPlayer(guiPlayers[5]);
 				fields[0].setCar(guiPlayers[5], true);
