@@ -58,6 +58,12 @@ public class Game {
 	}
 	
 	public void Jail(int die1, int die2) {
+		if (GUI_GUI.displayJailChoice()==false) {
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
+		}
+		
 		if (die1 == die2) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
@@ -70,6 +76,7 @@ public class Game {
 //		indsæt kode til at komme ud af fængslet med chance kort 
 		else {
 			ListOfPlayers.getPlayers(whosTurn).StayedInJail();
+			GUI_GUI.gui.setDice(die1, die2);
 		}
 	}
 	
