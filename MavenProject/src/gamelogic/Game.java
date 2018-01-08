@@ -96,6 +96,7 @@ public class Game {
 
 			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
 				ListOfPlayers.getPlayers(whosTurn).setDead(true);
+<<<<<<< HEAD
 				for (int i=0; i<40; i++) {
 					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6])) {
 						if(whosTurn==Fields[i][4]) {
@@ -105,6 +106,9 @@ public class Game {
 						}
 					}
 				}
+=======
+				GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+>>>>>>> 25ae96102d3db38852f35d7a235068ae1a7f9456
 				NumberOfDeadPlayers++;	
 			}
 		}
