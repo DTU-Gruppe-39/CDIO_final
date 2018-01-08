@@ -50,19 +50,37 @@ public class Game {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(true);
 			ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
 			GUI_GUI.getFields(30).removeAllCars();
 			//Move player on GUI to prison
 			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 
 		}
 	}
+	
+	public void Jail(int die1, int die2) {
+		if (die1 == die2) {
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
+		}
+		else if (ListOfPlayers.getPlayers(whosTurn).RoundsInJail==3) {
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
+		}
+//		indsæt kode til at komme ud af fængslet med chance kort 
+		else {
+			ListOfPlayers.getPlayers(whosTurn).StayedInJail();
+		}
+	}
+	
 
 
 	//Everything needed between each turn
 	public void updateTurn (int die1, int die2, Player player) {
-		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
-			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+		if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
+			Jail(die1, die2);
+		}
+		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
 			movePlayer(player, die1 + die2);
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 			goToJail();
