@@ -1,18 +1,24 @@
 package gamelogic;
 
-import boundary.GUI_GUI; 
+
+import boundary.GUI_GUI;  
+
+import java.util.Arrays;
+import boundary.GUI_GUI;
+
 import controller.ListOfPlayers;
 import entity.Player;
 import entity.TwoDice;
+import controller.ChanceDeck;
 
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
-
-	static int FieldNumb = 24;
-	static int 	Attribute = 6;
+	private static int NumberOfDeadPlayers;
+	static int FieldNumb = 40;
+	static int 	Attribute = 8;
 	/**
-	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable]
+	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
 
@@ -34,174 +40,313 @@ public class Game {
 		//Create dice
 		TwoDice dice = new TwoDice();
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-
-		switch (GUI_GUI.getNumberOfPlayers()) {
-		case 2:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false) {
+		
+			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
 				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
+				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
-			break;
-		case 3:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-
-		case 4:
-			while (ListOfPlayers.getPlayers(1).isDead() == false && ListOfPlayers.getPlayers(2).isDead() == false && ListOfPlayers.getPlayers(3).isDead() == false && ListOfPlayers.getPlayers(4).isDead() == false) {
-				Game turn = new Game();
-				GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");
-				TwoDice.roll();
-				turn.updateTurn(dice.getdie1(), ListOfPlayers.getPlayers(whosTurn));
-			}
-			break;
-
-		default:
-			break;
-		}
-		int temp = 0;
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() > temp)
-				temp = ListOfPlayers.getPlayers(i).getBalance();
-		}
-
-		for(int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
-			if(ListOfPlayers.getPlayers(i).getBalance() == temp) {
-				ListOfPlayers.getPlayers(i).setWinner(true);
-				System.out.println("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-				GUI_GUI.gui.showMessage("" + ListOfPlayers.getPlayers(i).getName() + " har vundet");
-			}	
-		}
 	}
-	
-	
+
+
 	public void goToJail() {
-		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==18) {
+		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(true);
-			ListOfPlayers.getPlayers(whosTurn).setCurrentField(6);
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1);
-			GUI_GUI.getFields(18).removeAllCars();
+			ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
+			GUI_GUI.getFields(30).removeAllCars();
 			//Move player on GUI to prison
-			GUI_GUI.getFields(6).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 
 		}
 	}
 
 
 	//Everything needed between each turn
-	public void updateTurn (int diceSum, Player player) {
-		movePlayer(player, diceSum);
-		handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
-		goToJail();
+	public void updateTurn (int die1, int die2, Player player) {
+		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+			movePlayer(player, die1 + die2);
+			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
+			goToJail();
 
-		if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
-			ListOfPlayers.getPlayers(whosTurn).setDead(true);
+			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
+				ListOfPlayers.getPlayers(whosTurn).setDead(true);
+				NumberOfDeadPlayers++;	
+			}
 		}
-
 		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
 			whosTurn = 1;
 		}
 		else {
 			whosTurn++;
 		}
+
 	}
 
 	public static void movePlayer(Player player, int diceSum) {
-		GUI_GUI.gui.setDie(diceSum);
+		GUI_GUI.gui.setDice(TwoDice.getdie1(), TwoDice.getdie2());
 		int nextField = 0;
 		int currField;
 		//Get current field of player
 		currField = ListOfPlayers.getPlayers(whosTurn).getCurrentField();
 
 		//Calculate next field with dice and current field
-		//If above 24, then modulus 24
+		//If above 40, then modulus 40
 		nextField += currField + diceSum;
-		if (nextField > 23) {
-			nextField = (currField + diceSum) % 24;
-			player.setNewBalance(2);
+		if (nextField > 39) {
+			nextField = (currField + diceSum) % 40;
+			player.setNewBalance(0);
 		}
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
-		
+
 		//Move player on GUI
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
 	public static void fillFields() {
 		int field[][];
-		field = new int [24][6];
-		for (int i = 0; i < 24; i++) {
+		field = new int [40][8];
+		for (int i = 0; i < 40; i++) {
 			field[i][0] = i; 
 			switch (i) {
 			case 0:
 				break;
 			case 1:
-			case 2:
-				field[i][1] = 1;
+				field[i][1] = 50;
 				field[i][2] = 1;
 				field[i][5] = 1;
+				field[i][6] = 1200;
+				field[i][7] = 600;
+				break;
+			case 2:
 				break;
 			case 3:
+				field[i][1] = 50;
+				field[i][2] = 1;
+				field[i][5] = 1;
+				field[i][6] = 1200;
+				field[i][7] = 600;
 				break;
 			case 4:
+//				Indkomst skat felt
+				break;
 			case 5:
-				field[i][1] = 1;
-				field[i][2] = 2;
+//				Rederi felt
+//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
+				field[i][1] = 500;
 				field[i][5] = 1;
+				field[i][6] = 4000;
+				field[i][7] = 2000;
 				break;
 			case 6:
+				field[i][1] = 100;
+				field[i][2] = 2;
+				field[i][5] = 1;
+				field[i][6] = 2000;
+				field[i][7] = 1000;
 				break;
 			case 7:
+//				Chance felt
+				break;
 			case 8:
-				field[i][1] = 2;
-				field[i][2] = 3;
+				field[i][1] = 100;
+				field[i][2] = 2;
 				field[i][5] = 1;
+				field[i][6] = 2000;
+				field[i][7] = 1000;
 				break;
 			case 9:
+				field[i][1] = 150;
+				field[i][2] = 2;
+				field[i][5] = 1;
+				field[i][6] = 2400;
+				field[i][7] = 1200;
 				break;
 			case 10:
+//				Fængslet
+				break;
 			case 11:
-				field[i][1] = 2;
-				field[i][2] = 4;
+				field[i][1] = 200;
+				field[i][2] = 3;
 				field[i][5] = 1;
+				field[i][6] = 2800;
+				field[i][7] = 1400;
 				break;
 			case 12:
+//				Tuborg bryggeri
+//				Husk der skal ganges med øjne / dicesum og ganges med 2 hvis begge bryggerier ejes 
+				field[i][1] = 100;
+				field[i][5] = 1;
+				field[i][6] = 3000;
+				field[i][7] = 1500;
 				break;
 			case 13:
-			case 14:
-				field[i][1] = 3;
-				field[i][2] = 5;
+				field[i][1] = 200;
+				field[i][2] = 3;
 				field[i][5] = 1;
+				field[i][6] = 2800;
+				field[i][7] = 1400;
+				break;
+			case 14:
+				field[i][1] = 250;
+				field[i][2] = 3;
+				field[i][5] = 1;
+				field[i][6] = 3200;
+				field[i][7] = 1600;
 				break;
 			case 15:
+//				Rederi felt
+//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
+				field[i][1] = 500;
+				field[i][5] = 1;
+				field[i][6] = 4000;
+				field[i][7] = 2000;
 				break;
 			case 16:
-			case 17:
-				field[i][1] = 3;
-				field[i][2] = 6;
+				field[i][1] = 300;
+				field[i][2] = 4;
 				field[i][5] = 1;
+				field[i][6] = 3600;
+				field[i][7] = 1800;
+				break;
+			case 17:
+//				Chance felt
 				break;
 			case 18:
+				field[i][1] = 300;
+				field[i][2] = 4;
+				field[i][5] = 1;
+				field[i][6] = 3600;
+				field[i][7] = 1800;
 				break;
 			case 19:
-			case 20:
-				field[i][1] = 4;
-				field[i][2] = 7;
+				field[i][1] = 350;
+				field[i][2] = 4;
 				field[i][5] = 1;
+				field[i][6] = 4000;
+				field[i][7] = 2000;
+				break;
+			case 20:
+//				Helle felt
 				break;
 			case 21:
+				field[i][1] = 350;
+				field[i][2] = 5;
+				field[i][5] = 1;
+				field[i][6] = 4400;
+				field[i][7] = 2200;
 				break;
 			case 22:
+//				Chance felt
+				break;
 			case 23:
-				field[i][1] = 5;
+				field[i][1] = 350;
+				field[i][2] = 5;
+				field[i][5] = 1;
+				field[i][6] = 4400;
+				field[i][7] = 2200;
+				break;
+			case 24:
+				field[i][1] = 400;
+				field[i][2] = 5;
+				field[i][5] = 1;
+				field[i][6] = 4800;
+				field[i][7] = 2400;
+				break;
+			case 25:
+//				Rederi
+//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
+				field[i][1] = 500;
+				field[i][5] = 1;
+				field[i][6] = 4000;
+				field[i][7] = 2000;
+				break;
+			case 26:
+				field[i][1] = 450;
+				field[i][2] = 6;
+				field[i][5] = 1;
+				field[i][6] = 5200;
+				field[i][7] = 2600;
+				break;
+			case 27:
+				field[i][1] = 450;
+				field[i][2] = 6;
+				field[i][5] = 1;
+				field[i][6] = 5200;
+				field[i][7] = 2600;
+				break;
+			case 28:
+//				Carlsberg bryggeri
+//				Husk der skal ganges med øjne / dicesum og ganges med 2 hvis begge bryggerier ejes 
+				field[i][1] = 100;
+				field[i][5] = 1;
+				field[i][6] = 3000;
+				field[i][7] = 1500;
+				break;
+			case 29:
+				field[i][1] = 500;
+				field[i][2] = 6;
+				field[i][5] = 1;
+				field[i][6] = 5600;
+				field[i][7] = 2800;
+				break;
+			case 30:
+//				De fængsles felt
+				break;
+			case 31:
+				field[i][1] = 550;
+				field[i][2] = 7;
+				field[i][5] = 1;
+				field[i][6] = 6000;
+				field[i][7] = 3000;
+				break;
+			case 32:
+				field[i][1] = 550;
+				field[i][2] = 7;
+				field[i][5] = 1;
+				field[i][6] = 6000;
+				field[i][7] = 3000;
+				break;
+			case 33:
+//				Chance felt
+				break;
+			case 34:
+				field[i][1] = 600;
+				field[i][2] = 7;
+				field[i][5] = 1;
+				field[i][6] = 6400;
+				field[i][7] = 3200;
+				break;
+			case 35:
+//				Rederi
+//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
+				field[i][1] = 500;
+				field[i][5] = 1;
+				field[i][6] = 4000;
+				field[i][7] = 2000;
+				break;
+			case 36:
+//				Chance felt
+				break;
+			case 37:
+				field[i][1] = 700;
 				field[i][2] = 8;
 				field[i][5] = 1;
+				field[i][6] = 7000;
+				field[i][7] = 3500;
+				break;
+			case 38:
+//				Ekstraordinær statsskat
+				break;
+			case 39:
+				field[i][1] = 1000;
+				field[i][2] = 8;
+				field[i][5] = 1;
+				field[i][6] = 8000;
+				field[i][7] = 4000;
 				break;
 			default:
 				break;
@@ -210,6 +355,7 @@ public class Game {
 		setFields(field);
 		//		System.out.println(Arrays.deepToString(Fields));
 	}
+
 
 	public boolean ownsBothFields() {
 
@@ -238,84 +384,119 @@ public class Game {
 			else {
 				if (ownsBothFields()) {
 					//Multiply rent by 2
-
+					for (int i=0; i<24; i++) {
+						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+							if(whosTurn==Fields[i][4]) {
+								Fields[i][4]=0;
+								Fields[i][3]=0;
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
+								removeOwner(i);
+							}
+						}
+						else {
+							break;
+						}
+					}
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-					
+
 					//Update recievers balance on GUI
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				} else {
 					//Pay normal rent
-					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
-					
+					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
+						for (int i=0; i<24; i++) {
+							if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+								if(whosTurn==Fields[i][4]) {
+									Fields[i][4]=0;
+									Fields[i][3]=0;
+									ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][1]);
+									removeOwner(i);
+								}
+							}
+							else {
+								
+								break;
+							}
+						}
+						if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+							ListOfPlayers.getPlayers(whosTurn).setBalance(0);
+						}
+						else {
+							ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);							
+						}
+					}
 					//Update recievers balance on GUI
 					GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 				}
 			}
+		}
 
-		} else {
+		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
 				setOwner(ListOfPlayers.getPlayers(whosTurn));
+				
 			}
 		}
 		//Update whosTurn's players balance on GUI
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
+//	private void payRent() {
+//		if (ownsBothFields()) {
+//			//Multiply rent by 2
+//
+//			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+//			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+//			
+//			//Update recievers balance on GUI
+//			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
+//		} else {
+//			//Pay normal rent
+//			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+//			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
+//			
+//			//Update recievers balance on GUI
+//			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
+//		}
+//	}
+
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
-		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), ListOfPlayers.getPlayers(whosTurn).getName());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void removeOwner(int fieldnumber) {
+		GUI_GUI.getFields(fieldnumber).setDescription("");
+	}
 	
 	
 	public static int getWhosTurn() {
 		return whosTurn;
 	}
-
+	
+	
+	
 
 	//Updates the GUI
-//			public void updateGUI (int field, Player player, int dice) {
-//				GUI_Test.gui.removeAllCars(player.getName());
-//				GUI_Test.gui.setCar(field, player.getName());
-//				GUI_Test.gui.setBalance(player.getName(), player.getBalance());
-//				GUI_Test.gui.setDie(dice);
-				
-				//Print text to GUI
-//				try {
-//					printText(field);
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
+	//			public void updateGUI (int field, Player player, int dice) {
+	//				GUI_Test.gui.removeAllCars(player.getName());
+	//				GUI_Test.gui.setCar(field, player.getName());
+	//				GUI_Test.gui.setBalance(player.getName(), player.getBalance());
+	//				GUI_Test.gui.setDie(dice);
+
+	//Print text to GUI
+	//				try {
+	//					printText(field);
+	//				} catch (IOException e) {
+	//					// TODO Auto-generated catch block
+	//					e.printStackTrace();
+	//				}
+	//			}
 
 }

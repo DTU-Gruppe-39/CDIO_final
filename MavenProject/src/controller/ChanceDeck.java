@@ -1,6 +1,6 @@
 package controller;
 
-import entity.*;
+import entity.*; 
 import gamelogic.*;
 
 import java.io.BufferedReader;
@@ -55,7 +55,7 @@ public class ChanceDeck {
 		nextDraw = 0;
 	}
 
-	public Chancecard drawCard(Player player) {
+	public Chancecard drawCard() {
 		if (Cards.length == nextDraw)
 			shuffle();
 		
