@@ -205,7 +205,7 @@ public class Game {
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1) {
-				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
 				setOwner(ListOfPlayers.getPlayers(whosTurn));
 				
 			}

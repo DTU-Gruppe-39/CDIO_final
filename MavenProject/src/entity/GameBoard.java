@@ -252,4 +252,11 @@ public class GameBoard {
 		}
 		Game.setFields(field);
 	}
+	
+	//Multiply rent by x
+	public static void adjustPrices() {
+		for (int i = 0; i < 40; i++) {
+			Game.getFields()[i][1] = Game.getFields()[i][1] * 10; //Adjust here
+		}
+	}
 }
