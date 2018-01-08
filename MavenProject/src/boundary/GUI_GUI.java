@@ -368,7 +368,7 @@ public class GUI_GUI {
 		GUI_GUI.disc = disc;
 	}
 	public static boolean displayJailChoice() {
-		return gui.getUserLeftButtonPressed("Vælg om du vil kaste, eller betale 1000kr for at komme ud af fængsel", "Kast", "Betal 1000kr.");
+		return gui.getUserLeftButtonPressed("Kast med terningerne for at forsøge at slå 2 ens, eller betale 1000kr, for at komme ud af fængsel", "Kast", "Betal 1000kr.");
 	}
 
 	public static GUI_Player getGuiPlayers(int index) {
