@@ -370,6 +370,9 @@ public class GUI_GUI {
 	public static boolean displayJailChoice() {
 		return gui.getUserLeftButtonPressed("Vælg om du vil kaste, eller betale 1000kr for at komme ud af fængsel", "Kast", "Betal 1000kr.");
 	}
+	public static boolean displayBuyChoice() {
+		return gui.getUserLeftButtonPressed("Vil du købe denne Grund?", "Ja", "Afslut tur");
+	}
 
 	public static GUI_Player getGuiPlayers(int index) {
 		return guiPlayers[index -1];
