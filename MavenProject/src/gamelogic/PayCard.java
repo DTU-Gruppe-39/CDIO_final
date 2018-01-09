@@ -11,13 +11,13 @@ public class PayCard extends Chancecard {
 		this.amount = amount;
 	}
 	
-	public static int getAmount() {
-		return amount;
-	}
+//	public static int getAmount() {
+//		return amount;
+//	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+//	public void setAmount(int amount) {
+//		this.amount = amount;
+//	}
 
 //	@Override
 //	public void PerformAction(Player player) {
