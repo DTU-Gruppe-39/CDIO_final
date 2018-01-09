@@ -1,5 +1,9 @@
 package entity;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class HousePrice {
 	HousePrice(){
 		int[][] houseprice = new int [40][5];
@@ -157,6 +161,24 @@ public class HousePrice {
 		houseprice [39][3] = 28000;
 		houseprice [39][4] = 34000;
 		houseprice [39][5] = 40000;
-	
+
+	}
+	//	Reads the prices of houses from a text document.
+	public static void readAmaount() throws IOException {
+		String file = "../ChanceBalanceCards.txt";
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String [] mmoney;
+		mmoney = new String[40];
+		amount = new int[40];
+
+		for (int i = 0; i < 18; i++) {
+			String currentLine = reader.readLine();
+			mmoney[i] = currentLine;
+			//			System.out.print(mmoney[i]);
+			amount[i] = (Integer.parseInt(mmoney[i]));
+			//			System.out.println(amount[i]);
+		}
+		reader.close();
+		setAmount(amount);
 	}
 }
