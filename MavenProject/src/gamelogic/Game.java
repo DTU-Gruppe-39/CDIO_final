@@ -427,7 +427,7 @@ public class Game {
 	}
 	
 	public void removeOwner(int fieldnumber) {
-		GUI_GUI.displayOwner(fieldnumber, " ");
+		GUI_GUI.displayOwner(fieldnumber, " ");  //Needs to display the price again
 	}
 	
 	
