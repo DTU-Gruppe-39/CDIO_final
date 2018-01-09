@@ -12,9 +12,9 @@ public class Game {
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
 	static int FieldNumb = 40;
-	static int 	Attribute = 9;
+	static int 	Attribute = 10;
 	/**
-	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice, isPawned]
+	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice, isPawned, Buildings]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
 
