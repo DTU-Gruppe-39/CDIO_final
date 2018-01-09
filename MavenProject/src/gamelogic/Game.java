@@ -45,8 +45,8 @@ public class Game {
 					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
 					case "Kast":
 						System.out.println("1");
-						TwoDice.roll();
-						turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
+						dice.roll();
+						turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 						break;
 					case "Byg huse/hotel":
 						System.out.println("2");
@@ -64,8 +64,7 @@ public class Game {
 											
 				}
 
-				dice.roll();
-				turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
+				
 			}
 	}
 
