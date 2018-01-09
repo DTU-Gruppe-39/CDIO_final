@@ -33,6 +33,10 @@ public class Game {
 		//Randomize whosTurn
 		whosTurn = (int) Math.ceil(Math.random() * GUI_GUI.getNumberOfPlayers());
 
+
+//		//Create dice
+		TwoDice dice = new TwoDice();
+
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
@@ -41,6 +45,8 @@ public class Game {
 					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
 					case "Kast":
 						System.out.println("1");
+						TwoDice.roll();
+						turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 						break;
 					case "Byg huse/hotel":
 						System.out.println("2");
@@ -57,8 +63,9 @@ public class Game {
 					}
 											
 				}
-				TwoDice.roll();
-				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
+
+				dice.roll();
+				turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
 	}
 
@@ -105,7 +112,7 @@ public class Game {
 			Jail(die1, die2);
 		}
 		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
-			movePlayer(player, die1 + die2);
+			movePlayer(player, die1, die2);
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 			goToJail();
 
@@ -135,13 +142,14 @@ public class Game {
 
 	}
 
-	public static void movePlayer(Player player, int diceSum) {
-		GUI_GUI.gui.setDice(TwoDice.getdie1(), TwoDice.getdie2());
+	public static void movePlayer(Player player, int die1, int die2) {
+		GUI_GUI.gui.setDice(die1, die2);
 		int nextField = 0;
 		int currField;
+		int diceSum=0;
 		//Get current field of player
 		currField = ListOfPlayers.getPlayers(whosTurn).getCurrentField();
-
+		diceSum= die1 + die2;
 		//Calculate next field with dice and current field
 		//If above 40, then modulus 40
 		nextField += currField + diceSum;
