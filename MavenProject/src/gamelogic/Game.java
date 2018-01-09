@@ -297,16 +297,10 @@ public class Game {
 //				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
 				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
 					size++;
 				}
-					
-//				refinedFields
-//				Fields[i][4] = 0;
-//				Fields[i][3] = 0;
-//				Fields[i][8] = 0;
-//				removeOwner(i);
 			}
-		
 		}
 //		System.out.println(Arrays.deepToString(Fields));
 //		System.out.println(size);
