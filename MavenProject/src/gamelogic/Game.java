@@ -53,6 +53,7 @@ public class Game {
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
+						turn.choosePawn();
 						break;
 					case "Genkøb":
 						System.out.println("4");
@@ -282,6 +283,45 @@ public class Game {
 ////		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 //		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
 //	}
+	
+	public void choosePawn() {
+		GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
+	}
+	
+	public String[] pawnableFields() {
+		String [] Fields = new String[40];
+		String [] refinedFields;
+		int size = 0;
+		for (int i=0; i<40; i++) {
+			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 0) {
+//				System.out.println(getFields()[i][0]);
+				Fields[i] = "" + getFields()[i][0];
+				if(Fields[i] != null) {
+					size++;
+				}
+					
+//				refinedFields
+//				Fields[i][4] = 0;
+//				Fields[i][3] = 0;
+//				Fields[i][8] = 0;
+//				removeOwner(i);
+			}
+		
+		}
+//		System.out.println(Arrays.deepToString(Fields));
+//		System.out.println(size);
+		refinedFields = new String[size];
+		int temp = 0;
+		for (int i=0; i<40; i++) {
+			if(Fields[i] != null) {
+				refinedFields[temp] = Fields[i];
+				temp++;
+			}
+		}
+//		System.out.println(Arrays.deepToString(refinedFields));		
+		
+		return refinedFields;
+	}
 	
 	public void setPawned(int fieldnumber) {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
