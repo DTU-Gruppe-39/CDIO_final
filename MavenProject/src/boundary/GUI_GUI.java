@@ -7,7 +7,9 @@ import java.io.IOException;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Chance;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Jail;
 import gui_fields.GUI_Player;
+import gui_fields.GUI_Refuge;
 import gui_fields.GUI_Start;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
@@ -51,6 +53,7 @@ public class GUI_GUI {
 		//	Opretter alle felterne
 
 		fields[0] = new GUI_Start();
+	
 		fields[0].setBackGroundColor(Color.RED);
 		fields[0].setForeGroundColor(Color.white);
 		fields[0].setTitle(titles[0]);
@@ -76,7 +79,7 @@ public class GUI_GUI {
 		fields[9] = new GUI_Street(titles[9], subText[9], titles[9] + disc[9], "", Color.pink, Color.BLACK);
 
 		fields[10] = new GUI_Street(titles[10], subText[10], titles[10], "", Color.white, Color.BLACK);
-
+		
 		fields[11] = new GUI_Street(titles[11], subText[11], titles[11] + disc[11], "", Color.green, Color.BLACK);
 
 		fields[12] = new GUI_Street(titles[12], subText[12],titles[12] + disc[12], "", Color.WHITE, Color.black);
@@ -96,7 +99,11 @@ public class GUI_GUI {
 		fields[19] = new GUI_Street(titles[19], subText[19], titles[19] + disc[19], "", Color.gray, Color.white);
 
 		fields[20] = new GUI_Street(titles[20], subText[20], titles[20] + disc[20], "", Color.white, Color.BLACK);
-
+//		fields[20] = new GUI_Refuge();
+//		fields[20].setTitle(titles[20]);
+//		fields[20].setSubText(subText[20]);
+//		fields[20].setDescription(disc[20]);
+		
 		fields[21] = new GUI_Street(titles[21], subText[21], titles[21] + disc[21],"", Color.red, Color.white);
 
 		fields[22] = new GUI_Chance(titles[22], subText[22], titles[22] + disc[22], Color.white, Color.black);

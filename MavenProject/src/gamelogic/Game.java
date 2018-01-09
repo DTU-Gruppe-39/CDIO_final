@@ -1,17 +1,24 @@
 package gamelogic;
 
+
+import boundary.GUI_GUI;   
+
 import java.util.Arrays;
 import boundary.GUI_GUI;
+
 import controller.ListOfPlayers;
 import entity.Player;
 import entity.TwoDice;
+import controller.ChanceDeck;
 import entity.GameBoard;
 
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
+	
 	static int FieldNumb = 40;
+	ChanceDeck deck = new ChanceDeck();
 	static int 	Attribute = 10;
 	/**
 	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
@@ -25,7 +32,6 @@ public class Game {
 	public static void setFields(int[][] fields) {
 		Fields = fields;
 	}
-
 
 	public static void gameLogic() {
 		//Game logic
@@ -68,7 +74,6 @@ public class Game {
 				
 			}
 	}
-
 
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
@@ -164,6 +169,7 @@ public class Game {
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
+
 	public boolean ownsBothFields() {
 
 		if (ListOfPlayers.getPlayers(whosTurn).getCurrentField() % 3 == 1) {
@@ -221,6 +227,33 @@ public class Game {
 			}
 		}
 
+		else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 0) {
+			
+			switch (ListOfPlayers.getPlayers(whosTurn).getCurrentField()) {
+			case 0: break;
+			case 2: this.deck.drawCard();
+					break;
+			case 4:  //betal 10% eller 4000;
+					break;
+			case 7:	this.deck.drawCard();
+					break;
+			case 10:break;
+			case 17:this.deck.drawCard();
+					break;
+			case 20:break;
+			case 22:this.deck.drawCard();
+					break;
+			case 33:this.deck.drawCard();
+					break;
+			case 36:this.deck.drawCard();
+					break;
+			case 38: //betal skat
+				break;
+			default:
+				break;
+			}
+		}
+		
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
