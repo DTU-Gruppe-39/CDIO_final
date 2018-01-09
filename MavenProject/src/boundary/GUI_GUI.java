@@ -346,7 +346,7 @@ public class GUI_GUI {
 		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
 			subtext[i] = currentLine;
-			System.out.println(subtext[i]);
+//			System.out.println(subtext[i]);
 		}
 		reader.close();
 		setSubText(subtext);
