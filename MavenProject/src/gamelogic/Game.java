@@ -53,7 +53,7 @@ public class Game {
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
-						turn.choosePawn();
+						turn.setPawned(turn.titleToInt(turn.choosePawn()));
 						break;
 					case "Genkøb":
 						System.out.println("4");
@@ -284,8 +284,8 @@ public class Game {
 //		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
 //	}
 	
-	public void choosePawn() {
-		GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
+	public String choosePawn() {
+		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
 	}
 	
 	public String[] pawnableFields() {
@@ -317,9 +317,24 @@ public class Game {
 		return refinedFields;
 	}
 	
+	public int titleToInt(String title) {
+		int fieldNumber = 0;
+		for (int i=0; i<40; i++) {
+			if (title.equals(GUI_GUI.getTitles()[i])) {
+				fieldNumber = i;
+				break;
+			}
+		}
+		
+		return fieldNumber;
+	}
+	
 	public void setPawned(int fieldnumber) {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(fieldnumber, "( "+ListOfPlayers.getPlayers(whosTurn).getName()+")");
+		Fields[fieldnumber][8] = 1;
+		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 	
 	public void removeOwner(int fieldnumber) {
