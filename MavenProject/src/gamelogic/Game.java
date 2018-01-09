@@ -63,6 +63,7 @@ public class Game {
 						break;
 					case "Genkøb":
 						System.out.println("4");
+						turn.rebuy(turn.titleToInt(turn.choosePawned()));
 						break;
 					default:
 						System.out.println("Selection not recognized");
@@ -215,8 +216,8 @@ public class Game {
 				} else {
 					//Pay normal rent
 					if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) {
-						if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
-							pawnToPayDebt();							
+						while(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
+							setPawned(titleToInt(choosePawn()));	
 						}
 						if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
 							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
@@ -327,6 +328,9 @@ public class Game {
 	public String choosePawn() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
 	}
+	public String choosePawned() {
+		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnedFields());
+	}
 	
 	public String[] pawnableFields() {
 		String [] Fields = new String[40];
@@ -357,6 +361,30 @@ public class Game {
 		return refinedFields;
 	}
 	
+	public String [] pawnedFields() {
+		String [] Fields = new String[40];
+		String [] refinedFields;
+		int size = 0;
+		for (int i=0; i<40; i++) {
+			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 1) {
+				Fields[i] = "" + getFields()[i][0];
+				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
+					size++;
+				}
+			}
+		}
+		refinedFields = new String[size];
+		int temp = 0;
+		for (int i=0; i<40; i++) {
+			if(Fields[i] != null) {
+				refinedFields[temp] = Fields[i];
+				temp++;
+			}
+		}
+		return refinedFields;
+	}
+	
 	public int titleToInt(String title) {
 		int fieldNumber = 0;
 		for (int i=0; i<40; i++) {
@@ -371,9 +399,16 @@ public class Game {
 	
 	public void setPawned(int fieldnumber) {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		GUI_GUI.displayOwner(fieldnumber, "( "+ListOfPlayers.getPlayers(whosTurn).getName()+")");
+		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 		Fields[fieldnumber][8] = 1;
 		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+	}
+	
+	public void rebuy(int fieldnumber) {
+		GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());
+		Fields[fieldnumber][8] = 0;
+		ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 	

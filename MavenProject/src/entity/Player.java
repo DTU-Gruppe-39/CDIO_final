@@ -65,6 +65,10 @@ public class Player {
 	public void setNewBalance(int balance) {
 		account.newBalance(balance);
 	}
+	
+	public void setNewBalance(double balance) {
+		account.newBalance((int)balance);
+	}
 
 	public String getName() {
 		return name;
