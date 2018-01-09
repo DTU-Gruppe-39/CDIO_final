@@ -239,20 +239,26 @@ public class Game {
 			switch (ListOfPlayers.getPlayers(whosTurn).getCurrentField()) {
 			case 0: break;
 			case 2: this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 4:  //betal 10% eller 4000;
 					break;
 			case 7:	this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 10:break;
 			case 17:this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 20:break;
 			case 22:this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 33:this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 36:this.deck.drawCard();
+			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 38: //betal skat
 				break;

@@ -35,29 +35,30 @@ public class ChanceDeck {
 
 	public static void CreateCards(){
 		Chancecard[] Card;
-		Card = new Chancecard[21];
+		Card = new Chancecard[22];
 
 		Card[0] = new RecieveCard("Chance1", 200);
-		Card[1] = new RecieveCard("Chance2", 500);
-		Card[2] = new RecieveCard("Chance3", 1000);
+		Card[1] = new RecieveCard("Chance2", 200);		
+		Card[2] = new RecieveCard("Chance3", 500);
 		Card[3] = new RecieveCard("Chance4", 1000);
 		Card[4] = new RecieveCard("Chance5", 1000);
 		Card[5] = new RecieveCard("Chance6", 1000);
 		Card[6] = new RecieveCard("Chance7", 1000);
 		Card[7] = new RecieveCard("Chance8", 1000);
-		Card[8] = new RecieveCard("Chance9", 3000);
-		Card[9] = new PayCard("Chance10", -200);
+		Card[8] = new RecieveCard("Chance9", 1000);
+		Card[9] = new RecieveCard("Chance10", 3000);
 		Card[10] = new PayCard("Chance11", -200);
-		Card[11] = new PayCard("Chance12", -1000);	
-		Card[12] = new PayCard("Chance13", -1000);
-		Card[13] = new PayCard("Chance14", -2000);
-		Card[14] = new PayCard("Chance15", -3000);
+		Card[11] = new PayCard("Chance12", -200);
+		Card[12] = new PayCard("Chance13", -1000);	
+		Card[13] = new PayCard("Chance14", -1000);
+		Card[14] = new PayCard("Chance15", -2000);
 		Card[15] = new PayCard("Chance16", -3000);
-		Card[16] = new JailCard("Chance17");
+		Card[16] = new PayCard("Chance17", -3000);
 		Card[17] = new JailCard("Chance18");
-		Card[18] = new MoveCard("Chance19", 30);
+		Card[18] = new JailCard("Chance19");
 		Card[19] = new MoveCard("Chance20", 30);
-		Card[20] = new MoveCard("Chance21", 0);
+		Card[20] = new MoveCard("Chance21", 30);
+		Card[21] = new MoveCard("Chance22", 0);
 
 		setCards(Card);
 	}
@@ -134,14 +135,27 @@ public class ChanceDeck {
 		}
 		return draw;
 	}
+	
+	public String ShowCardText() {
+		String ctext = "";
+		Chancecard draw = ChanceDeck.Cards[ChanceDeck.nextDraw];
+		for(int i = 0; i < 38; i++) {
+			if(draw.getText().equals(getText()[i])) {
+				ctext = getText()[i+1];
+			}
+		}
+		return ctext;
+	}
+	
+	
 
 	public static void readText() throws IOException {
 		String file = "../CardText.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String [] title;
-		title = new String[21];
+		title = new String[44];
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 44; i++) {
 			String currentLine = reader.readLine();
 			title[i] = currentLine;
 			//			System.out.println(title[i]);
