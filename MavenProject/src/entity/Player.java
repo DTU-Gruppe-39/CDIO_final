@@ -9,7 +9,9 @@ public class Player {
 	private boolean isDead;
 	private boolean isWinner;
 	private boolean isJailed;
+	private int haveJailCard;
 	private int currentField = 0;
+
 	private int netWorth;
 	public int propertyValue;
 	public int RoundsInJail = 0;
@@ -22,6 +24,9 @@ public class Player {
 		isDead = false;
 		isWinner = false;
 		isJailed = false;
+
+		this.haveJailCard = 0;
+
 		netWorth = 0;
 	}
 
@@ -93,6 +98,15 @@ public class Player {
 		this.isWinner = Winner;
 	}
 
+
+	public int getHaveJailCard() {
+		return haveJailCard;
+	}
+
+	public void setHaveJailCard(int haveJailCard) {
+		this.haveJailCard += haveJailCard;
+	}
+
 	public int getNetWorth() { //adds together players balance and property value
 		this.netWorth = getBalance() + getPropertyValue();
 		return this.netWorth;
@@ -104,7 +118,6 @@ public class Player {
 			}
 		}
 		return this.propertyValue;
-
 	}
 }
 

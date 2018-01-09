@@ -1,20 +1,27 @@
 package gamelogic;
 
+
+import boundary.GUI_GUI;   
+
 import java.util.Arrays;
 import boundary.GUI_GUI;
+
 import controller.ListOfPlayers;
 import entity.Player;
 import entity.TwoDice;
+import controller.ChanceDeck;
 import entity.GameBoard;
 
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
+	
 	static int FieldNumb = 40;
-	static int 	Attribute = 9;
+	ChanceDeck deck = new ChanceDeck();
+	static int 	Attribute = 10;
 	/**
-	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice, isPawned]
+	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
 
@@ -25,7 +32,6 @@ public class Game {
 	public static void setFields(int[][] fields) {
 		Fields = fields;
 	}
-
 
 	public static void gameLogic() {
 		//Game logic
@@ -41,7 +47,7 @@ public class Game {
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
-				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false && ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+				if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
 					case "Kast":
 						System.out.println("1");
@@ -53,6 +59,7 @@ public class Game {
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
+						turn.setPawned(turn.titleToInt(turn.choosePawn()));
 						break;
 					case "Genkøb":
 						System.out.println("4");
@@ -67,7 +74,6 @@ public class Game {
 				
 			}
 	}
-
 
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
@@ -163,6 +169,7 @@ public class Game {
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
+
 	public boolean ownsBothFields() {
 
 		if (ListOfPlayers.getPlayers(whosTurn).getCurrentField() % 3 == 1) {
@@ -220,6 +227,33 @@ public class Game {
 			}
 		}
 
+		else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 0) {
+			
+			switch (ListOfPlayers.getPlayers(whosTurn).getCurrentField()) {
+			case 0: break;
+			case 2: this.deck.drawCard();
+					break;
+			case 4:  //betal 10% eller 4000;
+					break;
+			case 7:	this.deck.drawCard();
+					break;
+			case 10:break;
+			case 17:this.deck.drawCard();
+					break;
+			case 20:break;
+			case 22:this.deck.drawCard();
+					break;
+			case 33:this.deck.drawCard();
+					break;
+			case 36:this.deck.drawCard();
+					break;
+			case 38: //betal skat
+				break;
+			default:
+				break;
+			}
+		}
+		
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
@@ -283,9 +317,57 @@ public class Game {
 //		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
 //	}
 	
+	public String choosePawn() {
+		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
+	}
+	
+	public String[] pawnableFields() {
+		String [] Fields = new String[40];
+		String [] refinedFields;
+		int size = 0;
+		for (int i=0; i<40; i++) {
+			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 0) {
+//				System.out.println(getFields()[i][0]);
+				Fields[i] = "" + getFields()[i][0];
+				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
+					size++;
+				}
+			}
+		}
+//		System.out.println(Arrays.deepToString(Fields));
+//		System.out.println(size);
+		refinedFields = new String[size];
+		int temp = 0;
+		for (int i=0; i<40; i++) {
+			if(Fields[i] != null) {
+				refinedFields[temp] = Fields[i];
+				temp++;
+			}
+		}
+//		System.out.println(Arrays.deepToString(refinedFields));		
+		
+		return refinedFields;
+	}
+	
+	public int titleToInt(String title) {
+		int fieldNumber = 0;
+		for (int i=0; i<40; i++) {
+			if (title.equals(GUI_GUI.getTitles()[i])) {
+				fieldNumber = i;
+				break;
+			}
+		}
+		
+		return fieldNumber;
+	}
+	
 	public void setPawned(int fieldnumber) {
 //		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(fieldnumber, "( "+ListOfPlayers.getPlayers(whosTurn).getName()+")");
+		Fields[fieldnumber][8] = 1;
+		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 	
 	public void removeOwner(int fieldnumber) {
