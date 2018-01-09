@@ -69,7 +69,7 @@ public class GUI_GUI {
 		fields[4] = new GUI_Street(titles[4], subText[4], titles[4] + disc[4], "", Color.white, Color.BLACK);
 
 		fields[5] = new GUI_Street(titles[5], subText[5], titles[5] + disc[5], "", Color.white, Color.BLACK);
-
+	
 		fields[6] = new GUI_Street(titles[6], subText[6], titles[6] + disc[6], "", Color.pink, Color.BLACK);
 
 		fields[7] = new GUI_Chance(titles[7], subText[7], titles[7] + disc[7], Color.white, Color.BLACK);
@@ -290,7 +290,7 @@ public class GUI_GUI {
 				fields[0].setCar(guiPlayers[4], true);
 				
 				GUI_Car twenty = new GUI_Car();
-				twenty.setPrimaryColor(Color.yellow);
+				twenty.setPrimaryColor(Color.green);
 				guiPlayers[5] = new GUI_Player(names[5],30000, twenty);
 				gui.addPlayer(guiPlayers[5]);
 				fields[0].setCar(guiPlayers[5], true);
@@ -353,7 +353,7 @@ public class GUI_GUI {
 		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
 			subtext[i] = currentLine;
-			System.out.println(subtext[i]);
+//			System.out.println(subtext[i]);
 		}
 		reader.close();
 		setSubText(subtext);
@@ -373,6 +373,12 @@ public class GUI_GUI {
 
 	public static void setDisc(String[] disc) {
 		GUI_GUI.disc = disc;
+	}
+	public static boolean displayJailChoice() {
+		return gui.getUserLeftButtonPressed("Kast med terningerne for at forsøge at slå 2 ens, eller betal 1000kr, for at komme ud af fængsel", "Kast", "Betal 1000kr.");
+	}
+	public static boolean displayBuyChoice() {
+		return gui.getUserLeftButtonPressed("Vil du købe denne Grund?", "Ja", "Afslut tur");
 	}
 
 	public static GUI_Player getGuiPlayers(int index) {

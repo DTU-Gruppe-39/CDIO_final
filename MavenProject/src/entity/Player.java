@@ -14,6 +14,7 @@ public class Player {
 
 	private int netWorth;
 	public int propertyValue;
+	public int RoundsInJail = 0;
 
 
 	public Player () {
@@ -40,6 +41,18 @@ public class Player {
 	//	public TwoDice getDice() {
 	//		return dice;
 	//	}
+	
+	public int getRoundsInJail() {
+		return this.RoundsInJail;
+	}
+	
+	public void StayedInJail() {
+		this.RoundsInJail++;
+	}
+	
+	public void GotOutOfJail() {
+		this.RoundsInJail = 0;
+	}
 
 	public int getBalance() {
 		return this.account.balance;
