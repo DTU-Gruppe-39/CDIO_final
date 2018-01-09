@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import gui_codebehind.GUI_BoardController;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Chance;
+import gui_fields.GUI_Empty;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Jail;
 import gui_fields.GUI_Player;
+import gui_fields.GUI_Refuge;
 import gui_fields.GUI_Start;
 import gui_fields.GUI_Street;
+import gui_fields.GUI_Tax;
 import gui_main.GUI;
 public class GUI_GUI {
 	private static String [] titles;
@@ -75,7 +80,9 @@ public class GUI_GUI {
 
 		fields[9] = new GUI_Street(titles[9], subText[9], titles[9] + disc[9], "", Color.pink, Color.BLACK);
 
-		fields[10] = new GUI_Street(titles[10], subText[10], titles[10], "", Color.white, Color.BLACK);
+		fields[10] = new GUI_Jail();
+		fields[10].setSubText(subText[10]);
+		fields[10].setDescription(subText[10] + " / " + titles[10]);
 
 		fields[11] = new GUI_Street(titles[11], subText[11], titles[11] + disc[11], "", Color.green, Color.BLACK);
 
@@ -95,7 +102,9 @@ public class GUI_GUI {
 
 		fields[19] = new GUI_Street(titles[19], subText[19], titles[19] + disc[19], "", Color.gray, Color.white);
 
-		fields[20] = new GUI_Street(titles[20], subText[20], titles[20] + disc[20], "", Color.white, Color.BLACK);
+		fields[20] = new GUI_Refuge();
+		fields[20].setSubText(titles[20]);
+		fields[20].setTitle(titles[20]);
 
 		fields[21] = new GUI_Street(titles[21], subText[21], titles[21] + disc[21],"", Color.red, Color.white);
 
@@ -115,7 +124,9 @@ public class GUI_GUI {
 
 		fields[29] = new GUI_Street(titles[29], subText[29], titles[29] + disc[29], "", Color.lightGray, Color.BLACK);
 
-		fields[30] = new GUI_Street(titles[30], subText[30], disc[30], "", Color.white, Color.BLACK);
+		fields[30] = new GUI_Jail();
+		fields[30].setSubText(titles[30]);
+		fields[30].setDescription(titles[30]);
 
 		fields[31] = new GUI_Street(titles[31], subText[31], titles[31] + disc[31], "", Color.yellow, Color.BLACK);
 
