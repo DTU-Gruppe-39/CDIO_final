@@ -91,6 +91,7 @@ public class Game {
 			ListOfPlayers.getPlayers(whosTurn).setHaveJailCard(-1);
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
+			ChanceDeck.setJailInDeck(1);
 		}
 		
 		if (GUI_GUI.displayJailChoice()==false) {

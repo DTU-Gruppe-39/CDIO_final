@@ -14,7 +14,7 @@ public class ChanceDeck {
 	private static String[] text;
 	private static int[] amount;
 	private static Chancecard[] Cards;
-	private int jailInDeck = 2;
+	private static int jailInDeck = 2;
 	private static int nextDraw = -1;
 
 	public Chancecard[] getCards() {
@@ -149,6 +149,16 @@ public class ChanceDeck {
 		reader.close();
 		setText(title);
 	}
+
+	public static int getJailInDeck() {
+		return jailInDeck;
+	}
+
+
+	public static void setJailInDeck(int jailInDeck) {
+		jailInDeck += jailInDeck;
+	}
+
 
 	public String[] getText() {
 		return text;
