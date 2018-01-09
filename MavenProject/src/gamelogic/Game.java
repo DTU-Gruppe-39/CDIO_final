@@ -41,7 +41,7 @@ public class Game {
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
-				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false && ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+				if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
 					case "Kast":
 						System.out.println("1");
