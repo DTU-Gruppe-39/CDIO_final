@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class HousePrice {
+	private static int[] HousePriceInt;
 	HousePrice(){
 		int[][] houseprice = new int [40][5];
 		//Rødovervej, blå
@@ -167,18 +168,26 @@ public class HousePrice {
 	public static void readAmaount() throws IOException {
 		String file = "../ChanceBalanceCards.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String [] mmoney;
-		mmoney = new String[40];
-		amount = new int[40];
+		String [] houseprices;
+		houseprices = new String[40];
+		int [] tempHousePriceInt;
+		tempHousePriceInt = new int[40];
 
-		for (int i = 0; i < 18; i++) {
+		for (int i = 0; i < 40; i++) {
 			String currentLine = reader.readLine();
-			mmoney[i] = currentLine;
-			//			System.out.print(mmoney[i]);
-			amount[i] = (Integer.parseInt(mmoney[i]));
-			//			System.out.println(amount[i]);
+			houseprices[i] = currentLine;
+//						System.out.print(houseprices[i]);
+			tempHousePriceInt[i] = (Integer.parseInt(houseprices[i]));
+//						System.out.println(HousePriceInt[i]);
 		}
 		reader.close();
-		setAmount(amount);
+		setHousePriceInt(tempHousePriceInt);
 	}
+	public static int[] getHousePriceInt() {
+		return HousePriceInt;
+	}
+	public static void setHousePriceInt(int[] housePriceInt) {
+		HousePriceInt = housePriceInt;
+	}
+
 }
