@@ -2,21 +2,20 @@ package gamelogic;
 
 import entity.Player;
 
-
 public class MoveCard extends Chancecard {
-	private static int MoveTo;
+	private int amount;
 
-	public MoveCard(String text, int MoveTo) {
+	public MoveCard(String text, int amount) {
 		super(text);
-		this.MoveTo = MoveTo;
+		this.amount = amount;
 	}
 
-	public static int getMoveTo() {
-		return MoveTo;
+	public int getAmount() {
+		return amount;
 	}
 
-	public void setMoveTo(int moveTo) {
-		MoveTo = moveTo;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 //	@Override

@@ -15,7 +15,7 @@ public class Main {
 		GUI_GUI.GUILauncher();
 		Game.fillFields();
 		ChanceDeck.CreateCards();
-//		ChanceDeck.shuffle();
+		ChanceDeck.shuffle();
 		ListOfPlayers list = new ListOfPlayers((GUI_GUI.getNumberOfPlayers() + 1)); //Players index in array needs to start at 1, because 0 = to no owner on a field
 		list.addplayer(GUI_GUI.getNumberOfPlayers());		
 		Game.gameLogic();

@@ -37,22 +37,22 @@ public class ChanceDeck {
 		Chancecard[] Card;
 		Card = new Chancecard[21];
 
-		Card[0] = new RecieveCard("Chance0", 200);
-		Card[1] = new RecieveCard("Chance1", 500);
-		Card[2] = new RecieveCard("Chance2", 1000);
-		Card[3] = new RecieveCard("Chance3", 1000);
-		Card[4] = new RecieveCard("Chance4", 1000);
-		Card[5] = new RecieveCard("Chance5", 1000);
-		Card[6] = new RecieveCard("Chance6", 1000);
-		Card[7] = new RecieveCard("Chance7", 1000);
-		Card[8] = new RecieveCard("Chance8", 3000);
-		Card[9] = new PayCard("Chance8", -200);
-		Card[10] = new PayCard("Chance9", -200);
-		Card[11] = new PayCard("Chance10", -1000);	
-		Card[12] = new PayCard("Chance11", -1000);
-		Card[13] = new PayCard("Chance12", -2000);
-		Card[14] = new PayCard("Chance13", -3000);
-		Card[15] = new PayCard("Chance14", -3000);
+		Card[0] = new RecieveCard("Chance1", 200);
+		Card[1] = new RecieveCard("Chance2", 500);
+		Card[2] = new RecieveCard("Chance3", 1000);
+		Card[3] = new RecieveCard("Chance4", 1000);
+		Card[4] = new RecieveCard("Chance5", 1000);
+		Card[5] = new RecieveCard("Chance6", 1000);
+		Card[6] = new RecieveCard("Chance7", 1000);
+		Card[7] = new RecieveCard("Chance8", 1000);
+		Card[8] = new RecieveCard("Chance9", 3000);
+		Card[9] = new PayCard("Chance10", -200);
+		Card[10] = new PayCard("Chance11", -200);
+		Card[11] = new PayCard("Chance12", -1000);	
+		Card[12] = new PayCard("Chance13", -1000);
+		Card[13] = new PayCard("Chance14", -2000);
+		Card[14] = new PayCard("Chance15", -3000);
+		Card[15] = new PayCard("Chance16", -3000);
 		Card[16] = new JailCard("Chance17");
 		Card[17] = new JailCard("Chance18");
 		Card[18] = new MoveCard("Chance19", 30);
@@ -83,25 +83,31 @@ public class ChanceDeck {
 		ChanceDeck.nextDraw++;
 		Chancecard draw = ChanceDeck.Cards[ChanceDeck.nextDraw];
 		
+		
+		System.out.println("index" +ChanceDeck.nextDraw);
+		System.out.println(draw);
 
-		System.out.println(ChanceDeck.nextDraw);
-		System.out.println(getAmount(ChanceDeck.nextDraw));
-		System.out.println(getAmount(18));
-		System.out.println(draw.getClass());
-		System.out.println((draw.getClass() == MoveCard.class));
-		System.out.println(ChanceDeck.Cards.length);
+	
+//		System.out.println(getAmount(ChanceDeck.nextDraw));
+//		System.out.println(getAmount(18));
+//		System.out.println(draw.getClass());
+//		System.out.println((draw.getClass() == MoveCard.class));
+		System.out.println("Længde" +ChanceDeck.Cards.length);
 
 
-		if(draw.getClass() == RecieveCard.class)
-			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(getAmount(ChanceDeck.nextDraw));
+		if(draw instanceof RecieveCard) {
+			System.out.println(((RecieveCard)draw).getAmount());
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(((RecieveCard)draw).getAmount());
+		}
+			
+		else if(draw instanceof PayCard) {
+			System.out.println(((PayCard)draw).getAmount());	
+			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(((PayCard)draw).getAmount());
 
-		else if(draw.getClass() == PayCard.class) {
-			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(getAmount(ChanceDeck.nextDraw));
-
-		}else if(draw.getClass() == MoveCard.class) {
-						System.out.println(getAmount(ChanceDeck.nextDraw));
+		}else if(draw instanceof MoveCard) {
+						System.out.println("Move to: " +((MoveCard)draw).getAmount());
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
-						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(getAmount(ChanceDeck.nextDraw));
+						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(((MoveCard)draw).getAmount());
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
 
 			//			ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(getAmount(ChanceDeck.nextDraw));
@@ -109,10 +115,10 @@ public class ChanceDeck {
 			//			GUI_GUI.getFields(getAmount(ChanceDeck.nextDraw)).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
 		}
 
-		else if	(draw.getClass() == JailCard.class) {
+		else if	(draw instanceof JailCard) {
 			if(this.jailInDeck == 0) {
 				if (ChanceDeck.Cards.length == ChanceDeck.nextDraw) { 
-					while (draw.getClass() ==  JailCard.class) {
+					while (draw instanceof JailCard) {
 						shuffle();
 						draw = ChanceDeck.Cards[ChanceDeck.nextDraw];
 						ChanceDeck.nextDraw++;

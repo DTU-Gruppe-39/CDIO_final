@@ -10,6 +10,15 @@ public class RecieveCard extends Chancecard {
 		this.amount = amount;
 	}
 	
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+
 	@Override
 	public String getChanceCardText() {
 		return super.getChanceCardText();
