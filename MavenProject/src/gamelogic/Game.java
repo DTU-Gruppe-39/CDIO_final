@@ -33,14 +33,31 @@ public class Game {
 		//Randomize whosTurn
 		whosTurn = (int) Math.ceil(Math.random() * GUI_GUI.getNumberOfPlayers());
 
-		//Create dice
-		TwoDice dice = new TwoDice();
+//		//Create dice
+//		TwoDice dice = new TwoDice();
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				if(ListOfPlayers.getPlayers(whosTurn).isJailed()==false && ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
-					GUI_GUI.gui.getUserButtonPressed("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur", "Kast");					
+					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
+					case "Kast":
+						System.out.println("1");
+						break;
+					case "Byg huse/hotel":
+						System.out.println("2");
+						break;
+					case "Pantsæt grunde":
+						System.out.println("3");
+						break;
+					case "Genkøb":
+						System.out.println("4");
+						break;
+					default:
+						System.out.println("Selection not recognized");
+						break;
+					}
+											
 				}
 				TwoDice.roll();
 				turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
