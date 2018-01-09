@@ -6,6 +6,7 @@ import gamelogic.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 import boundary.GUI_GUI;
 
@@ -33,10 +34,10 @@ public class ChanceDeck {
 	//		}
 
 
-	public static void CreateCards(){
+	public static void CreateCards() throws IOException{
 		Chancecard[] Card;
 		Card = new Chancecard[22];
-
+		readText();
 		Card[0] = new RecieveCard("Chance1", 200);
 		Card[1] = new RecieveCard("Chance2", 200);		
 		Card[2] = new RecieveCard("Chance3", 500);
