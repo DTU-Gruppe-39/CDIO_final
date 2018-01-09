@@ -1,8 +1,9 @@
 package gamelogic;
 
 
-import boundary.GUI_GUI;   
+import boundary.GUI_GUI;
 
+import java.awt.List;
 import java.util.Arrays;
 import boundary.GUI_GUI;
 
@@ -243,6 +244,12 @@ public class Game {
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 4:  //betal 10% eller 4000;
+//				if(GUI_GUI.displayTaxChoice()==false) {
+//					ListOfPlayers.getPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance()/10);
+//				}
+//				else {
+//					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
+//				}
 					break;
 			case 7:	this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
@@ -262,6 +269,7 @@ public class Game {
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 					break;
 			case 38: //betal skat
+				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2000);
 				break;
 			default:
 				break;
