@@ -33,8 +33,10 @@ public class Game {
 		//Randomize whosTurn
 		whosTurn = (int) Math.ceil(Math.random() * GUI_GUI.getNumberOfPlayers());
 
+
 //		//Create dice
 		TwoDice dice = new TwoDice();
+
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
 		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
@@ -43,6 +45,8 @@ public class Game {
 					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
 					case "Kast":
 						System.out.println("1");
+						TwoDice.roll();
+						turn.updateTurn(TwoDice.getdie1(), TwoDice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 						break;
 					case "Byg huse/hotel":
 						System.out.println("2");
@@ -59,6 +63,7 @@ public class Game {
 					}
 											
 				}
+
 				dice.roll();
 				turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 			}
@@ -158,11 +163,6 @@ public class Game {
 		//Move player on GUI
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
-//Skrald kode
-//	GameBoard fields = new GameBoard(); 
-//		GameBoard.fillFields();
-		//		System.out.println(Arrays.deepToString(Fields));
-	
 
 	public boolean ownsBothFields() {
 
@@ -270,25 +270,6 @@ public class Game {
 		}
 	}
 
-//	private void payRent() {
-//		if (ownsBothFields()) {
-//			//Multiply rent by 2
-//
-//			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-//			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-//			
-//			//Update recievers balance on GUI
-//			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
-//		} else {
-//			//Pay normal rent
-//			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-//			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
-//			
-//			//Update recievers balance on GUI
-//			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
-//		}
-//	}
-
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
@@ -316,21 +297,4 @@ public class Game {
 	public static int getWhosTurn() {
 		return whosTurn;
 	}
-
-	//Updates the GUI
-	//			public void updateGUI (int field, Player player, int dice) {
-	//				GUI_Test.gui.removeAllCars(player.getName());
-	//				GUI_Test.gui.setCar(field, player.getName());
-	//				GUI_Test.gui.setBalance(player.getName(), player.getBalance());
-	//				GUI_Test.gui.setDie(dice);
-
-	//Print text to GUI
-	//				try {
-	//					printText(field);
-	//				} catch (IOException e) {
-	//					// TODO Auto-generated catch block
-	//					e.printStackTrace();
-	//				}
-	//			}
-
 }
