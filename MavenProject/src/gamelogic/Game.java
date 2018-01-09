@@ -87,6 +87,12 @@ public class Game {
 	}
 	
 	public void Jail(int die1, int die2) {
+		if (ListOfPlayers.getPlayers(whosTurn).getHaveJailCard()>0) {
+			ListOfPlayers.getPlayers(whosTurn).setHaveJailCard(-1);
+			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
+			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
+		}
+		
 		if (GUI_GUI.displayJailChoice()==false) {
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
