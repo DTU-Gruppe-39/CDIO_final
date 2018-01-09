@@ -14,7 +14,7 @@ public class Game {
 	static int FieldNumb = 40;
 	static int 	Attribute = 10;
 	/**
-	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, BuyPrice, PawnPrice, isPawned, Buildings]
+	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
 
