@@ -386,6 +386,9 @@ public class GUI_GUI {
 		return gui.getUserLeftButtonPressed("Vil du købe denne Grund?", "Ja", "Afslut tur");
 	}
 
+	public static boolean displayTaxChoice() {
+		return gui.getUserLeftButtonPressed("                                Du skal enten betale 4000kr eller 10% af dit kapital i indkomstskat", "4000kr", "10% af kapital");
+	}
 	public static GUI_Player getGuiPlayers(int index) {
 		return guiPlayers[index -1];
 	}
