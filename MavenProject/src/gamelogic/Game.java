@@ -96,7 +96,7 @@ public class Game {
 			ChanceDeck.setJailInDeck(1);
 		}
 		
-		if (GUI_GUI.displayJailChoice()==false) {
+		else if (GUI_GUI.displayJailChoice()==false) {
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
@@ -111,7 +111,6 @@ public class Game {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
 		}
-//		indsæt kode til at komme ud af fængslet med chance kort 
 		else {
 			ListOfPlayers.getPlayers(whosTurn).StayedInJail();
 			GUI_GUI.gui.setDice(die1, die2);
