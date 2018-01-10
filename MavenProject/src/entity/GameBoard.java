@@ -1,7 +1,9 @@
 package entity;
 
 import gamelogic.Game;
-
+/**
+ * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
+ */
 public class GameBoard {
 	public static void fillFields() {
 		int field[][];

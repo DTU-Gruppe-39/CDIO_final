@@ -1,13 +1,9 @@
 package controller;
 
-import entity.*; 
 import gamelogic.*;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-
 import boundary.GUI_GUI;
 
 
@@ -27,39 +23,31 @@ public class ChanceDeck {
 		Cards = cards;
 	}
 
-
-
-	//		public ChanceDeck(String name) {
-	//			this.text = name;
-	//		}
-
-
 	public static void CreateCards() throws IOException{
 		Chancecard[] Card;
-		Card = new Chancecard[22];
+		Card = new Chancecard[21];
 		readText();
 		Card[0] = new RecieveCard("Chance1", 200);
-		Card[1] = new RecieveCard("Chance2", 200);		
-		Card[2] = new RecieveCard("Chance3", 500);
+		Card[1] = new RecieveCard("Chance2", 500);
+		Card[2] = new RecieveCard("Chance3", 1000);
 		Card[3] = new RecieveCard("Chance4", 1000);
 		Card[4] = new RecieveCard("Chance5", 1000);
 		Card[5] = new RecieveCard("Chance6", 1000);
 		Card[6] = new RecieveCard("Chance7", 1000);
 		Card[7] = new RecieveCard("Chance8", 1000);
-		Card[8] = new RecieveCard("Chance9", 1000);
-		Card[9] = new RecieveCard("Chance10", 3000);
+		Card[8] = new RecieveCard("Chance9", 3000);
+		Card[9] = new PayCard("Chance10", -200);
 		Card[10] = new PayCard("Chance11", -200);
-		Card[11] = new PayCard("Chance12", -200);
-		Card[12] = new PayCard("Chance13", -1000);	
-		Card[13] = new PayCard("Chance14", -1000);
-		Card[14] = new PayCard("Chance15", -2000);
+		Card[11] = new PayCard("Chance12", -1000);	
+		Card[12] = new PayCard("Chance13", -1000);
+		Card[13] = new PayCard("Chance14", -2000);
+		Card[14] = new PayCard("Chance15", -3000);
 		Card[15] = new PayCard("Chance16", -3000);
-		Card[16] = new PayCard("Chance17", -3000);
+		Card[16] = new JailCard("Chance17");
 		Card[17] = new JailCard("Chance18");
-		Card[18] = new JailCard("Chance19");
+		Card[18] = new MoveCard("Chance19", 30);
 		Card[19] = new MoveCard("Chance20", 30);
-		Card[20] = new MoveCard("Chance21", 30);
-		Card[21] = new MoveCard("Chance22", 0);
+		Card[20] = new MoveCard("Chance21", 0);
 
 		setCards(Card);
 	}
@@ -87,15 +75,8 @@ public class ChanceDeck {
 		
 		
 		System.out.println("index" +ChanceDeck.nextDraw);
-		System.out.println(draw);
-
-	
-//		System.out.println(getAmount(ChanceDeck.nextDraw));
-//		System.out.println(getAmount(18));
-//		System.out.println(draw.getClass());
-//		System.out.println((draw.getClass() == MoveCard.class));
+		System.out.println(draw);	
 		System.out.println("Længde" +ChanceDeck.Cards.length);
-
 
 		if(draw instanceof RecieveCard) {
 			System.out.println(((RecieveCard)draw).getAmount());
@@ -111,14 +92,10 @@ public class ChanceDeck {
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(((MoveCard)draw).getAmount());
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
-
-			//			ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(getAmount(ChanceDeck.nextDraw));
-			//			GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).removeAllCars();
-			//			GUI_GUI.getFields(getAmount(ChanceDeck.nextDraw)).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
 		}
 
 		else if	(draw instanceof JailCard) {
-			if(this.jailInDeck == 0) {
+			if(ChanceDeck.jailInDeck == 0) {
 				if (ChanceDeck.Cards.length == ChanceDeck.nextDraw) { 
 					while (draw instanceof JailCard) {
 						shuffle();
@@ -131,7 +108,7 @@ public class ChanceDeck {
 				}
 			} else {
 				ListOfPlayers.getPlayers(Game.getWhosTurn()).setHaveJailCard(1);
-				this.jailInDeck--;
+				ChanceDeck.jailInDeck--;
 			}
 		}
 		return draw;
@@ -154,12 +131,11 @@ public class ChanceDeck {
 		String file = "../CardText.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String [] title;
-		title = new String[44];
+		title = new String[42];
 
-		for (int i = 0; i < 44; i++) {
+		for (int i = 0; i < 41; i++) {
 			String currentLine = reader.readLine();
 			title[i] = currentLine;
-			//			System.out.println(title[i]);
 		}
 		reader.close();
 		setText(title);
@@ -171,7 +147,7 @@ public class ChanceDeck {
 
 
 	public static void setJailInDeck(int jailInDeck) {
-		jailInDeck += jailInDeck;
+		ChanceDeck.jailInDeck += jailInDeck;
 	}
 
 
@@ -187,15 +163,13 @@ public class ChanceDeck {
 		String file = "../ChanceBalanceCards.txt";
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String [] mmoney;
-		mmoney = new String[21];
-		amount = new int[21];
+		mmoney = new String[20];
+		amount = new int[20];
 
-		for (int i = 0; i < 21; i++) {
+		for (int i = 0; i < 20; i++) {
 			String currentLine = reader.readLine();
 			mmoney[i] = currentLine;
-			//			System.out.print(mmoney[i]);
 			amount[i] = (Integer.parseInt(mmoney[i]));
-			//			System.out.println(amount[i]);
 		}
 		reader.close();
 		setAmount(amount);
