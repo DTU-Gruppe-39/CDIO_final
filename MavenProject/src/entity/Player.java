@@ -15,6 +15,7 @@ public class Player {
 	private int netWorth;
 	public int propertyValue;
 	public int RoundsInJail = 0;
+	public int ShippingCompaniesOwned = 0;
 
 
 	public Player () {
@@ -105,6 +106,14 @@ public class Player {
 
 	public int getHaveJailCard() {
 		return haveJailCard;
+	}
+	
+	public void boughtShippingCompany() {
+		this.ShippingCompaniesOwned += 1;
+	}
+	
+	public int getShippingCompaniesOwned() {
+		return this.ShippingCompaniesOwned;
 	}
 	
 	public void CalculateTax() {
