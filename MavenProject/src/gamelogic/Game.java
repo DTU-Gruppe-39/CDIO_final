@@ -75,10 +75,7 @@ public class Game {
 						break;
 					}
 				}
-
 			}
-
-
 		}
 
 
@@ -229,9 +226,33 @@ public class Game {
 							ListOfPlayers.getPlayers(whosTurn).setBalance(0);
 							//							changeOwnerToCreditor();
 						}
+						// Pay rent on shippingcompanies
+						else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][2]==9 && Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
+							// The owner of the shippingcompany only owns 1 shippingcompany
+							if(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getShippingCompaniesOwned()==1) {
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
+								ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
+							}
+							// The owner of the shippingcompany owns 2 shippingcompany
+							else if (ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getShippingCompaniesOwned()==2) {
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*2));
+								ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*2);
+							}
+							// The owner of the shippingcompany owns 3 shippingcompany
+							else if (ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getShippingCompaniesOwned()==3) {
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*4));
+								ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*4);
+							}
+							// The owner of the shippingcompany owns 4 shippingcompany
+							else if (ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getShippingCompaniesOwned()==4) {
+								ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*8));
+								ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*8);
+							}
+							
+						}
 						else if(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
 							ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
-							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);							
+							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);	
 						}
 					}
 					//Update recievers balance on GUI
@@ -291,7 +312,11 @@ public class Game {
 				}
 				else {
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
-					setOwner(ListOfPlayers.getPlayers(whosTurn));					
+					setOwner(ListOfPlayers.getPlayers(whosTurn));	
+					// Updates the amount of shippingcompanies a player owns after he bought one
+					if((Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][2]==9)){
+						ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+					}
 				}
 			}
 		}
