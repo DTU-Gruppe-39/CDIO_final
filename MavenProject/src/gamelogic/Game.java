@@ -17,6 +17,7 @@ public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
+	private int sameDice = 0;
 
 	static int FieldNumb = 40;
 	ChanceDeck deck = new ChanceDeck();
@@ -155,9 +156,13 @@ public class Game {
 			}
 			else {
 				whosTurn++;
-			}			
+			}
 		}
-
+		this.sameDice++;
+		if (this.sameDice == 3) {
+			goToJail();
+			whosTurn++;
+		}
 	}
 
 	public static void movePlayer(Player player, int die1, int die2) {

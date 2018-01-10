@@ -19,12 +19,4 @@ public class PayCard extends Chancecard {
 		this.amount = amount;
 	}
 
-//	@Override
-//	public void PerformAction(Player player) {
-//		ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(PayCard.getAmount());
-//	}
-
-//	@Override
-//	public void drawCard(Player player) {
-//	}
 }
