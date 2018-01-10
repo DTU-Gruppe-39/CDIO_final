@@ -247,13 +247,16 @@ public class Game {
 			case 2: this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 			break;
-			case 4:  //betal 10% eller 4000;
-				//				if(GUI_GUI.displayTaxChoice()==false) {
-				//					ListOfPlayers.getPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance()/10);
-				//				}
-				//				else {
-				//					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
-				//				}
+			case 4:  //betal 4000 eller 10%;
+			ListOfPlayers.getPlayers(whosTurn).setPropertyValue();			
+			ListOfPlayers.getPlayers(whosTurn).setNetWorth();
+			ListOfPlayers.getPlayers(whosTurn).CalculateTax();
+				if(GUI_GUI.displayTaxChoice()==false) {
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-ListOfPlayers.getPlayers(whosTurn).getTax());;
+				}
+				else {
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
+				}
 				break;
 			case 7:	this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());

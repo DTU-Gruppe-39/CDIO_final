@@ -11,7 +11,7 @@ public class Player {
 	private boolean isJailed;
 	private int haveJailCard;
 	private int currentField = 0;
-
+	private int tax;
 	private int netWorth;
 	public int propertyValue;
 	public int RoundsInJail = 0;
@@ -106,22 +106,59 @@ public class Player {
 	public int getHaveJailCard() {
 		return haveJailCard;
 	}
-
+	
+	public void CalculateTax() {
+		tax = 0;
+		tax = netWorth/10;
+	}
+	
+	public int getTax() {
+		return tax;
+		
+	}
+	
 	public void setHaveJailCard(int haveJailCard) {
 		this.haveJailCard += haveJailCard;
 	}
-
-	public int getNetWorth() { //adds together players balance and property value
+	
+	public void setNetWorth() { //adds together players balance and property value
+		this.netWorth = 0;
 		this.netWorth = getBalance() + getPropertyValue();
+	}
+	
+	public int getNetWorth() { //adds together players balance and property value
 		return this.netWorth;
 	}
-	public int getPropertyValue() { //method that gets a players property value
+	
+	public void setPropertyValue() { //method that gets a players property value
+		this.propertyValue = 0;
 		for (int i=0; i<40; i++) {
 			if (Game.getWhosTurn()==Game.getFields()[i][4]) {
-				this.propertyValue += Game.getFields()[i][1];
+				this.propertyValue += Game.getFields()[i][6];
+				if(Game.getFields()[i][2]== 1 || Game.getFields()[i][2]==2) {
+					this.propertyValue += (Game.getFields()[i][9]*1000);					
+				}
+				else if(Game.getFields()[i][2]== 3 || Game.getFields()[i][2]==4) {
+					this.propertyValue += (Game.getFields()[i][9]*2000);					
+				}
+				else if(Game.getFields()[i][2]== 5 || Game.getFields()[i][2]==6) {
+					this.propertyValue += (Game.getFields()[i][9]*3000);					
+				}
+				else if(Game.getFields()[i][2]== 7 || Game.getFields()[i][2]==8) {
+					this.propertyValue += (Game.getFields()[i][9]*4000);					
+				}
+				else if (Game.getFields()[i][2]== 9 ||Game.getFields()[i][2]== 10) {
+					System.out.println("Spilleren ejer et redderi eller et bryggeri");
+				}
+				else {
+					System.out.println("Error in PropertyValue in Player class");
+				}
 			}
 		}
+	}
+	public int getPropertyValue() {
 		return this.propertyValue;
+		
 	}
 }
 

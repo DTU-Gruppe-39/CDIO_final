@@ -37,6 +37,7 @@ public class GameBoard {
 				//				Rederi felt
 				//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
 				field[i][1] = 500;
+				field[i][2] = 9;
 				field[i][5] = 1;
 				field[i][6] = 4000;
 				field[i][7] = 2000;
@@ -79,6 +80,7 @@ public class GameBoard {
 				//				Tuborg bryggeri
 				//				Husk der skal ganges med øjne / dicesum og ganges med 2 hvis begge bryggerier ejes 
 				field[i][1] = 100;
+				field[i][2] = 10;
 				field[i][5] = 1;
 				field[i][6] = 3000;
 				field[i][7] = 1500;
@@ -101,6 +103,7 @@ public class GameBoard {
 				//				Rederi felt
 				//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
 				field[i][1] = 500;
+				field[i][2] = 9; 
 				field[i][5] = 1;
 				field[i][6] = 4000;
 				field[i][7] = 2000;
@@ -160,6 +163,7 @@ public class GameBoard {
 				//				Rederi
 				//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
 				field[i][1] = 500;
+				field[i][2] = 9;
 				field[i][5] = 1;
 				field[i][6] = 4000;
 				field[i][7] = 2000;
@@ -182,6 +186,7 @@ public class GameBoard {
 				//				Carlsberg bryggeri
 				//				Husk der skal ganges med øjne / dicesum og ganges med 2 hvis begge bryggerier ejes 
 				field[i][1] = 100;
+				field[i][2] = 10; 
 				field[i][5] = 1;
 				field[i][6] = 3000;
 				field[i][7] = 1500;
@@ -224,6 +229,7 @@ public class GameBoard {
 				//				Rederi
 				//				Hvis man ejer 2 så skal rent være 1000 og for hvert mere man ejer så skal rent dobbles
 				field[i][1] = 500;
+				field[i][2] = 9;
 				field[i][5] = 1;
 				field[i][6] = 4000;
 				field[i][7] = 2000;
