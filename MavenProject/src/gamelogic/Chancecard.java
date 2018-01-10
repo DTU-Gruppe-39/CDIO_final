@@ -1,8 +1,5 @@
 package gamelogic;
 
-import entity.Player;
-import gamelogic.RecieveCard;
-
 public abstract class Chancecard {
 	private String text;
 	
@@ -18,16 +15,6 @@ public abstract class Chancecard {
 
 	public Chancecard(String text) {
 		this.text = text;
-	}
-
-	
-
-//	public int getAmount () {
-//		return RecieveCard.getAmount();
-//	}
-	
-	public String getChanceCardText() {
-		return this.text;
 	}
 	
 }

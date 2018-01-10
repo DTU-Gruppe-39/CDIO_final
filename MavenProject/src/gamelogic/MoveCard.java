@@ -17,9 +17,5 @@ public class MoveCard extends Chancecard {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-
-//	@Override
-//	public void drawCard(Player player) {
-//	}
 }
 
