@@ -17,7 +17,7 @@ public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
-	private int sameDice = 0;
+	private static int sameDice = 0;
 
 	static int FieldNumb = 40;
 	ChanceDeck deck = new ChanceDeck();
@@ -46,38 +46,38 @@ public class Game {
 		TwoDice dice = new TwoDice();
 
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
-				Game turn = new Game();
-				if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
-					switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
-					case "Kast":
-						System.out.println("1");
-						dice.roll();
-						turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
-						break;
-					case "Byg huse/hotel":
-						System.out.println("2");
-                        turn.setHouse(turn.titleToInt(turn.chooseHouse()));
-						break;
-					case "Pantsæt grunde":
-						System.out.println("3");
-						if (turn.pawnableFields().length != 0) {							
-							turn.setPawned(turn.titleToInt(turn.choosePawn()));
-						}
-						break;
-					case "Genkøb":
-						System.out.println("4");
-						if (turn.pawnedFields().length != 0) {							
-						turn.rebuy(turn.titleToInt(turn.choosePawned()));
-						}
-						break;
-					default:
-						System.out.println("Selection not recognized");
-						break;
+		while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
+			Game turn = new Game();
+			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
+				case "Kast":
+					System.out.println("1");
+					dice.roll();
+					turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
+					break;
+				case "Byg huse/hotel":
+					System.out.println("2");
+					turn.setHouse(turn.titleToInt(turn.chooseHouse()));
+					break;
+				case "Pantsæt grunde":
+					System.out.println("3");
+					if (turn.pawnableFields().length != 0) {							
+						turn.setPawned(turn.titleToInt(turn.choosePawn()));
 					}
+					break;
+				case "Genkøb":
+					System.out.println("4");
+					if (turn.pawnedFields().length != 0) {							
+						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+					}
+					break;
+				default:
+					System.out.println("Selection not recognized");
+					break;
 				}
 			}
 		}
+	}
 
 
 	public void goToJail() {
@@ -124,48 +124,59 @@ public class Game {
 
 	//Everything needed between each turn
 	public void updateTurn (int die1, int die2, Player player) {
-		if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
-			Jail(die1, die2);
-		}
-		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
-			movePlayer(player, die1, die2);
-			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
-			goToJail();
+		if (sameDice == 3) {
+			tripleTurn(player);
+		}	else {
+			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
+				Jail(die1, die2);
+			}
+			if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
+				movePlayer(player, die1, die2);
+				handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
+				goToJail();
 
-			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
-				ListOfPlayers.getPlayers(whosTurn).setDead(true);
-				for (int i=0; i<40; i++) {
-					if(whosTurn==Fields[i][4]) {
-						Fields[i][4] = 0;
-						Fields[i][3] = 0;
-						Fields[i][8] = 0;
-						removeOwner(i);
+				if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
+					ListOfPlayers.getPlayers(whosTurn).setDead(true);
+					for (int i=0; i<40; i++) {
+						if(whosTurn==Fields[i][4]) {
+							Fields[i][4] = 0;
+							Fields[i][3] = 0;
+							Fields[i][8] = 0;
+							removeOwner(i);
+						}
+
 					}
-
+					GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+					NumberOfDeadPlayers++;	
 				}
-				GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-				NumberOfDeadPlayers++;	
 			}
-		}
-		if (die1 != die2) {
-			if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
-				whosTurn = 1;
-			}
-			else {
-				whosTurn++;
-			}
-		}
-		if (die1 == die2) {
-			this.sameDice++;
-			if (sameDice == 3) {
-				GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-				ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
-				ListOfPlayers.getPlayers(whosTurn).setJailed(true);
-				GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
-				whosTurn++;
+			if (die1 != die2) {
+				if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
+					whosTurn = 1;
+				}
+				else {
+					whosTurn++;
+				}
+			} else {
+				sameDice++;
 			}
 		}
 	}
+
+	public void tripleTurn(Player player) {
+		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+		ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
+		ListOfPlayers.getPlayers(whosTurn).setJailed(true);
+		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+		sameDice = 0;
+		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
+			whosTurn = 1;
+		}
+		else {
+			whosTurn++;
+		}
+	}
+
 
 	public static void movePlayer(Player player, int die1, int die2) {
 		GUI_GUI.gui.setDice(die1, die2);
@@ -282,7 +293,7 @@ public class Game {
 								ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*8));
 								ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]*8);
 							}
-							
+
 						}
 						else if(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
 							ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
@@ -303,9 +314,9 @@ public class Game {
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
 			break;
 			case 4:  //betal 4000 eller 10%;
-			ListOfPlayers.getPlayers(whosTurn).setPropertyValue();			
-			ListOfPlayers.getPlayers(whosTurn).setNetWorth();
-			ListOfPlayers.getPlayers(whosTurn).CalculateTax();
+				ListOfPlayers.getPlayers(whosTurn).setPropertyValue();			
+				ListOfPlayers.getPlayers(whosTurn).setNetWorth();
+				ListOfPlayers.getPlayers(whosTurn).CalculateTax();
 				if(GUI_GUI.displayTaxChoice()==false) {
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-ListOfPlayers.getPlayers(whosTurn).getTax());;
 				}
@@ -426,8 +437,8 @@ public class Game {
 				}
 			}
 		}
-//		System.out.println("Fields are " + Arrays.deepToString(Fields));
-//		System.out.println("size is " + size);
+		//		System.out.println("Fields are " + Arrays.deepToString(Fields));
+		//		System.out.println("size is " + size);
 
 		refinedFields = new String[size];
 		int temp = 0;
@@ -437,7 +448,7 @@ public class Game {
 				temp++;
 			}
 		}
-//		System.out.println("refined are " + Arrays.deepToString(refinedFields));		
+		//		System.out.println("refined are " + Arrays.deepToString(refinedFields));		
 
 		return refinedFields;
 	}
@@ -504,22 +515,22 @@ public class Game {
 	public String chooseHouse() {
 		return GUI_GUI.gui.getUserSelection("                                            Hvor vil du købe hus?", LegalHouse() );
 	}
-	
+
 	public String [] LegalHouse() {
 		String [] Fields = new String[40];
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
 			if((whosTurn == getFields()[i][4]) && ownsGroupFields())
-//					&& !(getFields()[i][10] == 0)) {
+				//					&& !(getFields()[i][10] == 0)) {
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
-				if(Fields[i] != null) {
-					Fields[i] = GUI_GUI.getTitles()[i];
-					size++;
-				}
+			if(Fields[i] != null) {
+				Fields[i] = GUI_GUI.getTitles()[i];
+				size++;
 			}
-	//}
+		}
+		//}
 		//		System.out.println(Arrays.deepToString(Fields));
 		//		System.out.println(size);
 		refinedFields = new String[size];
