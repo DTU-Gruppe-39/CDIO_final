@@ -182,7 +182,7 @@ public class GUI_GUI {
 		fields[39] = new GUI_Street(titles[39], subText[39], titles[39] + disc[39],"", Color.magenta, Color.white);
 
 		
-		gui = new GUI(fields, Color.green);			
+		gui = new GUI(fields, Color.lightGray);			
 
 		long t1 = System.currentTimeMillis();
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
