@@ -46,30 +46,6 @@ public class Game {
 		TwoDice dice = new TwoDice();
 
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-<<<<<<< HEAD
-		while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
-			Game turn = new Game();
-			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
-				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb")) {
-				case "Kast":
-					System.out.println("1");
-					dice.roll();
-					turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
-					break;
-				case "Byg huse/hotel":
-					System.out.println("2");
-					turn.setHouse(turn.titleToInt(turn.chooseHouse()));
-					break;
-				case "Pantsæt grunde":
-					System.out.println("3");
-					if (turn.pawnableFields().length != 0) {							
-						turn.setPawned(turn.titleToInt(turn.choosePawn()));
-					}
-					break;
-				case "Genkøb":
-					System.out.println("4");
-					if (turn.pawnedFields().length != 0) {							
-=======
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
@@ -94,7 +70,6 @@ public class Game {
 					case "Genkøb":
 						System.out.println("4");
 						if (turn.pawnedFields().length != 0) {							
->>>>>>> 1ca13361b7ec46543733460d2a7e2fe12ec58062
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
 					}
 					break;
@@ -548,13 +523,9 @@ public class Game {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-<<<<<<< HEAD
-			if((whosTurn == getFields()[i][4]) && ownsGroupFields())
-				//					&& !(getFields()[i][10] == 0)) {
-=======
+
 			if((whosTurn == getFields()[i][4]) && ownsGroupFields(whosTurn))
 //					&& !(getFields()[i][10] == 0)) {
->>>>>>> 1ca13361b7ec46543733460d2a7e2fe12ec58062
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
 			if(Fields[i] != null) {
