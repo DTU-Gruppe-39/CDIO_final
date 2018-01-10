@@ -102,7 +102,7 @@ public class Game {
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
 		}
 		
-		if (die1 == die2) {
+		else if (die1 == die2) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
 		}
