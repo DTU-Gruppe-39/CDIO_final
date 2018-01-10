@@ -175,11 +175,11 @@ public class GUI_GUI {
 
 		fields[36] = new GUI_Chance(titles[36], subText[36], titles[36] + disc[36], Color.white, Color.BLACK);
 
-		fields[37] = new GUI_Street(titles[37], subText[37], titles[37] + disc[37], "", Color.red, Color.BLACK);
+		fields[37] = new GUI_Street(titles[37], subText[37], titles[37] + disc[37], "", Color.magenta, Color.WHITE);
 
 		fields[38] = new GUI_Street(titles[38], subText[38], titles[38] + disc[38],"", Color.white, Color.BLACK);
 		
-		fields[39] = new GUI_Street(titles[39], subText[39], titles[39] + disc[39],"", Color.red, Color.BLACK);
+		fields[39] = new GUI_Street(titles[39], subText[39], titles[39] + disc[39],"", Color.magenta, Color.white);
 
 		
 		gui = new GUI(fields, Color.green);			
