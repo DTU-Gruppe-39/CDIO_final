@@ -193,14 +193,14 @@ public class Game {
 		if (nextField > 39) {
 			nextField = (currField + diceSum) % 40;
 			player.setNewBalance(4000);
+			//Update whosTurn's players balance on GUI
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 		}
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
 
 		//Move player on GUI
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
-		//Update whosTurn's players balance on GUI
-		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
 	public boolean ownsGroupFields(int whosturn) {
