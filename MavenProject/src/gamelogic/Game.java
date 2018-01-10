@@ -461,7 +461,7 @@ public class Game {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if(whosTurn == getFields()[i][4] || getFields()[i][8] == 1) {
+			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 1) {
 				Fields[i] = "" + getFields()[i][0];
 				if(Fields[i] != null) {
 					Fields[i] = GUI_GUI.getTitles()[i];
