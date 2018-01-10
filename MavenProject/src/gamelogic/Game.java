@@ -57,7 +57,9 @@ public class Game {
 						break;
 					case "Byg huse/hotel":
 						System.out.println("2");
-                        turn.setHouse(turn.titleToInt(turn.chooseHouse()));
+						if (turn.LegalHouse().length != 0) {
+							turn.setHouse(turn.titleToInt(turn.chooseHouse()));
+						}
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
