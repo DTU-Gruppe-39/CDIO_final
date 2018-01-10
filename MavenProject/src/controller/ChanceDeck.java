@@ -133,7 +133,7 @@ public class ChanceDeck {
 		String [] title;
 		title = new String[42];
 
-		for (int i = 0; i < 44; i++) {
+		for (int i = 0; i < 41; i++) {
 			String currentLine = reader.readLine();
 			title[i] = currentLine;
 		}
