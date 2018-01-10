@@ -17,7 +17,7 @@ public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
 	private static int NumberOfDeadPlayers;
-	
+
 	static int FieldNumb = 40;
 	ChanceDeck deck = new ChanceDeck();
 	static int 	Attribute = 10;
@@ -41,11 +41,10 @@ public class Game {
 		whosTurn = (int) Math.ceil(Math.random() * GUI_GUI.getNumberOfPlayers());
 
 
-//		//Create dice
+		//		//Create dice
 		TwoDice dice = new TwoDice();
 
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-		
 			while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 				Game turn = new Game();
 				if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
@@ -57,25 +56,31 @@ public class Game {
 						break;
 					case "Byg huse/hotel":
 						System.out.println("2");
+                        turn.setHouse(turn.titleToInt(turn.chooseHouse()));
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
-						turn.setPawned(turn.titleToInt(turn.choosePawn()));
+						if (turn.pawnableFields().length != 0) {							
+							turn.setPawned(turn.titleToInt(turn.choosePawn()));
+						}
 						break;
 					case "Genkøb":
 						System.out.println("4");
+						if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+						}
 						break;
 					default:
 						System.out.println("Selection not recognized");
 						break;
 					}
-											
 				}
 
-				
 			}
-	}
+
+
+		}
+
 
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
@@ -87,7 +92,7 @@ public class Game {
 
 		}
 	}
-	
+
 	public void Jail(int die1, int die2) {
 		if (ListOfPlayers.getPlayers(whosTurn).getHaveJailCard()>0) {
 			ListOfPlayers.getPlayers(whosTurn).setHaveJailCard(-1);
@@ -95,13 +100,13 @@ public class Game {
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
 			ChanceDeck.setJailInDeck(1);
 		}
-		
+
 		else if (GUI_GUI.displayJailChoice()==false) {
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
 		}
-		
+
 		else if (die1 == die2) {
 			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
 			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
@@ -116,7 +121,7 @@ public class Game {
 			GUI_GUI.gui.setDice(die1, die2);
 		}
 	}
-	
+
 
 
 	//Everything needed between each turn
@@ -132,13 +137,13 @@ public class Game {
 			if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
 				ListOfPlayers.getPlayers(whosTurn).setDead(true);
 				for (int i=0; i<40; i++) {
-						if(whosTurn==Fields[i][4]) {
-							Fields[i][4] = 0;
-							Fields[i][3] = 0;
-							Fields[i][8] = 0;
-							removeOwner(i);
-						}
-					
+					if(whosTurn==Fields[i][4]) {
+						Fields[i][4] = 0;
+						Fields[i][3] = 0;
+						Fields[i][8] = 0;
+						removeOwner(i);
+					}
+
 				}
 				GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 				NumberOfDeadPlayers++;	
@@ -222,7 +227,7 @@ public class Game {
 						if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
 							ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 							ListOfPlayers.getPlayers(whosTurn).setBalance(0);
-//							changeOwnerToCreditor();
+							//							changeOwnerToCreditor();
 						}
 						else if(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
 							ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]));
@@ -236,7 +241,7 @@ public class Game {
 		}
 
 		else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 0) {
-			
+
 			switch (ListOfPlayers.getPlayers(whosTurn).getCurrentField()) {
 			case 0: break;
 			case 2: this.deck.drawCard();
@@ -277,7 +282,7 @@ public class Game {
 				break;
 			}
 		}
-		
+
 		else {
 			//Buy field if it is ownable
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
@@ -294,14 +299,14 @@ public class Game {
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
-//	public void changeOwnerToCreditor() {
-//		for (int i=0; i<40; i++) {			
-//				if(whosTurn==Fields[i][4]) {
-//					Fields[i][4] = Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4];
-//					setCreditorOwner(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]));
-//				}							
-//		}
-//	}
+	//	public void changeOwnerToCreditor() {
+	//		for (int i=0; i<40; i++) {			
+	//				if(whosTurn==Fields[i][4]) {
+	//					Fields[i][4] = Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4];
+	//					setCreditorOwner(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]));
+	//				}							
+	//		}
+	//	}
 
 	public void pawnToPayDebt() {
 		for (int i=0; i<40; i++) {
@@ -314,7 +319,7 @@ public class Game {
 			}
 		}
 	}
-	
+
 	public void pawnToBuyField() {
 		for (int i=0; i<40; i++) {
 			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6])) {
@@ -330,31 +335,31 @@ public class Game {
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
-//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
 	}
-	
-//	public void setCreditorOwner(Player player) {
-//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
-//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
-////		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-//		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
-//	}
-	
+
+	//	public void setCreditorOwner(Player player) {
+	//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
+	//		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
+	////		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+	//		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), "( " + player.getName() + " )");
+	//	}
+
 	public String choosePawn() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
 	}
 	public String choosePawned() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnedFields());
 	}
-	
+
 	public String[] pawnableFields() {
 		String [] Fields = new String[40];
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
 			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 0) {
-//				System.out.println(getFields()[i][0]);
+				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
 				if(Fields[i] != null) {
 					Fields[i] = GUI_GUI.getTitles()[i];
@@ -362,8 +367,9 @@ public class Game {
 				}
 			}
 		}
-//		System.out.println(Arrays.deepToString(Fields));
-//		System.out.println(size);
+//		System.out.println("Fields are " + Arrays.deepToString(Fields));
+//		System.out.println("size is " + size);
+
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
@@ -372,11 +378,11 @@ public class Game {
 				temp++;
 			}
 		}
-//		System.out.println(Arrays.deepToString(refinedFields));		
-		
+//		System.out.println("refined are " + Arrays.deepToString(refinedFields));		
+
 		return refinedFields;
 	}
-	
+
 	public String [] pawnedFields() {
 		String [] Fields = new String[40];
 		String [] refinedFields;
@@ -400,7 +406,7 @@ public class Game {
 		}
 		return refinedFields;
 	}
-	
+
 	public int titleToInt(String title) {
 		int fieldNumber = 0;
 		for (int i=0; i<40; i++) {
@@ -409,31 +415,71 @@ public class Game {
 				break;
 			}
 		}
-		
+
 		return fieldNumber;
 	}
-	
+
 	public void setPawned(int fieldnumber) {
-//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 		Fields[fieldnumber][8] = 1;
 		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
-	
+
 	public void rebuy(int fieldnumber) {
 		GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());
 		Fields[fieldnumber][8] = 0;
 		ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
-	
+
 	public void removeOwner(int fieldnumber) {
-		GUI_GUI.displayOwner(fieldnumber, " ");  //Needs to display the price again
+		GUI_GUI.displayPrice(fieldnumber);
 	}
-	
-	
+
+
 	public static int getWhosTurn() {
 		return whosTurn;
 	}
+	public String chooseHouse() {
+		return GUI_GUI.gui.getUserSelection("                                            Hvor vil du købe hus?", LegalHouse() );
+	}
+	
+	public String [] LegalHouse() {
+		String [] Fields = new String[40];
+		String [] refinedFields;
+		int size = 0;
+		for (int i=0; i<40; i++) {
+			if(whosTurn == getFields()[i][4] && getFields()[i][8] == 0) {
+				//				System.out.println(getFields()[i][0]);
+				Fields[i] = "" + getFields()[i][0];
+				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
+					size++;
+				}
+			}
+		}
+		//		System.out.println(Arrays.deepToString(Fields));
+		//		System.out.println(size);
+		refinedFields = new String[size];
+		int temp = 0;
+		for (int i=0; i<40; i++) {
+			if(Fields[i] != null) {
+				refinedFields[temp] = Fields[i];
+				temp++;
+			}
+		}
+		//		System.out.println(Arrays.deepToString(refinedFields));		
+
+		return refinedFields;
+	}
+	public void setHouse(int fieldnumber) {
+		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
+		Fields[fieldnumber][8] = 1;
+		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+	}
+
 }

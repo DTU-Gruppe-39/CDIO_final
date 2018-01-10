@@ -7,8 +7,6 @@ import entity.GameBoard;
 public class Main {
 	public static void main(String[] args) throws IOException {
 
-		ChanceDeck.readAmaount();
-
 //		new GameController().playGame();
 		GUI_GUI.readDisc();
 		GUI_GUI.readSubText();

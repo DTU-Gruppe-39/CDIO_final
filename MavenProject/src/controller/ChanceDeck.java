@@ -9,7 +9,6 @@ import boundary.GUI_GUI;
 
 public class ChanceDeck {
 	private static String[] text;
-	private static int[] amount;
 	private static Chancecard[] Cards;
 	private static int jailInDeck = 2;
 	private static int nextDraw = -1;
@@ -92,6 +91,10 @@ public class ChanceDeck {
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(((MoveCard)draw).getAmount());
 						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+						
+						if (((MoveCard)draw).getAmount() == 0){
+						ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(4000);
+						}
 		}
 
 		else if	(draw instanceof JailCard) {
@@ -117,14 +120,13 @@ public class ChanceDeck {
 	public String ShowCardText() {
 		String ctext = "";
 		Chancecard draw = ChanceDeck.Cards[ChanceDeck.nextDraw];
-		for(int i = 0; i < 38; i++) {
+		for(int i = 0; i <= 41; i++) {
 			if(draw.getText().equals(getText()[i])) {
 				ctext = getText()[i+1];
 			}
 		}
 		return ctext;
 	}
-	
 	
 
 	public static void readText() throws IOException {
@@ -133,7 +135,7 @@ public class ChanceDeck {
 		String [] title;
 		title = new String[42];
 
-		for (int i = 0; i < 41; i++) {
+		for (int i = 0; i <= 41; i++) {
 			String currentLine = reader.readLine();
 			title[i] = currentLine;
 		}
@@ -157,34 +159,6 @@ public class ChanceDeck {
 
 	public static void setText(String[] text) {
 		ChanceDeck.text = text;
-	}
-
-	public static void readAmaount() throws IOException {
-		String file = "../ChanceBalanceCards.txt";
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String [] mmoney;
-		mmoney = new String[20];
-		amount = new int[20];
-
-		for (int i = 0; i < 20; i++) {
-			String currentLine = reader.readLine();
-			mmoney[i] = currentLine;
-			amount[i] = (Integer.parseInt(mmoney[i]));
-		}
-		reader.close();
-		setAmount(amount);
-	}
-
-	public static int[] getAmount() {
-		return amount;
-	}
-
-	public static void setAmount(int[] amount) {
-		ChanceDeck.amount = amount;
-	}
-
-	public static int getAmount(int index) {
-		return amount [index];
 	}
 
 }

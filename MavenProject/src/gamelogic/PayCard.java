@@ -4,7 +4,7 @@ import entity.Player;
 import controller.ListOfPlayers;
 
 public class PayCard extends Chancecard {
-	private static int amount;
+	private  int amount;
 
 	public PayCard(String text, int amount)  {
 		super(text);
