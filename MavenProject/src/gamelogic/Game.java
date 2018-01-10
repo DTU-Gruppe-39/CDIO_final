@@ -60,7 +60,9 @@ public class Game {
 						break;
 					case "Pantsæt grunde":
 						System.out.println("3");
-						turn.setPawned(turn.titleToInt(turn.choosePawn()));
+						if (turn.pawnableFields().length != 0) {							
+							turn.setPawned(turn.titleToInt(turn.choosePawn()));
+						}
 						break;
 					case "Genkøb":
 						System.out.println("4");
@@ -360,8 +362,9 @@ public class Game {
 				}
 			}
 		}
-//		System.out.println(Arrays.deepToString(Fields));
-//		System.out.println(size);
+//		System.out.println("Fields are " + Arrays.deepToString(Fields));
+//		System.out.println("size is " + size);
+
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
@@ -370,8 +373,8 @@ public class Game {
 				temp++;
 			}
 		}
-//		System.out.println(Arrays.deepToString(refinedFields));		
-		
+//		System.out.println("refined are " + Arrays.deepToString(refinedFields));		
+
 		return refinedFields;
 	}
 	
@@ -427,7 +430,7 @@ public class Game {
 	}
 	
 	public void removeOwner(int fieldnumber) {
-		GUI_GUI.displayOwner(fieldnumber, " ");  //Needs to display the price again
+		GUI_GUI.displayPrice(fieldnumber);
 	}
 	
 	
