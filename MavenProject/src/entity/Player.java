@@ -112,6 +112,10 @@ public class Player {
 		this.ShippingCompaniesOwned += 1;
 	}
 	
+	public void pawnedShippingCompany() {
+		this.ShippingCompaniesOwned -= 1;
+	}
+	
 	public int getShippingCompaniesOwned() {
 		return this.ShippingCompaniesOwned;
 	}
