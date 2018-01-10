@@ -155,10 +155,15 @@ public class Game {
 				whosTurn++;
 			}
 		}
-		this.sameDice++;
-		if (this.sameDice == 3) {
-			goToJail();
-			whosTurn++;
+		if (die1 == die2) {
+			this.sameDice++;
+			if (sameDice == 3) {
+				GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+				ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
+				ListOfPlayers.getPlayers(whosTurn).setJailed(true);
+				GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+				whosTurn++;
+			}
 		}
 	}
 
