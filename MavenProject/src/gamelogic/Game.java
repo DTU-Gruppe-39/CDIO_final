@@ -78,7 +78,7 @@ public class Game {
 
 
 		}
-	}
+
 
 	public void goToJail() {
 		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
@@ -362,14 +362,9 @@ public class Game {
 				}
 			}
 		}
-<<<<<<< HEAD
 //		System.out.println("Fields are " + Arrays.deepToString(Fields));
 //		System.out.println("size is " + size);
 
-=======
-		//		System.out.println(Arrays.deepToString(Fields));
-		//		System.out.println(size);
->>>>>>> origin/develop
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
@@ -378,11 +373,7 @@ public class Game {
 				temp++;
 			}
 		}
-<<<<<<< HEAD
 //		System.out.println("refined are " + Arrays.deepToString(refinedFields));		
-=======
-		//		System.out.println(Arrays.deepToString(refinedFields));		
->>>>>>> origin/develop
 
 		return refinedFields;
 	}
