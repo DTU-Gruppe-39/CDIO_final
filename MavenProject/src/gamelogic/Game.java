@@ -184,19 +184,43 @@ public class Game {
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
-
-	public boolean ownsBothFields() {
-
-		if (ListOfPlayers.getPlayers(whosTurn).getCurrentField() % 3 == 1) {
-			int otherField = Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField() + 1][4];
-			return (otherField == Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]);
+	public boolean ownsGroupFields(int whosturn) {
+		int tempOwner = 0;
+		int tempruns = 0;
+		for (int j = 0; j < 40; j++) {
+			for (int i = 1; i < 10; i++) {
+				if (getFields()[j][2] == i && Fields[j][3] == 1) {
+					if (Fields[j][4] == whosturn) {
+						tempOwner++;
+					}
+					tempruns++;
+				}
+			}
 		}
-
-		else if (ListOfPlayers.getPlayers(whosTurn).getCurrentField() % 3 == 2) {
-			int otherField = Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField() - 1][4];
-			return (otherField == Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]);
+		if (tempOwner == tempruns) {
+			return true;			
+		} else {
+			return false;
 		}
-		else {
+	}
+
+	public boolean doubleRent(int field) { //Skal ændres til feltet og ikke spilleren
+		int Owner = Fields[field][4];
+		int tempOwner = 0;
+		int tempruns = 0;
+		for (int j = 0; j < 40; j++) {
+			if (Fields[j][2] == Fields[field][2]) {
+				if (Fields[j][3] == 1) {
+					if (Fields[j][4] == Owner) {
+						tempOwner++;
+					}
+					tempruns++;
+				}
+			}
+		}
+		if (tempOwner == tempruns) {
+			return true;			
+		} else {
 			return false;
 		}
 	}
@@ -210,7 +234,7 @@ public class Game {
 				//Lands on his own field
 			}
 			else {
-				if (ownsBothFields()) {
+				if (doubleRent(field)) {
 					//Multiply rent by 2
 					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
 						setPawned(titleToInt(choosePawn()));							
