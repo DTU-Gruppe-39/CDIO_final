@@ -396,4 +396,8 @@ public class GUI_GUI {
 	public static void displayOwner(int field, String name) {
 		fields[field].setSubText(name);
 	}
+
+	public static void displayPrice(int field) {
+		fields[field].setSubText(subText[field]);
+	}
 }
