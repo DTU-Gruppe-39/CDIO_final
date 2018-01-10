@@ -443,7 +443,7 @@ public class Game {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if((whosTurn == getFields()[i][4]))
+			if((whosTurn == getFields()[i][4]) && ownsBothFields())
 //					&& !(getFields()[i][10] == 0)) {
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
