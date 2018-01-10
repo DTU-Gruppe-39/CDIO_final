@@ -1,46 +1,44 @@
 Chance1
-Det er deres fødselsdag. Modtag af hver medspiller kr. 200.
-Chance2
 Værdien af egen avl fra nyttehaven udgør kr.200, som De modtager af banken.
-Chance3
+Chance2
 De har vundet i klasselotteriet. Modtag kr. 500.
-Chance4
+Chance3
 De havde en række med elleve rigtige i tipning. Modtag kr. 1.000.
-Chance5
+Chance4
 Grundet dyrtiden har De fået gageforhøjelse. Modtag kr. 1.000.
-Chance6
+Chance5
 Modtag udbytte af Deres aktier kr. 1.000.
-Chance7
+Chance6
 Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.
-Chance8
+Chance7
 De modtager Deres aktieudbytte. Modtag kr. 1.000 af banken.
-Chance9
+Chance8
 Modtag udbytte af deres aktier kr. 1.000.
-Chance10
+Chance9
 Kommunen har eftergivet et kvartals skat. Hæv i banken kr. 3.000.
-Chance11
+Chance10
 De har måtte vedtage en parkeringsbøde. Betal kr. 200 i bøde.
-Chance12
+Chance11
 De har været en tur i udlandet og haft for mange cigaretter med hjem. Betal told kr. 200.
-Chance13
+Chance12
 De har kørt frem for “Fuld Stop”. Betal kr. 1.000 i bøde.
-Chance14
+Chance13
 Betal Dere bilforsikring kr. 1.000.
-Chance15
+Chance14
 De har modtaget Deres tandlægeregning. Betal kr. 2.000.
+Chance15
+Betal kr. 3.000 for reparation af Deres vogn.
 Chance16
 Betal kr. 3.000 for reparation af Deres vogn.
 Chance17
-Betal kr. 3.000 for reparation af Deres vogn.
+I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.
 Chance18
 I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.
 Chance19
-I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.
+Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.
 Chance20
 Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.
 Chance21
-Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.
-Chance22
 Ryk frem til “Start”
 
 De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. Ved værdig trængende forstås, at Deres formue, d.v.s. Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.
