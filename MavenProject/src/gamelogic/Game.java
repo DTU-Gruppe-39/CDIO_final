@@ -187,6 +187,8 @@ public class Game {
 
 		//Move player on GUI
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+		//Update whosTurn's players balance on GUI
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 	}
 
 	public boolean ownsGroupFields(int whosturn) {
@@ -484,6 +486,9 @@ public class Game {
 		Fields[fieldnumber][8] = 1;
 		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+		if (Fields[fieldnumber][2] == 9) {
+			ListOfPlayers.getPlayers(whosTurn).pawnedShippingCompany();
+		}
 	}
 
 	public void rebuy(int fieldnumber) {
@@ -491,6 +496,9 @@ public class Game {
 		Fields[fieldnumber][8] = 0;
 		ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+		if (Fields[fieldnumber][2] == 9) {
+			ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+		}
 	}
 
 	public void removeOwner(int fieldnumber) {
