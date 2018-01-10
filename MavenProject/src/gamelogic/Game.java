@@ -66,7 +66,9 @@ public class Game {
 						break;
 					case "Genkøb":
 						System.out.println("4");
+						if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+						}
 						break;
 					default:
 						System.out.println("Selection not recognized");
