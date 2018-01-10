@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import gui_codebehind.GUI_BoardController;
+import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Chance;
 import gui_fields.GUI_Empty;
@@ -12,6 +13,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Jail;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Refuge;
+import gui_fields.GUI_Shipping;
 import gui_fields.GUI_Start;
 import gui_fields.GUI_Street;
 import gui_fields.GUI_Tax;
@@ -68,10 +70,15 @@ public class GUI_GUI {
 		fields[2] = new GUI_Chance(titles[2], subText[2], titles[2] + disc[2], Color.white, Color.BLACK);
 		
 		fields[3] = new GUI_Street(titles[3], subText[3], titles[3] + disc[3], "", Color.cyan, Color.BLACK);
-
+		
 		fields[4] = new GUI_Street(titles[4], subText[4], titles[4] + disc[4], "", Color.white, Color.BLACK);
 
-		fields[5] = new GUI_Street(titles[5], subText[5], titles[5] + disc[5], "", Color.white, Color.BLACK);
+		fields[5] = new GUI_Shipping();
+		fields[5].setTitle(titles[5]);
+		fields[5].setSubText(subText[5]);
+		fields[5].setDescription(disc[5]);
+		fields[5].setBackGroundColor(Color.blue);
+		fields[5].setForeGroundColor(Color.white);
 	
 		fields[6] = new GUI_Street(titles[6], subText[6], titles[6] + disc[6], "", Color.pink, Color.BLACK);
 
@@ -87,13 +94,23 @@ public class GUI_GUI {
 
 		fields[11] = new GUI_Street(titles[11], subText[11], titles[11] + disc[11], "", Color.green, Color.BLACK);
 
-		fields[12] = new GUI_Street(titles[12], subText[12],titles[12] + disc[12], "", Color.WHITE, Color.black);
+		fields[12] = new GUI_Brewery();
+		fields[12].setTitle(titles[12]);
+		fields[12].setSubText(subText[12]);
+		fields[12].setDescription(titles[12] + disc[12]);
+		fields[12].setBackGroundColor(Color.white);
+		fields[12].setForeGroundColor(Color.black);
 
 		fields[13] = new GUI_Street(titles[13], subText[13], titles[13] + disc[13], "", Color.green, Color.BLACK);
 
 		fields[14] = new GUI_Street(titles[14], subText[14], titles[14] + disc[14], "", Color.green, Color.BLACK);
 
-		fields[15] = new GUI_Street(titles[15], subText[15], titles[15] + disc[15], "", Color.white, Color.BLACK);
+		fields[15] = new GUI_Shipping();
+		fields[15].setTitle(titles[15]);
+		fields[15].setSubText(subText[15]);
+		fields[15].setDescription(disc[15]);
+		fields[15].setBackGroundColor(Color.blue);
+		fields[15].setForeGroundColor(Color.white);
 
 		fields[16] = new GUI_Street(titles[16], subText[16], titles[16] + disc[16], "", Color.gray, Color.white);
 
@@ -106,6 +123,8 @@ public class GUI_GUI {
 		fields[20] = new GUI_Refuge();
 		fields[20].setSubText(titles[20]);
 		fields[20].setTitle(titles[20]);
+		fields[20].setBackGroundColor(Color.WHITE);
+		fields[20].setDescription(titles[20] + " - " + subText[20]);
 
 		fields[21] = new GUI_Street(titles[21], subText[21], titles[21] + disc[21],"", Color.red, Color.white);
 
@@ -115,15 +134,25 @@ public class GUI_GUI {
 		
 		fields[24] = new GUI_Street(titles[24], subText[24], titles[24] + disc[24], "", Color.red, Color.white);
 
-		fields[25] = new GUI_Street(titles[25], subText[25], titles[25] + disc[25], "", Color.white, Color.black);
+		fields[25] = new GUI_Shipping();
+		fields[25].setTitle(titles[25]);
+		fields[25].setSubText(subText[25]);
+		fields[25].setDescription(disc[25]);
+		fields[25].setBackGroundColor(Color.blue);
+		fields[25].setForeGroundColor(Color.white);
 		
-		fields[26] = new GUI_Street(titles[26], subText[26], titles[26] + disc[26],"", Color.lightGray, Color.BLACK);
+		fields[26] = new GUI_Street(titles[26], subText[26], titles[26] + disc[26],"", Color.white, Color.BLACK);
 
-		fields[27] = new GUI_Street(titles[27], subText[27], titles[27] + disc[27], "", Color.lightGray, Color.BLACK);
+		fields[27] = new GUI_Street(titles[27], subText[27], titles[27] + disc[27], "", Color.white, Color.BLACK);
 
-		fields[28] = new GUI_Street(titles[28], subText[28], titles[28] + disc[28], "", Color.white, Color.BLACK);
+		fields[28] = new GUI_Brewery();
+		fields[28].setTitle(titles[28]);
+		fields[28].setSubText(subText[28]);
+		fields[28].setDescription(titles[28] + disc[28]);
+		fields[28].setBackGroundColor(Color.white);
+		fields[28].setForeGroundColor(Color.black);
 
-		fields[29] = new GUI_Street(titles[29], subText[29], titles[29] + disc[29], "", Color.lightGray, Color.BLACK);
+		fields[29] = new GUI_Street(titles[29], subText[29], titles[29] + disc[29], "", Color.white, Color.BLACK);
 
 		fields[30] = new GUI_Jail();
 		fields[30].setSubText(titles[30]);
@@ -137,7 +166,12 @@ public class GUI_GUI {
 
 		fields[34] = new GUI_Street(titles[34], subText[34], titles[34] + disc[34], "", Color.yellow, Color.BLACK);
 
-		fields[35] = new GUI_Street(titles[35], subText[35], titles[35] + disc[35], "", Color.WHITE, Color.black);
+		fields[35] = new GUI_Shipping();
+		fields[35].setTitle(titles[35]);
+		fields[35].setSubText(subText[35]);
+		fields[35].setDescription(disc[35]);
+		fields[35].setBackGroundColor(Color.blue);
+		fields[35].setForeGroundColor(Color.white);
 
 		fields[36] = new GUI_Chance(titles[36], subText[36], titles[36] + disc[36], Color.white, Color.BLACK);
 
@@ -148,7 +182,7 @@ public class GUI_GUI {
 		fields[39] = new GUI_Street(titles[39], subText[39], titles[39] + disc[39],"", Color.red, Color.BLACK);
 
 		
-		gui = new GUI(fields, Color.LIGHT_GRAY);			
+		gui = new GUI(fields, Color.green);			
 
 		long t1 = System.currentTimeMillis();
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
