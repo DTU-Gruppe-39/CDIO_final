@@ -250,8 +250,10 @@ public class Game {
 			//Field is owned
 			if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] == whosTurn) {
 				//Lands on his own field
-			}
-			else {
+			} else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8] == 1) {
+				//Field is pawned
+				
+			} else {
 				if (doubleRent(field)) {
 					//Multiply rent by 2
 					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1])) {
