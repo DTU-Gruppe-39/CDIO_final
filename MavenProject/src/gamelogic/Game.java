@@ -241,32 +241,35 @@ public class Game {
 			case 0: break;
 			case 2: this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
-			case 4:  //betal 10% eller 4000;
-//				if(GUI_GUI.displayTaxChoice()==false) {
-//					ListOfPlayers.getPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance()/10);
-//				}
-//				else {
-//					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
-//				}
-					break;
+			break;
+			case 4:  //betal 4000 eller 10%;
+			ListOfPlayers.getPlayers(whosTurn).setPropertyValue();			
+			ListOfPlayers.getPlayers(whosTurn).setNetWorth();
+			ListOfPlayers.getPlayers(whosTurn).CalculateTax();
+				if(GUI_GUI.displayTaxChoice()==false) {
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-ListOfPlayers.getPlayers(whosTurn).getTax());;
+				}
+				else {
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
+				}
+				break;
 			case 7:	this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
+			break;
 			case 10:break;
 			case 17:this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
+			break;
 			case 20:break;
 			case 22:this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
+			break;
 			case 33:this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
+			break;
 			case 36:this.deck.drawCard();
 			GUI_GUI.gui.displayChanceCard(this.deck.ShowCardText());
-					break;
+			break;
 			case 38: //betal skat
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2000);
 				break;
