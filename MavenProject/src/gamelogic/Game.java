@@ -50,7 +50,11 @@ public class Game {
 		while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 			Game turn = new Game();
 			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
+<<<<<<< HEAD
 				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Sælg huse")) {
+=======
+				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Indbyrdes handel")) {
+>>>>>>> ee1d79930e7f8e52c29d0c9c38c83322db207f34
 				case "Kast":
 					System.out.println("1");
 					dice.roll();
@@ -72,6 +76,11 @@ public class Game {
 					System.out.println("4");
 					if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+					}
+				case "Indbyrdes handel":
+					System.out.println("5");
+					if (turn.opponentsFields().length != 0) {							
+						turn.buyUsed(turn.titleToInt(turn.chooseProperty()));
 					}
 					break;
 				case "Sælg huse":
@@ -445,6 +454,25 @@ public class Game {
 	public String choosePawned() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil genkøbe", pawnedFields());
 	}
+	public String chooseProperty() {
+		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", opponentsFields());
+	}
+	
+	public int choosePrice(int owner) {
+		int offerPrice = 0;
+		boolean accepted;
+		offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+		while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
+			GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
+			offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+		}
+		accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
+		if (accepted && offerPrice != 0) {
+			return offerPrice;
+		} else {
+			return 0;
+		}
+	}
 
 	public String[] pawnableFields() {
 		String [] Fields = new String[40];
@@ -514,6 +542,7 @@ public class Game {
 
 	public void setPawned(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+<<<<<<< HEAD
 		if (Fields[fieldnumber][9]>0) {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
@@ -524,6 +553,14 @@ public class Game {
 			if (Fields[fieldnumber][2] == 9) {
 				ListOfPlayers.getPlayers(whosTurn).pawnedShippingCompany();			
 		    }
+=======
+		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
+		Fields[fieldnumber][8] = 1;
+		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
+		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+		if (Fields[fieldnumber][2] == 9) {
+			ListOfPlayers.getPlayers(whosTurn).lostShippingCompany();
+>>>>>>> ee1d79930e7f8e52c29d0c9c38c83322db207f34
 		}
 	}
 
@@ -534,6 +571,26 @@ public class Game {
 		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 		if (Fields[fieldnumber][2] == 9) {
 			ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+		}
+	}
+
+	public void buyUsed(int fieldnumber) {
+		int decidedPrice = choosePrice(Fields[fieldnumber][4]);
+		if (decidedPrice == 0) {
+			//Transaction denied
+			GUI_GUI.gui.showMessage("                                            Handlen blev afvist");
+		} else {
+			//Transaction confirmed
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
+			ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+			GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+			if (Fields[fieldnumber][2] == 9) {
+				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
+				ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+			}
+			Fields[fieldnumber][4] = whosTurn;
+			GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());  //Show after confirmation
 		}
 	}
 
@@ -557,9 +614,7 @@ public class Game {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-
 			if((whosTurn == getFields()[i][4]) && ownsGroupFields(whosTurn, getFields()[i][2])) {
-				//					&& !(getFields()[i][10] == 0)) {
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
 				if(Fields[i] != null) {
@@ -579,7 +634,6 @@ public class Game {
 			}
 		}
 		//		System.out.println(Arrays.deepToString(refinedFields));		
-
 		return refinedFields;
 	}
 	
@@ -634,6 +688,9 @@ public class Game {
 	}
 	
 	public void buyBuildings(int fieldnumber) {
+//		while(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
+//			setPawned(titleToInt(choosePawn()));	
+//		} Use to check if he can afford
 		if (Fields[fieldnumber][9] < 4) {	//Maybe check if he can afford
 			Fields[fieldnumber][9]++;
 			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);;  //Set house on GUI
@@ -651,5 +708,32 @@ public class Game {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke købe flere huse");
 		}
 	}
-
+	
+	public String[] opponentsFields() {
+		String [] Fields = new String[40];
+		String [] refinedFields;
+		int size = 0;
+		for (int i=0; i<40; i++) {
+			if(!(whosTurn == getFields()[i][4]) && getFields()[i][3] == 1) {
+				//				System.out.println(getFields()[i][0]);
+				Fields[i] = "" + getFields()[i][0];
+				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
+					size++;
+				}
+			}
+		}
+		//		System.out.println(Arrays.deepToString(Fields));
+		//		System.out.println(size);
+		refinedFields = new String[size];
+		int temp = 0;
+		for (int i=0; i<40; i++) {
+			if(Fields[i] != null) {
+				refinedFields[temp] = Fields[i];
+				temp++;
+			}
+		}
+		//		System.out.println(Arrays.deepToString(refinedFields));		
+		return refinedFields;
+	}
 }
