@@ -571,13 +571,13 @@ public class Game {
 	}
 	
 	public void buyBuildings(int fieldnumber) {
-		if (Fields[fieldnumber][9] < 5) {	//Maybe check if he can afford
+		if (Fields[fieldnumber][9] < 4) {	//Maybe check if he can afford
 			Fields[fieldnumber][9]++;
-			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]+1);;  //Set house on GUI
+			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);;  //Set house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
 			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 			System.out.println("Huset blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
-		} else if(Fields[fieldnumber][9] == 5) {
+		} else if(Fields[fieldnumber][9] == 4) {
 			Fields[fieldnumber][9]++;
 			GUI_GUI.displayHotel(fieldnumber);  //Set house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
