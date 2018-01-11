@@ -42,20 +42,9 @@ public class ListOfPlayers {
 //		return index;
 //	}
 	public static void addFunds(int amountOfPlayers) {
-		switch (amountOfPlayers) {
-		case 2:
 			for(int i=1; i <= amountOfPlayers; i++) {
-				Players[i].setNewBalance(20);
-			} break;
-		case 3:
-			for(int i=1; i <= amountOfPlayers; i++) {
-				Players[i].setNewBalance(18);
-			} break;	
-		case 4:
-			for(int i=1; i <= amountOfPlayers; i++) {
-				Players[i].setNewBalance(16);
-			} break;	
-	}
+				Players[i].setNewBalance(30000);
+			}
 }
 }
 
