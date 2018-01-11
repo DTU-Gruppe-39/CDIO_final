@@ -206,8 +206,8 @@ public class Game {
 	public boolean ownsGroupFields(int whosturn) {
 		int tempOwner = 0;
 		int tempruns = 0;
-		for (int j = 0; j < 40; j++) {
-			for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < 11; i++) {
+			for (int j = 0; j < 40; j++) {
 				if (getFields()[j][2] == i && Fields[j][3] == 1) {
 					if (Fields[j][4] == whosturn) {
 						tempOwner++;
