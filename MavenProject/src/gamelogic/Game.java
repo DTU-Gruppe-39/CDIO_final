@@ -182,6 +182,7 @@ public class Game {
 
 			}
 			GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+			GUI_GUI.gui.showMessage("Spilleren " + whosTurn + " er død");
 			NumberOfDeadPlayers++;	
 		}
 	}
