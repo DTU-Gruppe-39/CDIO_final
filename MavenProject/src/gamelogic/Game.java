@@ -130,24 +130,30 @@ public class Game {
 			sameDice++;
 			if (sameDice == 3) {
 				tripleTurn(player);			
+			} else {
+				handleTurn(die1, die2, player);
 			}
-		}	else {
-			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
-				Jail(die1, die2);
-				playerDied();
-			}
-			if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
-				movePlayer(player, die1, die2);
-				handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
-				goToJail();
-				playerDied();
-			}
-			if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
-				whosTurn = 1;
-			}
-			else {
-				whosTurn++;
-			}
+		} else {
+			handleTurn(die1, die2, player);
+		}
+	}
+
+	public void handleTurn(int die1, int die2, Player player) {
+		if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
+			Jail(die1, die2);
+			playerDied();
+		}
+		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
+			movePlayer(player, die1, die2);
+			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
+			goToJail();
+			playerDied();
+		}
+		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
+			whosTurn = 1;
+		}
+		else {
+			whosTurn++;
 		}
 	}
 
