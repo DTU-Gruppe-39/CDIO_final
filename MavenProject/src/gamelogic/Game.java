@@ -50,11 +50,7 @@ public class Game {
 		while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
 			Game turn = new Game();
 			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
-<<<<<<< HEAD
-				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Sælg huse")) {
-=======
-				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Indbyrdes handel")) {
->>>>>>> ee1d79930e7f8e52c29d0c9c38c83322db207f34
+				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Indbyrdes handel", "Sælg huse")) {
 				case "Kast":
 					System.out.println("1");
 					dice.roll();
@@ -542,7 +538,6 @@ public class Game {
 
 	public void setPawned(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-<<<<<<< HEAD
 		if (Fields[fieldnumber][9]>0) {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
@@ -551,16 +546,8 @@ public class Game {
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
 			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 			if (Fields[fieldnumber][2] == 9) {
-				ListOfPlayers.getPlayers(whosTurn).pawnedShippingCompany();			
+				ListOfPlayers.getPlayers(whosTurn).lostShippingCompany();			
 		    }
-=======
-		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
-		Fields[fieldnumber][8] = 1;
-		ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[fieldnumber][7]);
-		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
-		if (Fields[fieldnumber][2] == 9) {
-			ListOfPlayers.getPlayers(whosTurn).lostShippingCompany();
->>>>>>> ee1d79930e7f8e52c29d0c9c38c83322db207f34
 		}
 	}
 
