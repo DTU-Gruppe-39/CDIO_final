@@ -552,12 +552,16 @@ public class Game {
 	}
 
 	public void rebuy(int fieldnumber) {
-		GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());
-		Fields[fieldnumber][8] = 0;
-		ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
-		GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
-		if (Fields[fieldnumber][2] == 9) {
-			ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+		if (ListOfPlayers.getPlayers(whosTurn).getBalance() < 1.1 * Fields[fieldnumber][7]) {
+			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at genkøbe denne grund");
+		} else {
+			GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());
+			Fields[fieldnumber][8] = 0;
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+			if (Fields[fieldnumber][2] == 9) {
+				ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+			}
 		}
 	}
 
@@ -675,10 +679,9 @@ public class Game {
 	}
 	
 	public void buyBuildings(int fieldnumber) {
-		while(ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
-			setPawned(titleToInt(choosePawn()));	
-		} 
-		if (Fields[fieldnumber][9] < 4) {
+		if (ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
+			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
+		} else if (Fields[fieldnumber][9] < 4) {
 			Fields[fieldnumber][9]++;
 			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);;  //Set house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
