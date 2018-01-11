@@ -4,10 +4,12 @@ import java.io.IOException;
 import boundary.GUI_GUI;
 import gamelogic.Game;
 import entity.GameBoard;
+import entity.HousePrice;
 public class Main {
 	public static void main(String[] args) throws IOException {
 
 //		new GameController().playGame();
+		HousePrice.readHousePrice();
 		GUI_GUI.readDisc();
 		GUI_GUI.readSubText();
 		GUI_GUI.GUILauncher();

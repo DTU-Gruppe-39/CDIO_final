@@ -58,7 +58,7 @@ public class Game {
 				case "Byg huse/hotel":
 					System.out.println("2");
 					if (turn.LegalHouse().length != 0) {
-						turn.setHouse(turn.titleToInt(turn.chooseHouse()));
+						turn.buyBuildings(turn.titleToInt(turn.chooseHouse()));
 					}
 					break;
 				case "Pantsæt grunde":
@@ -207,17 +207,15 @@ public class Game {
 		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
-	public boolean ownsGroupFields(int whosturn) {
+	public boolean ownsGroupFields(int whosturn, int color) {
 		int tempOwner = 0;
 		int tempruns = 0;
-		for (int i = 1; i < 11; i++) {
-			for (int j = 0; j < 40; j++) {
-				if (getFields()[j][2] == i && Fields[j][3] == 1) {
-					if (Fields[j][4] == whosturn) {
-						tempOwner++;
-					}
-					tempruns++;
+		for (int j = 0; j < 40; j++) {
+			if (getFields()[j][2] == color && Fields[j][5] == 1) {
+				if (Fields[j][4] == whosturn) {
+					tempOwner++;
 				}
+				tempruns++;
 			}
 		}
 		if (tempOwner == tempruns) {
@@ -537,16 +535,16 @@ public class Game {
 		int size = 0;
 		for (int i=0; i<40; i++) {
 
-			if((whosTurn == getFields()[i][4]) && ownsGroupFields(whosTurn))
+			if((whosTurn == getFields()[i][4]) && ownsGroupFields(whosTurn, getFields()[i][2])) {
 				//					&& !(getFields()[i][10] == 0)) {
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
-			if(Fields[i] != null) {
-				Fields[i] = GUI_GUI.getTitles()[i];
-				size++;
+				if(Fields[i] != null) {
+					Fields[i] = GUI_GUI.getTitles()[i];
+					size++;
+				}
 			}
 		}
-		//}
 		//		System.out.println(Arrays.deepToString(Fields));
 		//		System.out.println(size);
 		refinedFields = new String[size];
@@ -561,7 +559,8 @@ public class Game {
 
 		return refinedFields;
 	}
-	public void setHouse(int fieldnumber) {
+	
+	public void buyBuildings(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 		Fields[fieldnumber][8] = 1;
