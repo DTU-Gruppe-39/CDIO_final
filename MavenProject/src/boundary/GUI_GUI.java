@@ -187,12 +187,12 @@ public class GUI_GUI {
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
 		
 //		System.out.println(Arrays.toString(titles));
-		numberOfPlayers = gui.getUserInteger("Indtast antal spillere", 2, 6);
+		numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere", 2, 6);
 //		System.out.println(numberOfPlayers);
 		
 		names = new String [numberOfPlayers];
 		for (int i = 0; i < numberOfPlayers; i++ ) {
-			names[i] = gui.getUserString("Spiller " + (i + 1) + " indtast navn");
+			names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
 		}
 //		Cars = new GUI_Cars[numberOfPlayers];
 //		for (int i = 0; i < numberOfPlayers; i++ ) {
@@ -440,7 +440,7 @@ public class GUI_GUI {
 		return gui.getUserLeftButtonPressed("Kast med terningerne for at forsøge at slå 2 ens, eller betal 1000kr, for at komme ud af fængsel", "Kast", "Betal 1000kr.");
 	}
 	public static boolean displayBuyChoice() {
-		return gui.getUserLeftButtonPressed("Vil du købe denne Grund?", "Ja", "Afslut tur");
+		return gui.getUserLeftButtonPressed("                                            Vil du købe denne Grund?", "Ja", "Afslut tur");
 	}
 
 	public static boolean displayTaxChoice() {

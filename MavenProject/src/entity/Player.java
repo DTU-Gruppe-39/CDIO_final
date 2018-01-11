@@ -112,7 +112,7 @@ public class Player {
 		this.ShippingCompaniesOwned += 1;
 	}
 	
-	public void pawnedShippingCompany() {
+	public void lostShippingCompany() {
 		this.ShippingCompaniesOwned -= 1;
 	}
 	
