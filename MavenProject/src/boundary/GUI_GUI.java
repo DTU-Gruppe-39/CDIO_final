@@ -418,6 +418,18 @@ public class GUI_GUI {
 			street1.setHouses(houses);
 		}
 	}
+	public static void removeHouses(int fieldnumber) {
+		if (fields[fieldnumber] instanceof GUI_Street) {
+			GUI_Street street1 = (GUI_Street)fields[fieldnumber];
+			street1.setHouses(0);
+		}
+	}
+	public static void removeHotel(int fieldnumber) {
+		if (fields[fieldnumber] instanceof GUI_Street) {
+			GUI_Street street1 = (GUI_Street)fields[fieldnumber];
+			street1.setHotel(false);
+		}
+	}
 	public static void displayHotel(int fieldnumber) {
 		if (fields[fieldnumber] instanceof GUI_Street) {
 			GUI_Street street1 = (GUI_Street)fields[fieldnumber];
