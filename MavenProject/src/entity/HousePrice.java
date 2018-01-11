@@ -3,13 +3,15 @@ package entity;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class HousePrice {
 	private static int[] HousePriceInt;
 	private static int[][] houseRentPrice;
+	
 	public static void setupHouse(){
-	int [][] houseRentPrice2  = new int [40][5];
-	houseRentPrice = new int [40][5];
+	int [][] houseRentPrice2  = new int [40][6];
+	houseRentPrice = new int [40][6];
 	//Rødovervej, blå
 	houseRentPrice2 [1][0] = 50;
 	houseRentPrice2 [1][1] = 250;
@@ -165,6 +167,7 @@ public class HousePrice {
 	houseRentPrice2 [39][4] = 34000;
 	houseRentPrice2 [39][5] = 40000;
 	
+	System.out.println(Arrays.deepToString(houseRentPrice2));
 	setHouseRentPrice(houseRentPrice2);
 
 }

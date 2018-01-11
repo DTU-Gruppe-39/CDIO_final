@@ -136,6 +136,12 @@ public class Game {
 			}
 		} else {
 			handleTurn(die1, die2, player);
+			if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
+				whosTurn = 1;
+			}
+			else {
+				whosTurn++;
+			}
 		}
 	}
 
@@ -149,12 +155,6 @@ public class Game {
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 			goToJail();
 			playerDied();
-		}
-		if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
-			whosTurn = 1;
-		}
-		else {
-			whosTurn++;
 		}
 	}
 
@@ -243,8 +243,8 @@ public class Game {
 					if (Fields[j][4] == Owner) {
 						tempOwner++;
 					}
-					tempruns++;
 				}
+				tempruns++;
 			}
 		}
 		if (tempOwner == tempruns) {
