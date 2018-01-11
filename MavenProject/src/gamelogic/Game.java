@@ -333,21 +333,21 @@ public class Game {
 	private void payRent(int field) {
 		if (doubleRent(field) && Fields[field][9] == 0) {
 			//Multiply rent by 2
-			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
+			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
 				setPawned(titleToInt(choosePawn()));							
 			}
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
-			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
+			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-2 * (HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
+			ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(2 * (HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
 
 			//Update recievers balance on GUI
 			GUI_GUI.getGuiPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setBalance(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getBalance());
 		} else {
 			//Pay normal rent
 			if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).isDead()== false) { //Er det nødvendigt at tjekke om ejeren er død?
-				while(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
+				while(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
 					setPawned(titleToInt(choosePawn()));	
 				}
-				if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
+				if (ListOfPlayers.getPlayers(whosTurn).getBalance()<(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
 					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 					ListOfPlayers.getPlayers(whosTurn).setBalance(0);
 					//							changeOwnerToCreditor();
@@ -356,7 +356,7 @@ public class Game {
 				else if (Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][2]==9 && Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
 					// The owner of the shippingcompany only owns 1 shippingcompany
 					if(ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).getShippingCompaniesOwned()==1) {
-						ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
+						ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
 						ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][1]);
 					}
 					// The owner of the shippingcompany owns 2 shippingcompany
@@ -377,8 +377,8 @@ public class Game {
 
 				}
 				else if(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][8]==0) {
-					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
-					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]);	
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]));
+					ListOfPlayers.getPlayers(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4]).setNewBalance(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]]);	
 				}
 			}
 			//Update recievers balance on GUI
@@ -397,7 +397,7 @@ public class Game {
 
 	public void pawnToPayDebt() {
 		for (int i=0; i<40; i++) {
-			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHousePriceInt()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
+			if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][9]])) {
 				if(whosTurn==Fields[i][4] && Fields[i][8]==0) {
 					Fields[i][8] = 1;
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(Fields[i][7]);
