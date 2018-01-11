@@ -134,26 +134,13 @@ public class Game {
 		}	else {
 			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
 				Jail(die1, die2);
+				playerDied();
 			}
 			if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
 				movePlayer(player, die1, die2);
 				handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player);
 				goToJail();
-
-				if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
-					ListOfPlayers.getPlayers(whosTurn).setDead(true);
-					for (int i=0; i<40; i++) {
-						if(whosTurn==Fields[i][4]) {
-							Fields[i][4] = 0;
-							Fields[i][3] = 0;
-							Fields[i][8] = 0;
-							removeOwner(i);
-						}
-
-					}
-					GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-					NumberOfDeadPlayers++;	
-				}
+				playerDied();
 			}
 			if (whosTurn == GUI_GUI.getNumberOfPlayers()) {
 				whosTurn = 1;
@@ -161,6 +148,23 @@ public class Game {
 			else {
 				whosTurn++;
 			}
+		}
+	}
+
+	public void playerDied() {
+		if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
+			ListOfPlayers.getPlayers(whosTurn).setDead(true);
+			for (int i=0; i<40; i++) {
+				if(whosTurn==Fields[i][4]) {
+					Fields[i][4] = 0;
+					Fields[i][3] = 0;
+					Fields[i][8] = 0;
+					removeOwner(i);
+				}
+
+			}
+			GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+			NumberOfDeadPlayers++;	
 		}
 	}
 
