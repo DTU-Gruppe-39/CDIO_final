@@ -575,7 +575,7 @@ public class Game {
 			//Transaction confirmed
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
 			ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());	//Bug around here with GUI balance
 			GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 			if (Fields[fieldnumber][2] == 9) {
 				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
