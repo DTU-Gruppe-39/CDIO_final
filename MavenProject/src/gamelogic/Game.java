@@ -655,7 +655,7 @@ public class Game {
 		return refinedFields;
 	}
 	public void sellBuildings(int fieldnumber) {
-		if (Fields[fieldnumber][9] <= 4 && Fields[fieldnumber][9] > 0) {	//Maybe check if he can afford?
+		if (Fields[fieldnumber][9] <= 4 && Fields[fieldnumber][9] > 0) {
 			Fields[fieldnumber][9]--;
 			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);  //Remove house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
@@ -675,10 +675,10 @@ public class Game {
 	}
 	
 	public void buyBuildings(int fieldnumber) {
-//		while(ListOfPlayers.getPlayers(whosTurn).getBalance()<=(HousePrice.getHouseRentPrice()[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][Fields[field][9]])) {
-//			setPawned(titleToInt(choosePawn()));	
-//		} Use to check if he can afford
-		if (Fields[fieldnumber][9] < 4) {	//Maybe check if he can afford
+		while(ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
+			setPawned(titleToInt(choosePawn()));	
+		} 
+		if (Fields[fieldnumber][9] < 4) {
 			Fields[fieldnumber][9]++;
 			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);;  //Set house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
