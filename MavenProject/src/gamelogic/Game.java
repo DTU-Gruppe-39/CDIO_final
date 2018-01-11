@@ -243,8 +243,8 @@ public class Game {
 					if (Fields[j][4] == Owner) {
 						tempOwner++;
 					}
-					tempruns++;
 				}
+				tempruns++;
 			}
 		}
 		if (tempOwner == tempruns) {
