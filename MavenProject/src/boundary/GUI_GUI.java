@@ -43,7 +43,7 @@ public class GUI_GUI {
 		return names;
 	}
 
-	public static int getNumberOfPlayers() {
+	public static int getNumberOfPlayers() {		
 		return numberOfPlayers;
 	}
 	
@@ -53,7 +53,7 @@ public class GUI_GUI {
 		readText();
 
 		 fields = new GUI_Field[40];
-		 street = new GUI_Street[40];
+//		 street = new GUI_Street[40];
 
 		//	Opretter alle felterne
 
@@ -180,7 +180,6 @@ public class GUI_GUI {
 		fields[38] = new GUI_Street(titles[38], subText[38], titles[38] + disc[38],"", Color.white, Color.BLACK);
 		
 		fields[39] = new GUI_Street(titles[39], subText[39], titles[39] + disc[39],"", Color.magenta, Color.white);
-
 		
 		gui = new GUI(fields, Color.lightGray);			
 
@@ -412,6 +411,18 @@ public class GUI_GUI {
 
 	public static void setDisc(String[] disc) {
 		GUI_GUI.disc = disc;
+	}
+	public static void displayHouses(int fieldnumber, int houses) {
+		if (fields[fieldnumber] instanceof GUI_Street) {
+			GUI_Street street1 = (GUI_Street)fields[fieldnumber];
+			street1.setHouses(houses);
+		}
+	}
+	public static void displayHotel(int fieldnumber) {
+		if (fields[fieldnumber] instanceof GUI_Street) {
+			GUI_Street street1 = (GUI_Street)fields[fieldnumber];
+			street1.setHotel(true);
+		}
 	}
 	public static boolean displayJailChoice() {
 		return gui.getUserLeftButtonPressed("Kast med terningerne for at forsøge at slå 2 ens, eller betal 1000kr, for at komme ud af fængsel", "Kast", "Betal 1000kr.");
