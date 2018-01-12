@@ -16,6 +16,7 @@ public class Player {
 	public int propertyValue;
 	public int RoundsInJail = 0;
 	public int ShippingCompaniesOwned = 0;
+	public int BreweriesOwned = 0;
 
 
 	public Player () {
@@ -107,7 +108,15 @@ public class Player {
 	public int getHaveJailCard() {
 		return haveJailCard;
 	}
-	
+	public void boughtBrewery() {
+		this.BreweriesOwned += 1;
+	}
+	public void lostBrewery() {
+		this.BreweriesOwned -= 1;
+	}
+	public int getBreweriesOwned() {
+		return this.BreweriesOwned;
+	}
 	public void boughtShippingCompany() {
 		this.ShippingCompaniesOwned += 1;
 	}
