@@ -540,8 +540,8 @@ public class Game {
 
 	public void setPawned(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		if (Fields[fieldnumber][9]>0) {
-			GUI_GUI.gui.showMessage("                                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
+		if (hasHousesOnColor(fieldnumber)) {
+			GUI_GUI.gui.showMessage("                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
 			GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 			Fields[fieldnumber][8] = 1;
