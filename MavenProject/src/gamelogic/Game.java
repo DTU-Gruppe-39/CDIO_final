@@ -112,6 +112,7 @@ public class Game {
 			GUI_GUI.getFields(30).removeAllCars();
 			//Move player on GUI to prison
 			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_GUI.gui.showMessage("                                            Du er røget i fængsel");
 
 		}
 	}
