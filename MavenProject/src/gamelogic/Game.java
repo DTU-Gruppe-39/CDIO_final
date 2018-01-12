@@ -73,6 +73,7 @@ public class Game {
 					if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
 					}
+					break;
 				case "Indbyrdes handel":
 					System.out.println("5");
 					if (turn.opponentsFields().length != 0) {							
