@@ -196,6 +196,14 @@ public class GUI_GUI {
 		names = new String [numberOfPlayers];
 		for (int i = 0; i < numberOfPlayers; i++ ) {
 			names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+//			for (int j = 0; j < i; j++ ) {
+			if (i > 0) {
+				while (contains(names[i], i) ) {
+					gui.showMessage("Vælg venligst et andet navn");
+					names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+				}
+			}
+//			}
 		}
 //		Cars = new GUI_Cars[numberOfPlayers];
 //		for (int i = 0; i < numberOfPlayers; i++ ) {
@@ -344,6 +352,22 @@ public class GUI_GUI {
 		
 		
 //		System.out.println(Arrays.toString(names));
+	}
+	
+	public static boolean contains(String name, int j) {
+		boolean answer;
+		int number = 0;
+		for (int i = 0; i < j; i++) {
+			if (name.equals(names[i])) {
+				number++;
+			}
+		}
+		if (number != 0) {
+			answer = true;
+		} else {
+			answer = false;
+		}
+		return answer;
 	}
 
 // Læser titlerne på felterne fra titles arrayet
