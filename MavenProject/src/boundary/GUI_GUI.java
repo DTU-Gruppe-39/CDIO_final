@@ -186,13 +186,39 @@ public class GUI_GUI {
 		long t1 = System.currentTimeMillis();
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
 		
+		numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere, mellem 2 - 6", 2, 6);			
 //		System.out.println(Arrays.toString(titles));
-		numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere", 2, 6);
+		while (2 > numberOfPlayers || numberOfPlayers > 6) {
+			numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere, mellem 2 - 6", 2, 6);			
+		}
 //		System.out.println(numberOfPlayers);
 		
 		names = new String [numberOfPlayers];
 		for (int i = 0; i < numberOfPlayers; i++ ) {
 			names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+//			for (int j = 0; j < i; j++ ) {
+			while (names[i].length() == 0) {
+				gui.showMessage("                                            Du skal indtaste et navn \n                                            Vælg venligst et andet navn");
+				names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+			}
+			char result = names[i].charAt(0);
+			while (result == ' ') {
+				gui.showMessage("                                            Dit navn må ikke starte med et mellemrum \n                                            Vælg venligst et andet navn");
+				names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+				result = names[i].charAt(0);
+			}
+			if (i > 0) {
+				while (contains(names[i], i) || result == ' ' ) {
+					if (contains(names[i], i)) {
+						gui.showMessage("                                            En anden spiller hedder allerede dette navn \n                                            Vælg venligst et andet navn");
+					} else if (result == ' ') {
+						gui.showMessage("                                            Dit navn må ikke starte med et mellemrum \n                                            Vælg venligst et andet navn");
+					}
+					names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+					result = names[i].charAt(0);
+				}
+			}
+//			}
 		}
 //		Cars = new GUI_Cars[numberOfPlayers];
 //		for (int i = 0; i < numberOfPlayers; i++ ) {
@@ -341,6 +367,22 @@ public class GUI_GUI {
 		
 		
 //		System.out.println(Arrays.toString(names));
+	}
+	
+	public static boolean contains(String name, int j) {
+		boolean answer;
+		int number = 0;
+		for (int i = 0; i < j; i++) {
+			if (name.equals(names[i])) {
+				number++;
+			}
+		}
+		if (number != 0) {
+			answer = true;
+		} else {
+			answer = false;
+		}
+		return answer;
 	}
 
 // Læser titlerne på felterne fra titles arrayet

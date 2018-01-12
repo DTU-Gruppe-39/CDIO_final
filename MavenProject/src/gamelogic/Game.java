@@ -63,30 +63,40 @@ public class Game {
 					System.out.println("2");
 					if (turn.LegalHouse().length != 0) {
 						turn.buyBuildings(turn.titleToInt(turn.chooseHouse()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke alle grunde i denne farve endnu");
 					}
 					break;
 				case "Pantsæt grunde":
 					System.out.println("3");
 					if (turn.pawnableFields().length != 0) {							
 						turn.setPawned(turn.titleToInt(turn.choosePawn()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen grunde");
 					}
 					break;
 				case "Genkøb":
 					System.out.println("4");
 					if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen pantsatte grunde");
 					}
 					break;
 				case "Indbyrdes handel":
 					System.out.println("5");
 					if (turn.opponentsFields().length != 0) {							
 						turn.buyUsed(turn.titleToInt(turn.chooseProperty()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Dine modstandere ejer ikke nogen grunde");
 					}
 					break;
 				case "Sælg huse":
 					System.out.println("5");
 					if (turn.LegalHouseSale().length != 0) {							
 						turn.sellBuildings(turn.titleToInt(turn.chooseSellHouse()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen huse endnu");
 					}
 					break;
 				default:
@@ -105,6 +115,7 @@ public class Game {
 			GUI_GUI.getFields(30).removeAllCars();
 			//Move player on GUI to prison
 			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_GUI.gui.showMessage("                                            Du er røget i fængsel");
 
 		}
 	}
@@ -484,11 +495,16 @@ public class Game {
 		int offerPrice = 0;
 		boolean accepted;
 		offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
-		while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
-			GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
-			offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+		if (offerPrice == 0) {
+			//Transaction denied
+			accepted = false;
+		} else {	
+			while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
+				GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
+				offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+			}
+			accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
 		}
-		accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
 		if (accepted && offerPrice != 0) {
 			return offerPrice;
 		} else {
@@ -564,8 +580,8 @@ public class Game {
 
 	public void setPawned(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		if (Fields[fieldnumber][9]>0) {
-			GUI_GUI.gui.showMessage("                                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
+		if (hasHousesOnColor(fieldnumber)) {
+			GUI_GUI.gui.showMessage("                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
 			GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(whosTurn).getName()+")");
 			Fields[fieldnumber][8] = 1;
@@ -592,24 +608,50 @@ public class Game {
 			}
 		}
 	}
+	
+	public boolean hasHousesOnColor(int fieldnumber) {
+		boolean hasHouses;
+		int houses = 0;
+		for (int j = 0; j < 40; j++) {
+			if (getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+				if (Fields[j][9] != 0) {
+					houses++;
+				}
+			}
+		}
+		if (houses != 0) {
+			hasHouses = true;
+		} else {
+			hasHouses = false;
+		}
+		return hasHouses;
+	}
 
 	public void buyUsed(int fieldnumber) {
-		int decidedPrice = choosePrice(Fields[fieldnumber][4]);
-		if (decidedPrice == 0) {
-			//Transaction denied
-			GUI_GUI.gui.showMessage("                                            Handlen blev afvist");
+		if (hasHousesOnColor(fieldnumber)) {
+			GUI_GUI.gui.showMessage("Sælg alle huse på grunde med samme farve, som den valgte grund, før du kan lave indbyrdes handel");
 		} else {
-			//Transaction confirmed
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
-			ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());	//Bug around here with GUI balance
-			GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
-			if (Fields[fieldnumber][2] == 9) {
-				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
-				ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+			int decidedPrice = choosePrice(Fields[fieldnumber][4]);
+			if (decidedPrice == 0) {
+				//Transaction denied
+				GUI_GUI.gui.showMessage("                                       	     Handlen blev afvist");
+			} else {
+				//Transaction confirmed
+				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
+				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
+				GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());	//Bug around here with GUI balance
+				GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+				if (Fields[fieldnumber][2] == 9) {
+					ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
+					ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+				}
+				Fields[fieldnumber][4] = whosTurn;
+				if (Fields[fieldnumber][8] != 0) {
+					GUI_GUI.displayOwner(fieldnumber, "(" + ListOfPlayers.getPlayers(whosTurn).getName() + ")");  //Show after confirmation
+				} else {
+					GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName()); 
+				}
 			}
-			Fields[fieldnumber][4] = whosTurn;
-			GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());  //Show after confirmation
 		}
 	}
 
@@ -706,8 +748,30 @@ public class Game {
 		}
 	}
 	
+	public boolean hasPawnedOnColor(int fieldnumber) {
+		boolean hasPawned;
+		int pawned = 0;
+		for (int j = 0; j < 40; j++) {
+			if (getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+				if (Fields[j][8] != 0) {
+					pawned++;
+				}
+			}
+		}
+		if (pawned != 0) {
+			hasPawned = true;
+		} else {
+			hasPawned = false;
+		}
+		return hasPawned;
+	}
+
 	public void buyBuildings(int fieldnumber) {
-		if (ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
+		if (Fields[fieldnumber][8] != 0) {
+			GUI_GUI.gui.showMessage("                                            Du kan ikke købe huse på en pantsat grund");
+		} else if (hasPawnedOnColor(fieldnumber)) {
+			GUI_GUI.gui.showMessage("                 Du kan ikke købe huse, da en af dine grunde i denne farve er pantsat");
+		} else if (ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
 		} else if (Fields[fieldnumber][9] < 4) {
 			Fields[fieldnumber][9]++;
