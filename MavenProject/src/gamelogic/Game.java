@@ -60,6 +60,8 @@ public class Game {
 					System.out.println("2");
 					if (turn.LegalHouse().length != 0) {
 						turn.buyBuildings(turn.titleToInt(turn.chooseHouse()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke alle grunde i denne farve endnu");
 					}
 					break;
 				case "Pantsæt grunde":
@@ -72,18 +74,24 @@ public class Game {
 					System.out.println("4");
 					if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen pantsatte grunde");
 					}
 					break;
 				case "Indbyrdes handel":
 					System.out.println("5");
 					if (turn.opponentsFields().length != 0) {							
 						turn.buyUsed(turn.titleToInt(turn.chooseProperty()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Dine modstandere ejer ikke nogen grunde");
 					}
 					break;
 				case "Sælg huse":
 					System.out.println("5");
 					if (turn.LegalHouseSale().length != 0) {							
 						turn.sellBuildings(turn.titleToInt(turn.chooseSellHouse()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen huse endnu");
 					}
 					break;
 				default:
@@ -460,11 +468,16 @@ public class Game {
 		int offerPrice = 0;
 		boolean accepted;
 		offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
-		while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
-			GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
-			offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+		if (offerPrice == 0) {
+			//Transaction denied
+			accepted = false;
+		} else {	
+			while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
+				GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
+				offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
+			}
+			accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
 		}
-		accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
 		if (accepted && offerPrice != 0) {
 			return offerPrice;
 		} else {
@@ -592,7 +605,7 @@ public class Game {
 			int decidedPrice = choosePrice(Fields[fieldnumber][4]);
 			if (decidedPrice == 0) {
 				//Transaction denied
-				GUI_GUI.gui.showMessage("                                            Handlen blev afvist");
+				GUI_GUI.gui.showMessage("                                       	     Handlen blev afvist");
 			} else {
 				//Transaction confirmed
 				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
@@ -604,7 +617,11 @@ public class Game {
 					ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
 				}
 				Fields[fieldnumber][4] = whosTurn;
-				GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());  //Show after confirmation
+				if (Fields[fieldnumber][8] != 0) {
+					GUI_GUI.displayOwner(fieldnumber, "(" + ListOfPlayers.getPlayers(whosTurn).getName() + ")");  //Show after confirmation
+				} else {
+					GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName()); 
+				}
 			}
 		}
 	}
