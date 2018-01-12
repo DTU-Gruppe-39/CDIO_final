@@ -5,11 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Chancecards.Chancecard;
-import Chancecards.JailCard;
-import Chancecards.MoveCard;
-import Chancecards.PayCard;
-import Chancecards.RecieveCard;
+import Chancecards.*;
 import boundary.GUI_GUI;
 
 
