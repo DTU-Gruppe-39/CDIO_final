@@ -197,6 +197,10 @@ public class GUI_GUI {
 		for (int i = 0; i < numberOfPlayers; i++ ) {
 			names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
 //			for (int j = 0; j < i; j++ ) {
+			while (names[i].length() == 0) {
+				gui.showMessage("                                            Du skal indtaste et navn \n                                            Vælg venligst et andet navn");
+				names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+			}
 			char result = names[i].charAt(0);
 			while (result == ' ') {
 				gui.showMessage("                                            Dit navn må ikke starte med et mellemrum \n                                            Vælg venligst et andet navn");
