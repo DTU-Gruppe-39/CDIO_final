@@ -1,7 +1,7 @@
 package gamelogic;
 
 
-import boundary.GUI_GUI;
+import boundary.GUI_GUI; 
 
 import java.awt.List;
 import java.util.Arrays;
@@ -73,6 +73,7 @@ public class Game {
 					if (turn.pawnedFields().length != 0) {							
 						turn.rebuy(turn.titleToInt(turn.choosePawned()));
 					}
+					break;
 				case "Indbyrdes handel":
 					System.out.println("5");
 					if (turn.opponentsFields().length != 0) {							
@@ -291,7 +292,7 @@ public class Game {
 				ListOfPlayers.getPlayers(whosTurn).setNetWorth();
 				ListOfPlayers.getPlayers(whosTurn).CalculateTax();
 				if(GUI_GUI.displayTaxChoice()==false) {
-					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-ListOfPlayers.getPlayers(whosTurn).getTax());;
+					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-ListOfPlayers.getPlayers(whosTurn).getTax());
 				}
 				else {
 					ListOfPlayers.getPlayers(whosTurn).setNewBalance(-4000);
@@ -708,7 +709,7 @@ public class Game {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
 		} else if (Fields[fieldnumber][9] < 4) {
 			Fields[fieldnumber][9]++;
-			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);;  //Set house on GUI
+			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);  //Set house on GUI
 			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
 			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
 			System.out.println("Huset blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
