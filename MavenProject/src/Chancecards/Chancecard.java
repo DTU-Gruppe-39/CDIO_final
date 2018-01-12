@@ -1,4 +1,4 @@
-package gamelogic;
+package Chancecards;
 
 public abstract class Chancecard {
 	private String text;

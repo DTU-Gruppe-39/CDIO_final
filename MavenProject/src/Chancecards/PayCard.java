@@ -1,11 +1,12 @@
-package gamelogic;
+package Chancecards;
 
 import entity.Player;
+import controller.ListOfPlayers;
 
-public class RecieveCard extends Chancecard {
-	private int amount;
+public class PayCard extends Chancecard {
+	private  int amount;
 
-	public RecieveCard(String text, int amount)  {
+	public PayCard(String text, int amount)  {
 		super(text);
 		this.amount = amount;
 	}
@@ -17,4 +18,5 @@ public class RecieveCard extends Chancecard {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
 }

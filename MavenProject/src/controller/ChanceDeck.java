@@ -4,6 +4,12 @@ import gamelogic.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import Chancecards.Chancecard;
+import Chancecards.JailCard;
+import Chancecards.MoveCard;
+import Chancecards.PayCard;
+import Chancecards.RecieveCard;
 import boundary.GUI_GUI;
 
 
@@ -12,15 +18,6 @@ public class ChanceDeck {
 	private static Chancecard[] Cards;
 	private static int jailInDeck = 2;
 	private static int nextDraw = -1;
-
-	public Chancecard[] getCards() {
-		return ChanceDeck.Cards;
-	}
-
-
-	public static void setCards(Chancecard[] cards) {
-		Cards = cards;
-	}
 
 	public static void CreateCards() throws IOException{
 		Chancecard[] Card;
@@ -143,6 +140,15 @@ public class ChanceDeck {
 		setText(title);
 	}
 
+	public Chancecard[] getCards() {
+		return ChanceDeck.Cards;
+	}
+
+
+	public static void setCards(Chancecard[] cards) {
+		Cards = cards;
+	}
+	
 	public static int getJailInDeck() {
 		return jailInDeck;
 	}

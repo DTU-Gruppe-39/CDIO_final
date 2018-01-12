@@ -1,4 +1,4 @@
-package gamelogic;
+package Chancecards;
 
 public class JailCard extends Chancecard {
 
