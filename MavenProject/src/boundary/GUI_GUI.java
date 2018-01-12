@@ -199,7 +199,7 @@ public class GUI_GUI {
 //			for (int j = 0; j < i; j++ ) {
 			if (i > 0) {
 				while (contains(names[i], i) ) {
-					gui.showMessage("Vælg venligst et andet navn");
+					gui.showMessage("                                            En anden spiller hedder allerede dette navn \n                                            Vælg venligst et andet navn");
 					names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
 				}
 			}
