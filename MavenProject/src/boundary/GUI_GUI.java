@@ -186,8 +186,11 @@ public class GUI_GUI {
 		long t1 = System.currentTimeMillis();
 		System.out.println("GUI'en starter på "+ (t1-t0) + "ms");
 		
+		numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere, mellem 2 - 6", 2, 6);			
 //		System.out.println(Arrays.toString(titles));
-		numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere", 2, 6);
+		while (2 > numberOfPlayers || numberOfPlayers > 6) {
+			numberOfPlayers = gui.getUserInteger("                                            Indtast antal spillere, mellem 2 - 6", 2, 6);			
+		}
 //		System.out.println(numberOfPlayers);
 		
 		names = new String [numberOfPlayers];
