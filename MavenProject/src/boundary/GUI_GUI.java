@@ -197,10 +197,21 @@ public class GUI_GUI {
 		for (int i = 0; i < numberOfPlayers; i++ ) {
 			names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
 //			for (int j = 0; j < i; j++ ) {
+			char result = names[i].charAt(0);
+			while (result == ' ') {
+				gui.showMessage("                                            Dit navn må ikke starte med et mellemrum \n                                            Vælg venligst et andet navn");
+				names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+				result = names[i].charAt(0);
+			}
 			if (i > 0) {
-				while (contains(names[i], i) ) {
-					gui.showMessage("                                            En anden spiller hedder allerede dette navn \n                                            Vælg venligst et andet navn");
+				while (contains(names[i], i) || result == ' ' ) {
+					if (contains(names[i], i)) {
+						gui.showMessage("                                            En anden spiller hedder allerede dette navn \n                                            Vælg venligst et andet navn");
+					} else if (result == ' ') {
+						gui.showMessage("                                            Dit navn må ikke starte med et mellemrum \n                                            Vælg venligst et andet navn");
+					}
 					names[i] = gui.getUserString("                                            Spiller " + (i + 1) + " indtast navn");
+					result = names[i].charAt(0);
 				}
 			}
 //			}
