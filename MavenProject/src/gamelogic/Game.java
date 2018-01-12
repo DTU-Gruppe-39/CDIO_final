@@ -702,9 +702,29 @@ public class Game {
 		}
 	}
 	
+	public boolean hasPawnedOnColor(int fieldnumber) {
+		boolean hasPawned;
+		int pawned = 0;
+		for (int j = 0; j < 40; j++) {
+			if (getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+				if (Fields[j][8] != 0) {
+					pawned++;
+				}
+			}
+		}
+		if (pawned != 0) {
+			hasPawned = true;
+		} else {
+			hasPawned = false;
+		}
+		return hasPawned;
+	}
+
 	public void buyBuildings(int fieldnumber) {
 		if (Fields[fieldnumber][8] != 0) {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke købe huse på en pantsat grund");
+		} else if (hasPawnedOnColor(fieldnumber)) {
+			GUI_GUI.gui.showMessage("                 Du kan ikke købe huse, da en af dine grunde i denne farve er pantsat");
 		} else if (ListOfPlayers.getPlayers(whosTurn).getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
 		} else if (Fields[fieldnumber][9] < 4) {
