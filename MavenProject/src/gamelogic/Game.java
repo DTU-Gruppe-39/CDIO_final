@@ -68,6 +68,8 @@ public class Game {
 					System.out.println("3");
 					if (turn.pawnableFields().length != 0) {							
 						turn.setPawned(turn.titleToInt(turn.choosePawn()));
+					} else {
+						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen grunde");
 					}
 					break;
 				case "Genkøb":
