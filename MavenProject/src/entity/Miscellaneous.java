@@ -1,10 +1,9 @@
-package gamelogic;
+package entity;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
+import controller.Game;
 import controller.ListOfPlayers;
-import entity.HousePrice;
-import entity.Player;
 
 
 public class Miscellaneous {

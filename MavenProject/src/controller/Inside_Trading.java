@@ -1,8 +1,7 @@
-package gamelogic;
+package controller;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
-import controller.ListOfPlayers;
 import entity.Player;
 
 public class Inside_Trading {

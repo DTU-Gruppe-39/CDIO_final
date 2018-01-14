@@ -1,6 +1,6 @@
 package entity;
 
-import gamelogic.Game;
+import controller.Game;
 
 public class Player {
 	private String name;

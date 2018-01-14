@@ -1,11 +1,12 @@
-package gamelogic;
+package entity;
 
 import java.util.Arrays;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
+import controller.Game;
 import controller.ListOfPlayers;
-import entity.Player;
+import controller.Pawning_Rebuy;
 
 public class PlayerPayment {
 	int whosTurn;

@@ -1,6 +1,6 @@
 package entity;
 
-import gamelogic.Game;
+import controller.Game;
 /**
  * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
  */

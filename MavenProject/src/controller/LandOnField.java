@@ -1,10 +1,10 @@
-package gamelogic;
+package controller;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
-import controller.ChanceDeck;
-import controller.ListOfPlayers;
+import entity.Miscellaneous;
 import entity.Player;
+import entity.PlayerPayment;
 
 public class LandOnField {
 	public LandOnField(int whosturn, int [][]fields) {

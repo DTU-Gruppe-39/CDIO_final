@@ -1,9 +1,9 @@
-package gamelogic;
+package entity;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ChanceDeck;
-import entity.Player;
+import controller.Game;
 
 public class Jail {
 	public void goToJail(Player player) {

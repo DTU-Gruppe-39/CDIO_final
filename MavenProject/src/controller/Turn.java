@@ -1,7 +1,9 @@
-package gamelogic;
+package controller;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
+import entity.Jail;
+import entity.Miscellaneous;
 import entity.Player;
 
 public class Turn {
@@ -9,14 +11,14 @@ public class Turn {
 	Jail jail = new Jail();
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	LandOnField landOnField = new LandOnField(Game.getWhosTurn(), Game.getFields());
-	private static int sameDice = 0;
+	private int sameDice = 0;
 	
 	
 	
 	public void updateTurn (int die1, int die2, Player player) {
 		if (die1 == die2) {
-			sameDice++;
-			if (sameDice == 3) {
+			this.sameDice++;
+			if (this.sameDice == 3) {
 				tripleTurn(player);			
 			} else {
 				handleTurn(die1, die2, player);

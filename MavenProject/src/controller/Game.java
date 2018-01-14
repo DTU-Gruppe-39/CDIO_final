@@ -1,18 +1,12 @@
-package gamelogic;
+package controller;
 
 
-import boundary.GUI_GUI; 
+import boundary.GUI_GUI;  
 
-import java.awt.List;
 import java.io.IOException;
-import java.util.Arrays;
-import org.omg.PortableServer.POAPackage.ObjectAlreadyActive;
 
-import controller.ChanceDeck;
-import controller.ListOfPlayers;
-import entity.Player;
 import entity.TwoDice;
-import entity.HousePrice;
+import entity.Miscellaneous;
 
 public class Game {
 	final static int MIN_POINTS = 0;
@@ -41,11 +35,9 @@ public class Game {
 
 		//		//Create dice
 		TwoDice dice = new TwoDice();
-		ChanceDeck.CreateCards();
-		ChanceDeck.shuffle();
 		
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-		while ((GUI_GUI.getNumberOfPlayers()-1 == Miscellaneous.NumberOfDeadPlayers) ==false) {
+		while ((GUI_GUI.getNumberOfPlayers()-1 == Miscellaneous.getNumberOfDeadPlayers()) ==false) {
 			Turn turn = new Turn();
 			Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());	
 			Pawning_Rebuy PawReb = new Pawning_Rebuy(Game.getWhosTurn(), Game.getFields());

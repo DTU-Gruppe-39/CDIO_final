@@ -10,8 +10,6 @@ import Chancecards.MoveCard;
 import Chancecards.PayCard;
 import Chancecards.RecieveCard;
 import boundary.GUI_Create;
-import boundary.GUI_GUI;
-import gamelogic.Game;
 
 
 public class ChanceDeck {

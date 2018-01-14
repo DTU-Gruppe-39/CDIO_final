@@ -1,6 +1,6 @@
 package Tests;
 
-import static org.junit.Assert.*; 
+import static org.junit.Assert.*;  
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import Chancecards.Chancecard;
 import Chancecards.MoveCard;
-import gamelogic.*;
 import entity.*;
 
 public class MoveCardTest {

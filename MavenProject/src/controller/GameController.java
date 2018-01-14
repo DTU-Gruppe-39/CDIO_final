@@ -6,7 +6,6 @@ import java.util.Arrays;
 import boundary.GUI_GUI;
 import entity.GameBoard;
 import entity.HousePrice;
-import gamelogic.Game;
 
 public class GameController {
 
