@@ -68,11 +68,11 @@ public class Miscellaneous {
 	public int shippingCompaniesNumber() {
 		return ListOfPlayers.getPlayers(ownerOfCurrentField()).getShippingCompaniesOwned();
 	}
-	public void playerDied() {
-		if (ListOfPlayers.getPlayers(whosTurn).getBalance() == 0){
-			ListOfPlayers.getPlayers(whosTurn).setDead(true);
+	public void playerDied(Player player) {
+		if (player.getBalance() == 0){
+			player.setDead(true);
 			for (int i=0; i<40; i++) {
-				if(whosTurn==Fields[i][4]) {
+				if(Game.getWhosTurn()==Fields[i][4]) {
 					Fields[i][4] = 0;
 					Fields[i][3] = 0;
 					Fields[i][8] = 0;
@@ -80,8 +80,8 @@ public class Miscellaneous {
 				}
 
 			}
-			GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-			GUI_GUI.gui.showMessage("Spilleren " + whosTurn + " er død");
+			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+			GUI_GUI.gui.showMessage("Spilleren " + Game.getWhosTurn() + " er død");
 			NumberOfDeadPlayers++;	
 		}
 	}
@@ -90,7 +90,7 @@ public class Miscellaneous {
 		boolean hasHouses;
 		int houses = 0;
 		for (int j = 0; j < 40; j++) {
-			if (getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+			if (Game.getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
 				if (Fields[j][9] != 0) {
 					houses++;
 				}

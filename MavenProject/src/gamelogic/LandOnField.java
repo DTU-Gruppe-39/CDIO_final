@@ -7,7 +7,7 @@ import entity.Player;
 public class LandOnField {
 	//Update the balance depending on the field	
 		//[Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable]
-		public void handleField (int field, Player name, int die1, int die2) {
+		public void handleField (int field, Player player, int die1, int die2) {
 			if (Fields[field][3] == 1) {
 				//Field is owned
 				if (ownerOfCurrentField() == whosTurn) {
@@ -64,23 +64,23 @@ public class LandOnField {
 			else {
 				//Buy field if it is ownable
 				if (Fields[field][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
-					if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]) {
+					if(player.getBalance()<=Fields[player.getCurrentField()][6]) {
 						setPawned(titleToInt(choosePawn()));
 					}
 					else {
-						ListOfPlayers.getPlayers(whosTurn).setNewBalance(-(Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]));
+						player.setNewBalance(-(Fields[player.getCurrentField()][6]));
 						setOwner(ListOfPlayers.getPlayers(whosTurn));	
 						// Updates the amount of shippingcompanies a player owns after he bought one
 						if(Fields[field][2]==9){
-							currentPlayer().boughtShippingCompany();
+							player.boughtShippingCompany();
 						} else if (Fields[field][2]==10) {
-							currentPlayer().boughtBrewery();
+							player.boughtBrewery();
 						}
 					}
 				}
 			}
 			//Update whosTurn's players balance on GUI
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(currentPlayer().getBalance());
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
 		}
 		
 		

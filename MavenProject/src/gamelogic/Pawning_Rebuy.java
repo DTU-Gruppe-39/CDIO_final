@@ -2,6 +2,7 @@ package gamelogic;
 
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
+import entity.Player;
 
 public class Pawning_Rebuy {
 	int Fields[][] = Game.getFields();
@@ -85,16 +86,16 @@ public class Pawning_Rebuy {
 		}
 	}
 	
-	public void rebuy(int fieldnumber) {
-		if (ListOfPlayers.getPlayers(whosTurn).getBalance() < 1.1 * Fields[fieldnumber][7]) {
+	public void rebuy(int fieldnumber, Player player) {
+		if (player.getBalance() < 1.1 * Fields[fieldnumber][7]) {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at genkøbe denne grund");
 		} else {
-			GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName());
+			GUI_GUI.displayOwner(fieldnumber, player.getName());
 			Fields[fieldnumber][8] = 0;
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1.1 * Fields[fieldnumber][7]);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+			player.setNewBalance(-1.1 * Fields[fieldnumber][7]);
+			GUI_GUI.getGuiPlayers(Game.getWhosTurn()).setBalance(player.getBalance());
 			if (Fields[fieldnumber][2] == 9) {
-				ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+				player.boughtShippingCompany();
 			}
 		}
 	}

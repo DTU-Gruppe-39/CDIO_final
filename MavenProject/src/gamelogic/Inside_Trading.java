@@ -2,6 +2,7 @@ package gamelogic;
 
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
+import entity.Player;
 
 public class Inside_Trading {
 
@@ -28,7 +29,7 @@ public class Inside_Trading {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if(!(whosTurn == getFields()[i][4]) && getFields()[i][3] == 1) {
+			if(!(Game.getWhosTurn() == getFields()[i][4]) && getFields()[i][3] == 1) {
 				//				System.out.println(getFields()[i][0]);
 				Fields[i] = "" + getFields()[i][0];
 				if(Fields[i] != null) {
@@ -51,7 +52,7 @@ public class Inside_Trading {
 		return refinedFields;
 	}
 	
-	public void buyUsed(int fieldnumber) {
+	public void buyUsed(int fieldnumber, boolean hasBuildingsOnColor, Player player) {
 		if (hasHousesOnColor(fieldnumber)) {
 			GUI_GUI.gui.showMessage("Sælg alle huse på grunde med samme farve, som den valgte grund, før du kan lave indbyrdes handel");
 		} else {
@@ -61,19 +62,19 @@ public class Inside_Trading {
 				GUI_GUI.gui.showMessage("                                       	     Handlen blev afvist");
 			} else {
 				//Transaction confirmed
-				ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1 * decidedPrice);
+				player.setNewBalance(-1 * decidedPrice);
 				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
-				GUI_GUI.getGuiPlayers(whosTurn).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());	//Bug around here with GUI balance
-				GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(whosTurn).getBalance());
+				GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());	//Bug around here with GUI balance
+				GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(player.getBalance());
 				if (Fields[fieldnumber][2] == 9) {
 					ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
-					ListOfPlayers.getPlayers(whosTurn).boughtShippingCompany();
+					player.boughtShippingCompany();
 				}
 				Fields[fieldnumber][4] = whosTurn;
 				if (Fields[fieldnumber][8] != 0) {
-					GUI_GUI.displayOwner(fieldnumber, "(" + ListOfPlayers.getPlayers(whosTurn).getName() + ")");  //Show after confirmation
+					GUI_GUI.displayOwner(fieldnumber, "(" + player.getName() + ")");  //Show after confirmation
 				} else {
-					GUI_GUI.displayOwner(fieldnumber, ListOfPlayers.getPlayers(whosTurn).getName()); 
+					GUI_GUI.displayOwner(fieldnumber, player.getName()); 
 				}
 			}
 		}
@@ -83,7 +84,7 @@ public class Inside_Trading {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", opponentsFields());
 	}
 	
-	public int choosePrice(int owner) {
+	public int choosePrice(int owner, Player biddingPlayer) {
 		int offerPrice = 0;
 		boolean accepted;
 		offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
@@ -91,7 +92,7 @@ public class Inside_Trading {
 			//Transaction denied
 			accepted = false;
 		} else {	
-			while (offerPrice > ListOfPlayers.getPlayers(whosTurn).getBalance()) {
+			while (offerPrice > biddingPlayer.getBalance()) {
 				GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
 				offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
 			}

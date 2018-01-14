@@ -114,7 +114,7 @@ public class Game {
 		int currField;
 		int diceSum=0;
 		//Get current field of player
-		currField = currentPlayer().getCurrentField();
+		currField = player.getCurrentField();
 		diceSum= die1 + die2;
 		//Calculate next field with dice and current field
 		//If above 40, then modulus 40
@@ -123,13 +123,13 @@ public class Game {
 			nextField = (currField + diceSum) % 40;
 			player.setNewBalance(4000);
 			//Update whosTurn's players balance on GUI
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(currentPlayer().getBalance());
+			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
 		}
-		GUI_GUI.getFields(currentPlayer().getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
 
 		//Move player on GUI
-		GUI_GUI.getFields(currentPlayer().getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 	}
 
 	public void setOwner(Player player) {
@@ -146,4 +146,12 @@ public class Game {
 	public static int getWhosTurn() {
 		return whosTurn;
 	}
+	public static void increasWhosTurn() {
+		whosTurn++;
+	}
+	
+	public static void setWhosTurn(int turn) {
+		whosTurn = turn;
+	}
+	
 }
