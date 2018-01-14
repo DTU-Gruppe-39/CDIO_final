@@ -27,13 +27,13 @@ public class Building {
 			this.Fields[fieldnumber][9]++;
 			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
-			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else if(this.Fields[fieldnumber][9] == 4) {
 			this.Fields[fieldnumber][9]++;
 			GUI_Create.displayHotel(fieldnumber);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
-			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else {
 			//Tell user they can't buy any more houses
@@ -47,14 +47,14 @@ public class Building {
 			this.Fields[fieldnumber][9]--;
 			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Remove house on GUI
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
-			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev solgt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else if(this.Fields[fieldnumber][9] == 5) {
 			this.Fields[fieldnumber][9]--;
 			GUI_Create.removeHotel(fieldnumber);  // Remove hotel on GUI
 			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
-			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else {
 			//Tell user they can't sell any more houses

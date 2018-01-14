@@ -25,7 +25,6 @@ public class GUI_GUI {
 	private static String [] names;
 	private static int numberOfPlayers;
 	public static GUI gui;
-	private static GUI_Player[] guiPlayers;
 	private static GUI_Street[] street;
 	
 	public static GUI_Street getStreet(int index) {
@@ -40,6 +39,10 @@ public class GUI_GUI {
 		return names;
 	}
 
+	public static GUI getGui() {
+		return gui;
+	}
+	
 	public static int getNumberOfPlayers() {		
 		return numberOfPlayers;
 	}
@@ -179,8 +182,5 @@ public class GUI_GUI {
 
 	public static boolean displayTaxChoice() {
 		return gui.getUserLeftButtonPressed("                                Du skal enten betale 4000kr eller 10% af dit kapital i indkomstskat", "4000kr", "10% af kapital");
-	}
-	public static GUI_Player getGuiPlayers(int index) {
-		return guiPlayers[index -1];
 	}
 }

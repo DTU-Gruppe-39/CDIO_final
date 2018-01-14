@@ -85,7 +85,7 @@ public class Miscellaneous {
 				}
 
 			}
-			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), false);
 			GUI_GUI.gui.showMessage("Spilleren " + Game.getWhosTurn() + " er død");
 			increasNumberOfDeadPlayers();	
 		}

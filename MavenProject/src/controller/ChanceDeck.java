@@ -86,9 +86,9 @@ public class ChanceDeck {
 
 		}else if(draw instanceof MoveCard) {
 						System.out.println("Move to: " +((MoveCard)draw).getAmount());
-						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), false);
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(((MoveCard)draw).getAmount());
-						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
 						
 						if (((MoveCard)draw).getAmount() == 0){
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(4000);

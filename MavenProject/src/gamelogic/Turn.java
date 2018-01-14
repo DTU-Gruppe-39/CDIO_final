@@ -46,10 +46,10 @@ public class Turn {
 	}
 
 	public void tripleTurn(Player player) {
-		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), false);
 		player.setCurrentField(10);
 		player.setJailed(true);
-		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
 		this.sameDice = 0;
 		if (Game.getWhosTurn()== GUI_GUI.getNumberOfPlayers()) {
 			Game.setWhosTurn(1);

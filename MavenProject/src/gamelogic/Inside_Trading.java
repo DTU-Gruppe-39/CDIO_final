@@ -70,8 +70,8 @@ public class Inside_Trading {
 				//Transaction confirmed
 				player.setNewBalance(-1 * decidedPrice);
 				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
-				GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
-				GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(Fields[fieldnumber][4]).getBalance());
+				GUI_Create.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+				GUI_Create.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(Fields[fieldnumber][4]).getBalance());
 				if (Fields[fieldnumber][2] == 9) {
 					ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
 					player.boughtShippingCompany();

@@ -83,7 +83,7 @@ public class Pawning_Rebuy {
 			GUI_Create.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(Game.getWhosTurn()).getName()+")");
 			Fields[fieldnumber][8] = 1;
 			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(Fields[fieldnumber][7]);
-			GUI_GUI.getGuiPlayers(Game.getWhosTurn()).setBalance(ListOfPlayers.getPlayers(Game.getWhosTurn()).getBalance());
+			GUI_Create.getGuiPlayers(Game.getWhosTurn()).setBalance(ListOfPlayers.getPlayers(Game.getWhosTurn()).getBalance());
 			if (Fields[fieldnumber][2] == 9) {
 				ListOfPlayers.getPlayers(Game.getWhosTurn()).lostShippingCompany();			
 		    } else if(Fields[fieldnumber][2] == 10) {
@@ -100,7 +100,7 @@ public class Pawning_Rebuy {
 			GUI_Create.displayOwner(fieldnumber, player.getName());
 			Fields[fieldnumber][8] = 0;
 			player.setNewBalance(-1.1 * Fields[fieldnumber][7]);
-			GUI_GUI.getGuiPlayers(Game.getWhosTurn()).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(Game.getWhosTurn()).setBalance(player.getBalance());
 			if (Fields[fieldnumber][2] == 9) {
 				player.boughtShippingCompany();
 			}

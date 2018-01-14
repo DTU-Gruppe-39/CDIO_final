@@ -12,7 +12,7 @@ public class Jail {
 			player.setCurrentField(10);
 			GUI_Create.getFields(30).removeAllCars();
 			//Move player on GUI to prison
-			GUI_Create.getFields(10).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+			GUI_Create.getFields(10).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
 			GUI_GUI.gui.showMessage("                                            Du er røget i fængsel");
 
 		}
