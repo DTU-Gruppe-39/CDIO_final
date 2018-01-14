@@ -1,9 +1,8 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
-
 import controller.ChanceDeck;
-import controller.ListOfPlayers;
 import entity.Player;
 
 public class Jail {
@@ -11,9 +10,9 @@ public class Jail {
 		if(player.getCurrentField()==30) {
 			player.setJailed(true);
 			player.setCurrentField(10);
-			GUI_GUI.getFields(30).removeAllCars();
+			GUI_Create.getFields(30).removeAllCars();
 			//Move player on GUI to prison
-			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+			GUI_Create.getFields(10).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
 			GUI_GUI.gui.showMessage("                                            Du er røget i fængsel");
 
 		}

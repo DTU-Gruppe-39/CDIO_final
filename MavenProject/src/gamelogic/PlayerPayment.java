@@ -1,7 +1,11 @@
 package gamelogic;
 
+<<<<<<< HEAD
 import java.util.Arrays;
 
+=======
+import boundary.GUI_Create;
+>>>>>>> origin/Smaller_Classes
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -25,7 +29,7 @@ public class PlayerPayment {
 			this.misc.currentPlayer().setNewBalance(-2 * (this.misc.rent(field)));
 			ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(2 * (this.misc.rent(field)));
 			//Update recievers balance on GUI
-			GUI_GUI.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
+			GUI_Create.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
 		} else {
 			//Pay normal rent
 			if (this.misc.currentPlayer().isDead()==false && ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).isDead()== false) { //Er det nødvendigt at tjekke om ejeren er død?
@@ -70,7 +74,9 @@ public class PlayerPayment {
 				}
 			}
 			//Update recievers balance on GUI
-			GUI_GUI.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
+			GUI_Create.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
 		}
+			Game.setFields(this.Fields);
 	}	
+	
 }

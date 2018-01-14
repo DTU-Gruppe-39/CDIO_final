@@ -1,5 +1,6 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ChanceDeck;
 import controller.ListOfPlayers;
@@ -19,17 +20,17 @@ public class LandOnField {
 	//Update the balance depending on the field	
 		//[Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable]
 		public void handleField (int field, Player player, int die1, int die2) {
-			if (Fields[field][3] == 1) {
+			if (this.Fields[field][3] == 1) {
 				//Field is owned
-				if (misc.ownerOfCurrentField() == whosTurn) {
+				if (this.misc.ownerOfCurrentField() == this.whosTurn) {
 					//Lands on his own field
-				} else if (Fields[field][8] == 1) {
+				} else if (this.Fields[field][8] == 1) {
 					//Field is pawned
 					
 				} else {
-					playerPay.payRent(field, die1, die2);
+					this.playerPay.payRent(field, die1, die2);
 				}
-			} else if (Fields[field][5] == 0) {
+			} else if (this.Fields[field][5] == 0) {
 
 				switch (field) {
 				case 0: break;
@@ -74,24 +75,25 @@ public class LandOnField {
 
 			else {
 				//Buy field if it is ownable
-				if (Fields[field][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
-					if(player.getBalance()<=Fields[player.getCurrentField()][6]) {
-						PawReb.setPawned(misc.titleToInt(PawReb.choosePawn()), misc.hasHousesOnColor(field));
+				if (this.Fields[field][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
+					if(player.getBalance()<=this.Fields[player.getCurrentField()][6]) {
+						this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));
 					}
 					else {
-						player.setNewBalance(-(Fields[player.getCurrentField()][6]));
-						misc.setOwner(player);	
+						player.setNewBalance(-(this.Fields[player.getCurrentField()][6]));
+						this.misc.setOwner(player);	
 						// Updates the amount of shippingcompanies a player owns after he bought one
-						if(Fields[field][2]==9){
+						if(this.Fields[field][2]==9){
 							player.boughtShippingCompany();
-						} else if (Fields[field][2]==10) {
+						} else if (this.Fields[field][2]==10) {
 							player.boughtBrewery();
 						}
 					}
 				}
 			}
 			//Update whosTurn's players balance on GUI
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
+			Game.setFields(this.Fields);
 		}
 		public void movePlayer(Player player, int die1, int die2) {
 			GUI_GUI.gui.setDice(die1, die2);
@@ -108,12 +110,12 @@ public class LandOnField {
 				nextField = (currField + diceSum) % 40;
 				player.setNewBalance(4000);
 				//Update whosTurn's players balance on GUI
-				GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+				GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			}
-			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-			ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(this.whosTurn), false);
+			ListOfPlayers.getPlayers(this.whosTurn).setCurrentField(nextField);
 
 			//Move player on GUI
-			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(this.whosTurn), true);
 		}
 }

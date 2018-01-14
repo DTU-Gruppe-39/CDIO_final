@@ -20,7 +20,7 @@ public class ListOfPlayers {
 			Players[i].setName(names[(i - 1)]);
 		}	
 	}
-	
+
 	public Player[] getPlayers(){
 		return Players;
 	}
@@ -29,23 +29,23 @@ public class ListOfPlayers {
 		return Players[index];
 	}
 
-//	public boolean isVinder(){
-//		for (int i=0;i<spillere.length;i++){
-//			if (spillere[i].isVinder())
-//				return true;
-//		}		
-//		return false;
-//	}
-//
-//	public int nextPlayer(int index){
-//		index = ++index % Players.length;
-//		return index;
-//	}
+	//	public boolean isVinder(){
+	//		for (int i=0;i<spillere.length;i++){
+	//			if (spillere[i].isVinder())
+	//				return true;
+	//		}		
+	//		return false;
+	//	}
+	//
+	//	public int nextPlayer(int index){
+	//		index = ++index % Players.length;
+	//		return index;
+	//	}
 	public static void addFunds(int amountOfPlayers) {
-			for(int i=1; i <= amountOfPlayers; i++) {
-				Players[i].setNewBalance(30000);
-			}
-}
+		for(int i=1; i <= amountOfPlayers; i++) {
+			Players[i].setNewBalance(30000);
+		}
+	}
 }
 
 

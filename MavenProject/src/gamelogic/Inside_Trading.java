@@ -1,5 +1,6 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -69,21 +70,23 @@ public class Inside_Trading {
 				//Transaction confirmed
 				player.setNewBalance(-1 * decidedPrice);
 				ListOfPlayers.getPlayers(Fields[fieldnumber][4]).setNewBalance(decidedPrice);
-				GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
-				GUI_GUI.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(Fields[fieldnumber][4]).getBalance());
+				GUI_Create.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+				GUI_Create.getGuiPlayers(Fields[fieldnumber][4]).setBalance(ListOfPlayers.getPlayers(Fields[fieldnumber][4]).getBalance());
 				if (Fields[fieldnumber][2] == 9) {
 					ListOfPlayers.getPlayers(Fields[fieldnumber][4]).lostShippingCompany();
 					player.boughtShippingCompany();
 				}
 				Fields[fieldnumber][4] = whosTurn;
 				if (Fields[fieldnumber][8] != 0) {
-					GUI_GUI.displayOwner(fieldnumber, "(" + player.getName() + ")");  //Show after confirmation
+					GUI_Create.displayOwner(fieldnumber, "(" + player.getName() + ")");  //Show after confirmation
 				} else {
-					GUI_GUI.displayOwner(fieldnumber, player.getName()); 
+					GUI_Create.displayOwner(fieldnumber, player.getName()); 
 				}
 			}
 		}
+		Game.setFields(this.Fields);
 	}
+	
 	
 	public String chooseProperty() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil byde på", opponentsFields());
