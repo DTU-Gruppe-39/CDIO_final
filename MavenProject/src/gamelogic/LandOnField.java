@@ -1,6 +1,7 @@
 package gamelogic;
 
 import boundary.GUI_GUI;
+import controller.ChanceDeck;
 import controller.ListOfPlayers;
 import entity.Player;
 
@@ -14,6 +15,7 @@ public class LandOnField {
 		Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());	
 		PlayerPayment playerPay = new PlayerPayment(Game.getWhosTurn(), Game.getFields());
 		Pawning_Rebuy PawReb = new Pawning_Rebuy(Game.getWhosTurn(), Game.getFields());
+		ChanceDeck deck = new ChanceDeck();
 	//Update the balance depending on the field	
 		//[Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable]
 		public void handleField (int field, Player player, int die1, int die2) {

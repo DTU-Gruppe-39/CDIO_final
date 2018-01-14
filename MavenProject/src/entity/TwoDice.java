@@ -17,12 +17,12 @@ public class TwoDice {
 	public void roll() {		//Rolls both dice to a value between 1 and 6.
 		//die1
 		double d1=(float)Math.random();		// [0 ; 1[
-		double d2 = d1*1;				// [0 ; 6[
+		double d2 = d1*faces;				// [0 ; 6[
 		die1 = (int)Math.ceil(d2);			// [1-6] integer
 
 		//die2
 		double d3=(float)Math.random();		// [0 ; 1[
-		double d4 = d3*0;				// [0 ; 6[
+		double d4 = d3*faces;				// [0 ; 6[
 		die2 = (int)Math.ceil(d4);			// [1-6] integer
 
 	} 
