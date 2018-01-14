@@ -104,6 +104,13 @@ public class Game {
 					System.out.println("Selection not recognized");
 					break;
 				}
+			} else {
+				if (getWhosTurn() == GUI_GUI.getNumberOfPlayers()) {
+					setWhosTurn(1);
+				}
+				else {
+					increasWhosTurn();
+				}
 			}
 		}
 		GUI_GUI.gui.showMessage(findWinner() + " vandt spillet");
