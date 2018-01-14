@@ -17,8 +17,8 @@ import entity.HousePrice;
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
-	static int FieldNumb = 40;
-	static int 	Attribute = 10;
+	private static int FieldNumb = 40;
+	private static int 	Attribute = 10;
 	/**
 	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
 	 */

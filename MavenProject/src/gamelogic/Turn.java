@@ -10,6 +10,9 @@ public class Turn {
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	LandOnField landOnField = new LandOnField(Game.getWhosTurn(), Game.getFields());
 	private static int sameDice = 0;
+	
+	
+	
 	public void updateTurn (int die1, int die2, Player player) {
 		if (die1 == die2) {
 			sameDice++;
