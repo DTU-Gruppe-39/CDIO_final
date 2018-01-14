@@ -9,11 +9,11 @@ public class Turn {
 	Jail jail = new Jail();
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	LandOnField landOnField = new LandOnField(Game.getWhosTurn(), Game.getFields());
-	int sameDice;
+	private static int sameDice = 0;
 	public void updateTurn (int die1, int die2, Player player) {
 		if (die1 == die2) {
-			this.sameDice++;
-			if (this.sameDice == 3) {
+			sameDice++;
+			if (sameDice == 3) {
 				tripleTurn(player);			
 			} else {
 				handleTurn(die1, die2, player);

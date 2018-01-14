@@ -20,10 +20,7 @@ import entity.HousePrice;
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
-	private static int sameDice = 0;
-
 	static int FieldNumb = 40;
-	ChanceDeck deck = new ChanceDeck();
 	static int 	Attribute = 10;
 	/**
 	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
