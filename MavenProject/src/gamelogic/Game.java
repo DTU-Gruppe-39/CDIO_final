@@ -56,12 +56,12 @@ public class Game {
 			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Indbyrdes handel", "Sælg huse")) {
 				case "Kast":
-					System.out.println("1");
+					System.out.println("1"); //Printout to console for log purposes.
 					dice.roll();
 					turn.updateTurn(dice.getdie1(), dice.getdie2(), ListOfPlayers.getPlayers(whosTurn));
 					break;
 				case "Byg huse/hotel":
-					System.out.println("2");
+					System.out.println("2"); //Printout to console for log purposes.
 					if (build.LegalHouse().length != 0) {
 						build.buyBuildings(misc.titleToInt(build.chooseHouse()), ListOfPlayers.getPlayers(whosTurn), InTr.hasPawnedOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()) );
 					} else {
@@ -69,7 +69,7 @@ public class Game {
 					}
 					break;
 				case "Pantsæt grunde":
-					System.out.println("3");
+					System.out.println("3"); //Printout to console for log purposes.
 					if (PawReb.pawnableFields().length != 0) {							
 						PawReb.setPawned(misc.titleToInt(PawReb.choosePawn()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()));
 					} else {
@@ -77,14 +77,14 @@ public class Game {
 					}
 					break;
 				case "Genkøb":
-					System.out.println("4");
+					System.out.println("4"); //Printout to console for log purposes.
 					if (PawReb.pawnedFields().length != 0) {							
 						PawReb.rebuy(misc.titleToInt(PawReb.choosePawned()), ListOfPlayers.getPlayers(whosTurn));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen pantsatte grunde");
 					}
 					break;
-				case "Indbyrdes handel":
+				case "Indbyrdes handel": //Printout to console for log purposes.
 					System.out.println("5");
 					if (InTr.opponentsFields().length != 0) {							
 						InTr.buyUsed(misc.titleToInt(InTr.chooseProperty()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()), ListOfPlayers.getPlayers(whosTurn));
@@ -92,7 +92,7 @@ public class Game {
 						GUI_GUI.gui.showMessage("                                            Dine modstandere ejer ikke nogen grunde");
 					}
 					break;
-				case "Sælg huse":
+				case "Sælg huse": //Printout to console for log purposes.
 					System.out.println("5");
 					if (build.LegalHouseSale().length != 0) {							
 						build.sellBuildings(misc.titleToInt(build.chooseSellHouse()), ListOfPlayers.getPlayers(whosTurn));
@@ -101,7 +101,7 @@ public class Game {
 					}
 					break;
 				default:
-					System.out.println("Selection not recognized");
+					System.out.println("Selection not recognized"); //Printout to console for log purposes.
 					break;
 				}
 			} else {
