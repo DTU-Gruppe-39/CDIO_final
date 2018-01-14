@@ -1,7 +1,7 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
-import controller.ListOfPlayers;
 import entity.Player;
 
 public class Turn {
@@ -46,10 +46,10 @@ public class Turn {
 	}
 
 	public void tripleTurn(Player player) {
-		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
 		player.setCurrentField(10);
 		player.setJailed(true);
-		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
 		this.sameDice = 0;
 		if (Game.getWhosTurn()== GUI_GUI.getNumberOfPlayers()) {
 			Game.setWhosTurn(1);

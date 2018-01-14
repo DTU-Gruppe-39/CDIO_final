@@ -1,5 +1,6 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -79,7 +80,7 @@ public class Pawning_Rebuy {
 		if (houseOnColor) {
 			GUI_GUI.gui.showMessage("                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
-			GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(Game.getWhosTurn()).getName()+")");
+			GUI_Create.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(Game.getWhosTurn()).getName()+")");
 			Fields[fieldnumber][8] = 1;
 			ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(Fields[fieldnumber][7]);
 			GUI_GUI.getGuiPlayers(Game.getWhosTurn()).setBalance(ListOfPlayers.getPlayers(Game.getWhosTurn()).getBalance());
@@ -96,7 +97,7 @@ public class Pawning_Rebuy {
 		if (player.getBalance() < 1.1 * Fields[fieldnumber][7]) {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at genkøbe denne grund");
 		} else {
-			GUI_GUI.displayOwner(fieldnumber, player.getName());
+			GUI_Create.displayOwner(fieldnumber, player.getName());
 			Fields[fieldnumber][8] = 0;
 			player.setNewBalance(-1.1 * Fields[fieldnumber][7]);
 			GUI_GUI.getGuiPlayers(Game.getWhosTurn()).setBalance(player.getBalance());

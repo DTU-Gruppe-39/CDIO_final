@@ -1,7 +1,8 @@
 package gamelogic;
 
-import boundary.GUI_GUI;
+import boundary.GUI_Create;
 
+import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.HousePrice;
 import entity.Player;
@@ -24,13 +25,13 @@ public class Building {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
 		} else if (this.Fields[fieldnumber][9] < 4) {
 			this.Fields[fieldnumber][9]++;
-			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Set house on GUI
+			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
 			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else if(this.Fields[fieldnumber][9] == 4) {
 			this.Fields[fieldnumber][9]++;
-			GUI_GUI.displayHotel(fieldnumber);  //Set house on GUI
+			GUI_Create.displayHotel(fieldnumber);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
 			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
@@ -44,14 +45,14 @@ public class Building {
 	public void sellBuildings(int fieldnumber, Player player) {
 		if (this.Fields[fieldnumber][9] <= 4 && this.Fields[fieldnumber][9] > 0) {
 			this.Fields[fieldnumber][9]--;
-			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Remove house on GUI
+			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Remove house on GUI
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
 			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev solgt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else if(this.Fields[fieldnumber][9] == 5) {
 			this.Fields[fieldnumber][9]--;
-			GUI_GUI.removeHotel(fieldnumber);  // Remove hotel on GUI
-			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);
+			GUI_Create.removeHotel(fieldnumber);  // Remove hotel on GUI
+			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
 			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
@@ -106,7 +107,7 @@ public class Building {
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if((this.whosTurn == this.Fields[i][4]) && misc.ownsGroupFields(this.whosTurn, this.Fields[i][2])) {
+			if((this.whosTurn == this.Fields[i][4]) && this.misc.ownsGroupFields(this.whosTurn, this.Fields[i][2])) {
 				//				System.out.println(getFields()[i][0]);
 				SFields[i] = "" + this.Fields[i][0];
 				if(SFields[i] != null) {
@@ -128,7 +129,4 @@ public class Building {
 		//		System.out.println(Arrays.deepToString(refinedFields));		
 		return refinedFields;
 	}
-	
-	
-
 }
