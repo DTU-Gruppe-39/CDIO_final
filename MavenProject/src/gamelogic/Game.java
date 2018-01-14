@@ -30,7 +30,9 @@ public class Game {
 	 * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
 	 */
 	static int Fields[][] = new int [FieldNumb][Attribute];  //simple array to determine what field the player is on.
-
+	Jail jail = new Jail();
+	
+	
 	public static int[][] getFields() {
 		return Fields;
 	}
@@ -109,47 +111,6 @@ public class Game {
 	}
 
 
-	public void goToJail() {
-		if(ListOfPlayers.getPlayers(whosTurn).getCurrentField()==30) {
-			ListOfPlayers.getPlayers(whosTurn).setJailed(true);
-			ListOfPlayers.getPlayers(whosTurn).setCurrentField(10);
-			GUI_GUI.getFields(30).removeAllCars();
-			//Move player on GUI to prison
-			GUI_GUI.getFields(10).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
-			GUI_GUI.gui.showMessage("                                            Du er røget i fængsel");
-
-		}
-	}
-
-	public void Jail(int die1, int die2) {
-		if (ListOfPlayers.getPlayers(whosTurn).getHaveJailCard()>0) {
-			ListOfPlayers.getPlayers(whosTurn).setHaveJailCard(-1);
-			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
-			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
-			ChanceDeck.setJailInDeck(1);
-		}
-
-		else if (GUI_GUI.displayJailChoice()==false) {
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
-			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
-			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
-		}
-
-		else if (die1 == die2) {
-			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
-			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
-		}
-		else if (ListOfPlayers.getPlayers(whosTurn).RoundsInJail==3) {
-			ListOfPlayers.getPlayers(whosTurn).setNewBalance(-1000);
-			ListOfPlayers.getPlayers(whosTurn).setJailed(false);
-			ListOfPlayers.getPlayers(whosTurn).GotOutOfJail();
-		}
-		else {
-			ListOfPlayers.getPlayers(whosTurn).StayedInJail();
-			GUI_GUI.gui.setDice(die1, die2);
-		}
-	}
-
 
 
 	//Everything needed between each turn
@@ -174,13 +135,13 @@ public class Game {
 
 	public void handleTurn(int die1, int die2, Player player) {
 		if(ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==true) {
-			Jail(die1, die2);
+			jail.Jail(die1, die2, player);
 			playerDied();
 		}
 		if (ListOfPlayers.getPlayers(whosTurn).isDead()==false && ListOfPlayers.getPlayers(whosTurn).isJailed()==false) {
 			movePlayer(player, die1, die2);
 			handleField(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player, die1, die2);
-			goToJail();
+			jail.goToJail(player);
 			playerDied();
 		}
 	}
