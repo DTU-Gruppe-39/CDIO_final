@@ -105,6 +105,7 @@ public class Game {
 				}
 			}
 		}
+		GUI_GUI.gui.showMessage(findWinner() + " vandt spillet");
 	}
 
 
@@ -340,7 +341,7 @@ public class Game {
 		else {
 			//Buy field if it is ownable
 			if (Fields[field][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
-				if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]) {
+				if(ListOfPlayers.getPlayers(whosTurn).getBalance()<=Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][6]) {	//Maybe check networth and set to dead if below price
 					setPawned(titleToInt(choosePawn()));
 				}
 				else {
@@ -817,5 +818,15 @@ public class Game {
 		}
 		//		System.out.println(Arrays.deepToString(refinedFields));		
 		return refinedFields;
+	}
+	
+	public static String findWinner() {
+		String name = ""; 
+		for (int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+			if (ListOfPlayers.getPlayers(i).getBalance() != 0) {
+				name = ListOfPlayers.getPlayers(i).getName();
+			}
+		}
+		return name;
 	}
 }
