@@ -119,5 +119,13 @@ public class Game {
 	public static void setWhosTurn(int turn) {
 		whosTurn = turn;
 	}
-	
+	public static String findWinner() {
+		String name = ""; 
+		for (int i = 1; i <= GUI_GUI.getNumberOfPlayers(); i++) {
+			if (ListOfPlayers.getPlayers(i).getBalance() != 0) {
+				name = ListOfPlayers.getPlayers(i).getName();
+			}
+		}
+		return name;
+	}
 }
