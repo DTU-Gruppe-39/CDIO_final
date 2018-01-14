@@ -20,7 +20,6 @@ import entity.HousePrice;
 public class Game {
 	final static int MIN_POINTS = 0;
 	private static int whosTurn;
-	private static int NumberOfDeadPlayers;
 	private static int sameDice = 0;
 
 	static int FieldNumb = 40;
@@ -50,8 +49,14 @@ public class Game {
 		TwoDice dice = new TwoDice();
 
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
-		while (GUI_GUI.getNumberOfPlayers()-1 == NumberOfDeadPlayers==false) {
-			Game turn = new Game();
+		while ((GUI_GUI.getNumberOfPlayers()-1 == Miscellaneous.NumberOfDeadPlayers) ==false) {
+			Turn turn = new Turn();
+			Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());	
+			PlayerPayment playerPay = new PlayerPayment(Game.getWhosTurn(), Game.getFields());
+			Pawning_Rebuy PawReb = new Pawning_Rebuy(Game.getWhosTurn(), Game.getFields());
+			Building build = new Building(Game.getWhosTurn(), Game.getFields());	
+			Inside_Trading InTr = new Inside_Trading(Game.getWhosTurn(), Game.getFields());
+			
 			if(ListOfPlayers.getPlayers(whosTurn).isDead()==false) {
 				switch (GUI_GUI.gui.getUserSelection("                                            Det er: " + ListOfPlayers.getPlayers(whosTurn).getName() + "'s tur, vælg hvad du vil fortage dig", "Kast", "Byg huse/hotel", "Pantsæt grunde", "Genkøb", "Indbyrdes handel", "Sælg huse")) {
 				case "Kast":
@@ -61,40 +66,40 @@ public class Game {
 					break;
 				case "Byg huse/hotel":
 					System.out.println("2");
-					if (turn.LegalHouse().length != 0) {
-						turn.buyBuildings(turn.titleToInt(turn.chooseHouse()));
+					if (build.LegalHouse().length != 0) {
+						build.buyBuildings(misc.titleToInt(build.chooseHouse()), ListOfPlayers.getPlayers(whosTurn), InTr.hasPawnedOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()) );
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke alle grunde i denne farve endnu");
 					}
 					break;
 				case "Pantsæt grunde":
 					System.out.println("3");
-					if (turn.pawnableFields().length != 0) {							
-						turn.setPawned(turn.titleToInt(turn.choosePawn()));
+					if (PawReb.pawnableFields().length != 0) {							
+						PawReb.setPawned(misc.titleToInt(PawReb.choosePawn()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen grunde");
 					}
 					break;
 				case "Genkøb":
 					System.out.println("4");
-					if (turn.pawnedFields().length != 0) {							
-						turn.rebuy(turn.titleToInt(turn.choosePawned()));
+					if (PawReb.pawnedFields().length != 0) {							
+						PawReb.rebuy(misc.titleToInt(PawReb.choosePawned()), ListOfPlayers.getPlayers(whosTurn));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen pantsatte grunde");
 					}
 					break;
 				case "Indbyrdes handel":
 					System.out.println("5");
-					if (turn.opponentsFields().length != 0) {							
-						turn.buyUsed(turn.titleToInt(turn.chooseProperty()));
+					if (InTr.opponentsFields().length != 0) {							
+						InTr.buyUsed(misc.titleToInt(InTr.chooseProperty()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()), ListOfPlayers.getPlayers(whosTurn));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Dine modstandere ejer ikke nogen grunde");
 					}
 					break;
 				case "Sælg huse":
 					System.out.println("5");
-					if (turn.LegalHouseSale().length != 0) {							
-						turn.sellBuildings(turn.titleToInt(turn.chooseSellHouse()));
+					if (build.LegalHouseSale().length != 0) {							
+						build.sellBuildings(misc.titleToInt(build.chooseSellHouse()), ListOfPlayers.getPlayers(whosTurn));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen huse endnu");
 					}
@@ -105,42 +110,6 @@ public class Game {
 				}
 			}
 		}
-	}
-
-
-//	public void movePlayer(Player player, int die1, int die2) {
-//		GUI_GUI.gui.setDice(die1, die2);
-//		int nextField = 0;
-//		int currField;
-//		int diceSum=0;
-//		//Get current field of player
-//		currField = player.getCurrentField();
-//		diceSum= die1 + die2;
-//		//Calculate next field with dice and current field
-//		//If above 40, then modulus 40
-//		nextField += currField + diceSum;
-//		if (nextField > 39) {
-//			nextField = (currField + diceSum) % 40;
-//			player.setNewBalance(4000);
-//			//Update whosTurn's players balance on GUI
-//			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
-//		}
-//		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-//		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
-//
-//		//Move player on GUI
-//		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
-//	}
-
-	public void setOwner(Player player) {
-		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
-		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
-		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
-	}
-
-	public void removeOwner(int fieldnumber) {
-		GUI_GUI.displayPrice(fieldnumber);
 	}
 
 	public static int getWhosTurn() {

@@ -14,6 +14,7 @@ public class Building {
 		this.Fields = fields;
 	}
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
+	
 	public void buyBuildings(int fieldnumber, Player player, boolean pawnedOnColor) {
 		if (this.Fields[fieldnumber][8] != 0) {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke købe huse på en pantsat grund");

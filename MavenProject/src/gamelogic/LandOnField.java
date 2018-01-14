@@ -78,7 +78,7 @@ public class LandOnField {
 					}
 					else {
 						player.setNewBalance(-(Fields[player.getCurrentField()][6]));
-						setOwner(ListOfPlayers.getPlayers(whosTurn));	
+						misc.setOwner(player);	
 						// Updates the amount of shippingcompanies a player owns after he bought one
 						if(Fields[field][2]==9){
 							player.boughtShippingCompany();

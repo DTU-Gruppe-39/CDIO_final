@@ -8,13 +8,13 @@ import entity.Player;
 
 
 public class Miscellaneous {
-	int whosTurn;
-	int [][] Fields;
 	public Miscellaneous(int whosturn, int [][]fields) {
 		this.whosTurn = whosturn;
 		this.Fields = fields;
 	}
-	
+	static int NumberOfDeadPlayers;
+	int whosTurn;
+	int [][] Fields;
 	
 	public boolean doubleRent(int field) { //Skal ændres til feltet og ikke spilleren
 		int Owner = Fields[field][4];
@@ -87,10 +87,19 @@ public class Miscellaneous {
 			}
 			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
 			GUI_GUI.gui.showMessage("Spilleren " + Game.getWhosTurn() + " er død");
-			NumberOfDeadPlayers++;	
+			increasNumberOfDeadPlayers();	
 		}
 	}
+	public static int getNumberOfDeadPlayers() {
+		return NumberOfDeadPlayers;
+	}
+	public static void increasNumberOfDeadPlayers() {
+		NumberOfDeadPlayers++;
+	}
 	
+	public static void setNumberOfDeadPlayers(int deadPlayers) {
+		NumberOfDeadPlayers = deadPlayers;
+	}
 	public boolean hasHousesOnColor(int fieldnumber) {
 		boolean hasHouses;
 		int houses = 0;
@@ -120,5 +129,14 @@ public class Miscellaneous {
 
 		return fieldNumber;
 	}
-	
+	public void setOwner(Player player) {
+		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
+		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
+		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
+		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
+	}
+
+	public void removeOwner(int fieldnumber) {
+		GUI_GUI.displayPrice(fieldnumber);
+	}
 }
