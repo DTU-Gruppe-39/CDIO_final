@@ -49,7 +49,6 @@ public class Game {
 		while ((GUI_GUI.getNumberOfPlayers()-1 == Miscellaneous.NumberOfDeadPlayers) ==false) {
 			Turn turn = new Turn();
 			Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());	
-			PlayerPayment playerPay = new PlayerPayment(Game.getWhosTurn(), Game.getFields());
 			Pawning_Rebuy PawReb = new Pawning_Rebuy(Game.getWhosTurn(), Game.getFields());
 			Building build = new Building(Game.getWhosTurn(), Game.getFields());	
 			Inside_Trading InTr = new Inside_Trading(Game.getWhosTurn(), Game.getFields());
@@ -107,6 +106,7 @@ public class Game {
 				}
 			}
 		}
+		GUI_GUI.gui.showMessage(findWinner() + " vandt spillet");
 	}
 
 	public static int getWhosTurn() {
