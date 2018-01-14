@@ -18,15 +18,21 @@ public class PlayerPayment {
 	Pawning_Rebuy PawReb = new Pawning_Rebuy(Game.getWhosTurn(), Game.getFields());
 	
 	public void payRent(int field, int die1, int die2) {
-			if (this.misc.doubleRent(field) && this.Fields[field][9] == 0 && this.Fields[field][2] != 9 && this.Fields[field][2] != 10) {
+		if (this.misc.doubleRent(field) && this.Fields[field][9] == 0 && this.Fields[field][2] != 9 && this.Fields[field][2] != 10) {
 			//Multiply rent by 2
-			if(this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
+			while(this.PawReb.pawnableFields().length != 0 && this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
 				this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));							
 			}
-			this.misc.currentPlayer().setNewBalance(-2 * (this.misc.rent(field)));
-			ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(2 * (this.misc.rent(field)));
-			//Update recievers balance on GUI
-			GUI_Create.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
+//			if (this.misc.currentPlayer().getBalance()<(2 * this.misc.rent(field))) {
+//				ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(this.misc.currentPlayer().getBalance());
+//				this.misc.currentPlayer().setBalance(0);
+////						changeOwnerToCreditor();
+//			} else {
+				this.misc.currentPlayer().setNewBalance(-2 * (this.misc.rent(field)));
+				ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(2 * (this.misc.rent(field)));
+				//Update recievers balance on GUI
+				GUI_Create.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
+//			}
 		} else {
 			//Pay normal rent
 			if (this.misc.currentPlayer().isDead()==false && ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).isDead()== false) { //Er det nødvendigt at tjekke om ejeren er død?

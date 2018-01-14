@@ -16,7 +16,7 @@ public class Miscellaneous {
 	int whosTurn;
 	int [][] Fields;
 	
-	public boolean doubleRent(int field) { //Skal ændres til feltet og ikke spilleren
+	public boolean doubleRent(int field) {
 		int Owner = Fields[field][4];
 		int tempOwner = 0;
 		int tempruns = 0;
