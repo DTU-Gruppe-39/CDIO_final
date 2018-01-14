@@ -89,6 +89,7 @@ public class Miscellaneous {
 			GUI_GUI.gui.showMessage("Spilleren " + Game.getWhosTurn() + " er død");
 			increasNumberOfDeadPlayers();	
 		}
+		Game.setFields(this.Fields);
 	}
 	public static int getNumberOfDeadPlayers() {
 		return NumberOfDeadPlayers;
@@ -104,7 +105,7 @@ public class Miscellaneous {
 		boolean hasHouses;
 		int houses = 0;
 		for (int j = 0; j < 40; j++) {
-			if (Game.getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+			if (Fields[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
 				if (Fields[j][9] != 0) {
 					houses++;
 				}
@@ -134,6 +135,7 @@ public class Miscellaneous {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
 		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
+		Game.setFields(this.Fields);
 	}
 
 	public void removeOwner(int fieldnumber) {

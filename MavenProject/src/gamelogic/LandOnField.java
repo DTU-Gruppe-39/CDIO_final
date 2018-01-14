@@ -92,6 +92,7 @@ public class LandOnField {
 			}
 			//Update whosTurn's players balance on GUI
 			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+			Game.setFields(this.Fields);
 		}
 		public void movePlayer(Player player, int die1, int die2) {
 			GUI_GUI.gui.setDice(die1, die2);

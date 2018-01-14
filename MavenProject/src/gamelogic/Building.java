@@ -38,6 +38,7 @@ public class Building {
 			//Tell user they can't buy any more houses
 			GUI_GUI.gui.showMessage("                                            Du kan ikke købe flere huse");
 		}
+		Game.setFields(this.Fields);
 	}
 	
 	public void sellBuildings(int fieldnumber, Player player) {
@@ -58,6 +59,7 @@ public class Building {
 			//Tell user they can't sell any more houses
 			GUI_GUI.gui.showMessage("                                            Du kan ikke sælge flere huse");
 		}
+		Game.setFields(this.Fields);
 	}
 	
 	public String [] LegalHouseSale() {

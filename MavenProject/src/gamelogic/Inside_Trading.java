@@ -83,7 +83,9 @@ public class Inside_Trading {
 				}
 			}
 		}
+		Game.setFields(this.Fields);
 	}
+	
 	
 	public String chooseProperty() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil byde på", opponentsFields());

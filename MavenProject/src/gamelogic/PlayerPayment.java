@@ -69,5 +69,7 @@ public class PlayerPayment {
 			//Update recievers balance on GUI
 			GUI_GUI.getGuiPlayers(this.misc.ownerOfCurrentField()).setBalance(ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).getBalance());
 		}
+			Game.setFields(this.Fields);
 	}	
+	
 }

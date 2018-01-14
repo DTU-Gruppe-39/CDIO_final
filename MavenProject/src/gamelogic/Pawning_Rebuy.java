@@ -89,6 +89,7 @@ public class Pawning_Rebuy {
 		    	ListOfPlayers.getPlayers(Game.getWhosTurn()).lostBrewery();
 		    }
 		}
+		Game.setFields(this.Fields);
 	}
 	
 	public void rebuy(int fieldnumber, Player player) {
@@ -103,5 +104,6 @@ public class Pawning_Rebuy {
 				player.boughtShippingCompany();
 			}
 		}
+		Game.setFields(this.Fields);
 	}
 }
