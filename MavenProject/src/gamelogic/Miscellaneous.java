@@ -1,8 +1,8 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
-import entity.GameBoard;
 import entity.HousePrice;
 import entity.Player;
 
@@ -85,7 +85,7 @@ public class Miscellaneous {
 				}
 
 			}
-			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
 			GUI_GUI.gui.showMessage("Spilleren " + Game.getWhosTurn() + " er død");
 			increasNumberOfDeadPlayers();	
 		}
@@ -134,11 +134,11 @@ public class Miscellaneous {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][3] = 1;
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		GUI_GUI.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
+		GUI_Create.displayOwner(ListOfPlayers.getPlayers(whosTurn).getCurrentField(), player.getName());
 		Game.setFields(this.Fields);
 	}
 
 	public void removeOwner(int fieldnumber) {
-		GUI_GUI.displayPrice(fieldnumber);
+		GUI_Create.displayPrice(fieldnumber);
 	}
 }

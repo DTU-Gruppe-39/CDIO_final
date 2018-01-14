@@ -1,5 +1,6 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ChanceDeck;
 import controller.ListOfPlayers;
@@ -111,10 +112,10 @@ public class LandOnField {
 				//Update whosTurn's players balance on GUI
 				GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
 			}
-			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
 			ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
 
 			//Move player on GUI
-			GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+			GUI_Create.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
 		}
 }

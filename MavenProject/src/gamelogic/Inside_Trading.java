@@ -1,5 +1,6 @@
 package gamelogic;
 
+import boundary.GUI_Create;
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
@@ -77,9 +78,9 @@ public class Inside_Trading {
 				}
 				Fields[fieldnumber][4] = whosTurn;
 				if (Fields[fieldnumber][8] != 0) {
-					GUI_GUI.displayOwner(fieldnumber, "(" + player.getName() + ")");  //Show after confirmation
+					GUI_Create.displayOwner(fieldnumber, "(" + player.getName() + ")");  //Show after confirmation
 				} else {
-					GUI_GUI.displayOwner(fieldnumber, player.getName()); 
+					GUI_Create.displayOwner(fieldnumber, player.getName()); 
 				}
 			}
 		}
