@@ -86,7 +86,7 @@ public class Inside_Trading {
 	}
 	
 	public String chooseProperty() {
-		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", opponentsFields());
+		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil byde på", opponentsFields());
 	}
 	
 	public int choosePrice(int owner, Player biddingPlayer) {
