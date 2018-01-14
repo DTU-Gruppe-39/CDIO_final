@@ -1,11 +1,8 @@
 package gamelogic;
 
-<<<<<<< HEAD
 import java.util.Arrays;
 
-=======
 import boundary.GUI_Create;
->>>>>>> origin/Smaller_Classes
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
 import entity.Player;
