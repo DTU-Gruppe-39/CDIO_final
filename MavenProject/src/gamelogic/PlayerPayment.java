@@ -1,7 +1,10 @@
 package gamelogic;
 
+import java.util.Arrays;
+
 import boundary.GUI_GUI;
 import controller.ListOfPlayers;
+import entity.Player;
 
 public class PlayerPayment {
 	int whosTurn;
@@ -26,13 +29,13 @@ public class PlayerPayment {
 		} else {
 			//Pay normal rent
 			if (this.misc.currentPlayer().isDead()==false && ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).isDead()== false) { //Er det nødvendigt at tjekke om ejeren er død?
-				while(this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
+				while(this.PawReb.pawnableFields().length != 0 && this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
 					this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));	
 				}
 				if (this.misc.currentPlayer().getBalance()<(this.misc.rent(field))) {
 					ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(this.misc.currentPlayer().getBalance());
 					this.misc.currentPlayer().setBalance(0);
-					//							changeOwnerToCreditor();
+//							changeOwnerToCreditor();
 				}
 				// Pay rent on shippingcompanies
 				else if (this.Fields[field][2]==9) {
