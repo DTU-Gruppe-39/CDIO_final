@@ -6,10 +6,14 @@ import entity.Player;
 
 public class Turn {
 	//Everything needed between each turn
+	Jail jail = new Jail();
+	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
+	LandOnField landOnField = new LandOnField(Game.getWhosTurn(), Game.getFields());
+	int sameDice;
 	public void updateTurn (int die1, int die2, Player player) {
 		if (die1 == die2) {
-			sameDice++;
-			if (sameDice == 3) {
+			this.sameDice++;
+			if (this.sameDice == 3) {
 				tripleTurn(player);			
 			} else {
 				handleTurn(die1, die2, player);
@@ -27,14 +31,14 @@ public class Turn {
 
 	public void handleTurn(int die1, int die2, Player player) {
 		if(player.isDead()==false && player.isJailed()==true) {
-			Jail(die1, die2);
-			playerDied();
+			this.jail.jailTurn(die1, die2, player);
+			this.misc.playerDied(player);
 		}
 		if (player.isDead()==false && player.isJailed()==false) {
-			movePlayer(player, die1, die2);
-			handleField(player.getCurrentField(), player, die1, die2);
-			goToJail();
-			playerDied();
+			this.landOnField.movePlayer(player, die1, die2);
+			this.landOnField.handleField(player.getCurrentField(), player, die1, die2);
+			this.jail.goToJail(player);
+			this.misc.playerDied(player);
 		}
 	}
 
@@ -43,7 +47,7 @@ public class Turn {
 		player.setCurrentField(10);
 		player.setJailed(true);
 		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
-		sameDice = 0;
+		this.sameDice = 0;
 		if (Game.getWhosTurn()== GUI_GUI.getNumberOfPlayers()) {
 			Game.setWhosTurn(1);
 		}

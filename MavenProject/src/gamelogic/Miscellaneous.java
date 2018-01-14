@@ -8,8 +8,13 @@ import entity.Player;
 
 
 public class Miscellaneous {
+	int whosTurn;
+	int [][] Fields;
+	public Miscellaneous(int whosturn, int [][]fields) {
+		this.whosTurn = whosturn;
+		this.Fields = fields;
+	}
 	
-	int Fields[][] = Game.getFields();
 	
 	public boolean doubleRent(int field) { //Skal ændres til feltet og ikke spilleren
 		int Owner = Fields[field][4];

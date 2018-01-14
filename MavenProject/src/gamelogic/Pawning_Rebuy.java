@@ -5,7 +5,12 @@ import controller.ListOfPlayers;
 import entity.Player;
 
 public class Pawning_Rebuy {
-	int Fields[][] = Game.getFields();
+	int Fields[][];
+	int whosTurn;
+	public Pawning_Rebuy(int whosturn, int [][]fields) {
+		this.whosTurn = whosturn;
+		this.Fields = fields;
+	}
 	
 	public String choosePawn() {
 		return GUI_GUI.gui.getUserSelection("                                            Vælg hvilken grund du vil pantsætte", pawnableFields());
@@ -69,9 +74,9 @@ public class Pawning_Rebuy {
 		return refinedFields;
 	}
 	
-	public void setPawned(int fieldnumber) {
+	public void setPawned(int fieldnumber, boolean houseOnColor) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		if (hasHousesOnColor(fieldnumber)) {
+		if (houseOnColor) {
 			GUI_GUI.gui.showMessage("                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
 			GUI_GUI.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(Game.getWhosTurn()).getName()+")");

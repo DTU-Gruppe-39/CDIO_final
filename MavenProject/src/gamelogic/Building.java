@@ -1,29 +1,37 @@
 package gamelogic;
 
 import boundary.GUI_GUI;
+
 import controller.ListOfPlayers;
 import entity.HousePrice;
 import entity.Player;
 
 public class Building {
+	int whosTurn;
+	int [][] Fields;
+	public Building(int whosturn, int [][]fields) {
+		this.whosTurn = whosturn;
+		this.Fields = fields;
+	}
+	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	public void buyBuildings(int fieldnumber, Player player, boolean pawnedOnColor) {
-		if (Fields[fieldnumber][8] != 0) {
+		if (this.Fields[fieldnumber][8] != 0) {
 			GUI_GUI.gui.showMessage("                                            Du kan ikke købe huse på en pantsat grund");
-		} else if (hasPawnedOnColor(fieldnumber)) {
+		} else if (pawnedOnColor) {
 			GUI_GUI.gui.showMessage("                 Du kan ikke købe huse, da en af dine grunde i denne farve er pantsat");
-		} else if player.getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
+		} else if (player.getBalance() < HousePrice.getHousePriceInt()[fieldnumber]) {
 			GUI_GUI.gui.showMessage("                                            Du har ikke råd til at købe huse på denne grund");
-		} else if (Fields[fieldnumber][9] < 4) {
-			Fields[fieldnumber][9]++;
-			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);  //Set house on GUI
+		} else if (this.Fields[fieldnumber][9] < 4) {
+			this.Fields[fieldnumber][9]++;
+			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalanceplayer.getBalance());
+			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
-		} else if(Fields[fieldnumber][9] == 4) {
-			Fields[fieldnumber][9]++;
+		} else if(this.Fields[fieldnumber][9] == 4) {
+			this.Fields[fieldnumber][9]++;
 			GUI_GUI.displayHotel(fieldnumber);  //Set house on GUI
 			player.setNewBalance(-1 * HousePrice.getHousePriceInt()[fieldnumber]);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else {
 			//Tell user they can't buy any more houses
@@ -32,18 +40,18 @@ public class Building {
 	}
 	
 	public void sellBuildings(int fieldnumber, Player player) {
-		if (Fields[fieldnumber][9] <= 4 && Fields[fieldnumber][9] > 0) {
-			Fields[fieldnumber][9]--;
-			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);  //Remove house on GUI
+		if (this.Fields[fieldnumber][9] <= 4 && this.Fields[fieldnumber][9] > 0) {
+			this.Fields[fieldnumber][9]--;
+			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);  //Remove house on GUI
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Huset blev solgt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
-		} else if(Fields[fieldnumber][9] == 5) {
-			Fields[fieldnumber][9]--;
+		} else if(this.Fields[fieldnumber][9] == 5) {
+			this.Fields[fieldnumber][9]--;
 			GUI_GUI.removeHotel(fieldnumber);  // Remove hotel on GUI
-			GUI_GUI.displayHouses(fieldnumber, Fields[fieldnumber][9]);
+			GUI_GUI.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+			GUI_GUI.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
 			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else {
 			//Tell user they can't sell any more houses
@@ -52,17 +60,18 @@ public class Building {
 	}
 	
 	public String [] LegalHouseSale() {
-		String [] Fields = new String[40];
+//		Consider changing the name of the String array
+		String [] SFields = new String[40];
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
 
-			if((whosTurn == getFields()[i][4]) && getFields()[i][9]>0) {
+			if((this.whosTurn == this.Fields[i][4]) && this.Fields[i][9]>0) {
 				//					&& !(getFields()[i][10] == 0)) {
 				//				System.out.println(getFields()[i][0]);
-				Fields[i] = "" + getFields()[i][0];
-				if(Fields[i] != null) {
-					Fields[i] = GUI_GUI.getTitles()[i];
+				SFields[i] = "" + this.Fields[i][0];
+				if(SFields[i] != null) {
+					SFields[i] = GUI_GUI.getTitles()[i];
 					size++;
 				}
 			}
@@ -72,8 +81,8 @@ public class Building {
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
-			if(Fields[i] != null) {
-				refinedFields[temp] = Fields[i];
+			if(SFields[i] != null) {
+				refinedFields[temp] = SFields[i];
 				temp++;
 			}
 		}
@@ -90,15 +99,15 @@ public class Building {
 		return GUI_GUI.gui.getUserSelection("                                            Hvor vil du sælge et hus?", LegalHouseSale() );
 	}
 	public String [] LegalHouse() {
-		String [] Fields = new String[40];
+		String [] SFields = new String[40];
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if((whosTurn == getFields()[i][4]) && ownsGroupFields(whosTurn, getFields()[i][2])) {
+			if((this.whosTurn == this.Fields[i][4]) && misc.ownsGroupFields(this.whosTurn, this.Fields[i][2])) {
 				//				System.out.println(getFields()[i][0]);
-				Fields[i] = "" + getFields()[i][0];
-				if(Fields[i] != null) {
-					Fields[i] = GUI_GUI.getTitles()[i];
+				SFields[i] = "" + this.Fields[i][0];
+				if(SFields[i] != null) {
+					SFields[i] = GUI_GUI.getTitles()[i];
 					size++;
 				}
 			}
@@ -108,8 +117,8 @@ public class Building {
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
-			if(Fields[i] != null) {
-				refinedFields[temp] = Fields[i];
+			if(SFields[i] != null) {
+				refinedFields[temp] = SFields[i];
 				temp++;
 			}
 		}

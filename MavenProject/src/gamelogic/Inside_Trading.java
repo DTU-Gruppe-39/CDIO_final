@@ -5,12 +5,17 @@ import controller.ListOfPlayers;
 import entity.Player;
 
 public class Inside_Trading {
-
+		int whosTurn;
+		int [][] Fields;
+		public Inside_Trading(int whosturn, int [][]fields) {
+			this.whosTurn = whosturn;
+			this.Fields = fields;
+		}
 	public boolean hasPawnedOnColor(int fieldnumber) {
 		boolean hasPawned;
 		int pawned = 0;
 		for (int j = 0; j < 40; j++) {
-			if (getFields()[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
+			if (Fields[j][2] == Fields[fieldnumber][2] && Fields[j][5] == 1) {
 				if (Fields[j][8] != 0) {
 					pawned++;
 				}
@@ -25,15 +30,15 @@ public class Inside_Trading {
 	}
 
 	public String[] opponentsFields() {
-		String [] Fields = new String[40];
+		String [] SFields = new String[40];
 		String [] refinedFields;
 		int size = 0;
 		for (int i=0; i<40; i++) {
-			if(!(Game.getWhosTurn() == getFields()[i][4]) && getFields()[i][3] == 1) {
+			if(!(Game.getWhosTurn() == Fields[i][4]) && Fields[i][3] == 1) {
 				//				System.out.println(getFields()[i][0]);
-				Fields[i] = "" + getFields()[i][0];
-				if(Fields[i] != null) {
-					Fields[i] = GUI_GUI.getTitles()[i];
+				SFields[i] = "" + Fields[i][0];
+				if(SFields[i] != null) {
+					SFields[i] = GUI_GUI.getTitles()[i];
 					size++;
 				}
 			}
@@ -43,8 +48,8 @@ public class Inside_Trading {
 		refinedFields = new String[size];
 		int temp = 0;
 		for (int i=0; i<40; i++) {
-			if(Fields[i] != null) {
-				refinedFields[temp] = Fields[i];
+			if(SFields[i] != null) {
+				refinedFields[temp] = SFields[i];
 				temp++;
 			}
 		}
@@ -53,10 +58,10 @@ public class Inside_Trading {
 	}
 	
 	public void buyUsed(int fieldnumber, boolean hasBuildingsOnColor, Player player) {
-		if (hasHousesOnColor(fieldnumber)) {
+		if (hasBuildingsOnColor) {
 			GUI_GUI.gui.showMessage("Sælg alle huse på grunde med samme farve, som den valgte grund, før du kan lave indbyrdes handel");
 		} else {
-			int decidedPrice = choosePrice(Fields[fieldnumber][4]);
+			int decidedPrice = choosePrice(Fields[fieldnumber][4], player);
 			if (decidedPrice == 0) {
 				//Transaction denied
 				GUI_GUI.gui.showMessage("                                       	     Handlen blev afvist");

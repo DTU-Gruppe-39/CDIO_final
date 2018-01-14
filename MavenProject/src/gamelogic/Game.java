@@ -108,29 +108,29 @@ public class Game {
 	}
 
 
-	public void movePlayer(Player player, int die1, int die2) {
-		GUI_GUI.gui.setDice(die1, die2);
-		int nextField = 0;
-		int currField;
-		int diceSum=0;
-		//Get current field of player
-		currField = player.getCurrentField();
-		diceSum= die1 + die2;
-		//Calculate next field with dice and current field
-		//If above 40, then modulus 40
-		nextField += currField + diceSum;
-		if (nextField > 39) {
-			nextField = (currField + diceSum) % 40;
-			player.setNewBalance(4000);
-			//Update whosTurn's players balance on GUI
-			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
-		}
-		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
-		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
-
-		//Move player on GUI
-		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
-	}
+//	public void movePlayer(Player player, int die1, int die2) {
+//		GUI_GUI.gui.setDice(die1, die2);
+//		int nextField = 0;
+//		int currField;
+//		int diceSum=0;
+//		//Get current field of player
+//		currField = player.getCurrentField();
+//		diceSum= die1 + die2;
+//		//Calculate next field with dice and current field
+//		//If above 40, then modulus 40
+//		nextField += currField + diceSum;
+//		if (nextField > 39) {
+//			nextField = (currField + diceSum) % 40;
+//			player.setNewBalance(4000);
+//			//Update whosTurn's players balance on GUI
+//			GUI_GUI.getGuiPlayers(whosTurn).setBalance(player.getBalance());
+//		}
+//		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), false);
+//		ListOfPlayers.getPlayers(whosTurn).setCurrentField(nextField);
+//
+//		//Move player on GUI
+//		GUI_GUI.getFields(player.getCurrentField()).setCar(GUI_GUI.getGuiPlayers(whosTurn), true);
+//	}
 
 	public void setOwner(Player player) {
 		Fields[ListOfPlayers.getPlayers(whosTurn).getCurrentField()][4] = whosTurn;
