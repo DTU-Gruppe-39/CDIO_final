@@ -1,6 +1,5 @@
-package gamelogic;
+package Chancecards;
 
-import entity.Player;
 
 public class RecieveCard extends Chancecard {
 	private int amount;

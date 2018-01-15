@@ -1,6 +1,6 @@
 package entity;
 
-import gamelogic.Game;
+import controller.Game;
 
 public class Player {
 	private String name;
@@ -16,19 +16,20 @@ public class Player {
 	public int propertyValue;
 	public int RoundsInJail = 0;
 	public int ShippingCompaniesOwned = 0;
+	public int BreweriesOwned = 0;
 
 
 	public Player () {
 		//		TwoDice dice = new TwoDice();
 		this.account = new AccountBalance(0);
 		//		this.dice = dice;
-		isDead = false;
-		isWinner = false;
-		isJailed = false;
+		this.isDead = false;
+		this.isWinner = false;
+		this.isJailed = false;
 
 		this.haveJailCard = 0;
 
-		netWorth = 0;
+		this.netWorth = 0;
 	}
 
 	public int getCurrentField() {
@@ -107,12 +108,20 @@ public class Player {
 	public int getHaveJailCard() {
 		return haveJailCard;
 	}
-	
+	public void boughtBrewery() {
+		this.BreweriesOwned += 1;
+	}
+	public void lostBrewery() {
+		this.BreweriesOwned -= 1;
+	}
+	public int getBreweriesOwned() {
+		return this.BreweriesOwned;
+	}
 	public void boughtShippingCompany() {
 		this.ShippingCompaniesOwned += 1;
 	}
 	
-	public void pawnedShippingCompany() {
+	public void lostShippingCompany() {
 		this.ShippingCompaniesOwned -= 1;
 	}
 	
@@ -121,8 +130,8 @@ public class Player {
 	}
 	
 	public void CalculateTax() {
-		tax = 0;
-		tax = netWorth/10;
+		this.tax = 0;
+		this.tax = netWorth/10;
 	}
 	
 	public int getTax() {

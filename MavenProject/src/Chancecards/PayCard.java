@@ -1,4 +1,4 @@
-package gamelogic;
+package Chancecards;
 
 import entity.Player;
 import controller.ListOfPlayers;

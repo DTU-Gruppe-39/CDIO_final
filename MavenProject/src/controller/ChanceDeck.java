@@ -1,10 +1,15 @@
 package controller;
 
-import gamelogic.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import boundary.GUI_GUI;
+
+import Chancecards.Chancecard;
+import Chancecards.JailCard;
+import Chancecards.MoveCard;
+import Chancecards.PayCard;
+import Chancecards.RecieveCard;
+import boundary.GUI_Create;
 
 
 public class ChanceDeck {
@@ -12,15 +17,6 @@ public class ChanceDeck {
 	private static Chancecard[] Cards;
 	private static int jailInDeck = 2;
 	private static int nextDraw = -1;
-
-	public Chancecard[] getCards() {
-		return ChanceDeck.Cards;
-	}
-
-
-	public static void setCards(Chancecard[] cards) {
-		Cards = cards;
-	}
 
 	public static void CreateCards() throws IOException{
 		Chancecard[] Card;
@@ -88,9 +84,9 @@ public class ChanceDeck {
 
 		}else if(draw instanceof MoveCard) {
 						System.out.println("Move to: " +((MoveCard)draw).getAmount());
-						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), false);
+						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), false);
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setCurrentField(((MoveCard)draw).getAmount());
-						GUI_GUI.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_GUI.getGuiPlayers(Game.getWhosTurn()), true);
+						GUI_Create.getFields(ListOfPlayers.getPlayers(Game.getWhosTurn()).getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
 						
 						if (((MoveCard)draw).getAmount() == 0){
 						ListOfPlayers.getPlayers(Game.getWhosTurn()).setNewBalance(4000);
@@ -143,6 +139,15 @@ public class ChanceDeck {
 		setText(title);
 	}
 
+	public Chancecard[] getCards() {
+		return ChanceDeck.Cards;
+	}
+
+
+	public static void setCards(Chancecard[] cards) {
+		Cards = cards;
+	}
+	
 	public static int getJailInDeck() {
 		return jailInDeck;
 	}
