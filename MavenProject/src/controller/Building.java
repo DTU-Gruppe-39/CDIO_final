@@ -55,7 +55,7 @@ public class Building {
 			GUI_Create.displayHouses(fieldnumber, this.Fields[fieldnumber][9]);
 			player.setNewBalance(HousePrice.getHousePriceInt()[fieldnumber]/2);
 			GUI_Create.getGuiPlayers(this.whosTurn).setBalance(player.getBalance());
-			System.out.println("Hotelet blev købt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
+			System.out.println("Hotelet blev solgt på grunden " + GUI_GUI.getTitles()[fieldnumber]);
 		} else {
 			//Tell user they can't sell any more houses
 			GUI_GUI.gui.showMessage("                                            Du kan ikke sælge flere huse");
