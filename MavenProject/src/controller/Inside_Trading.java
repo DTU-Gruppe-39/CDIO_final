@@ -103,7 +103,7 @@ public class Inside_Trading {
 				GUI_GUI.gui.showMessage("                                            Du har ikke så mange penge, vælg et mindre beløb");
 				offerPrice = GUI_GUI.gui.getUserInteger("                            Indtast dit bud på grunden, bemærk at 0 betyder fortryd");
 			}
-			accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet? ", "Accepter", "Afvis");
+			accepted = GUI_GUI.gui.getUserLeftButtonPressed("                                            " + ListOfPlayers.getPlayers(owner).getName() + " vil du accepterer tilbuddet på " + offerPrice + "kr.?", "Accepter", "Afvis");
 		}
 		if (accepted && offerPrice != 0) {
 			return offerPrice;
