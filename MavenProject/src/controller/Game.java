@@ -35,6 +35,7 @@ public class Game {
 
 		//		//Create dice
 		TwoDice dice = new TwoDice();
+		dice.setupRunOne();
 		
 		ListOfPlayers.addFunds(GUI_GUI.getNumberOfPlayers());
 		while ((GUI_GUI.getNumberOfPlayers()-1 == Miscellaneous.getNumberOfDeadPlayers()) ==false) {
