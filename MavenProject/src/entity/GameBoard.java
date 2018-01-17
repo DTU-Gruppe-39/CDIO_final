@@ -2,7 +2,7 @@ package entity;
 
 import controller.Game;
 /**
- * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [FieldNumb, rent, color, isOwned, owner, isOwnable, buyPrice, pawnPrice, isPawned, buildings]
+ * Field[][] har formen [FieldNumb][Attributes], hvor [Attributes] = [0 :FieldNumb, 1:rent, 2:color, 3:isOwned, 4:owner, 5:isOwnable, 6:buyPrice, 7:pawnPrice, 8:isPawned, 9:buildings]
  */
 public class GameBoard {
 	public static void fillFields() {

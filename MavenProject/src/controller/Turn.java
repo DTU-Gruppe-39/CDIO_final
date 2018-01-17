@@ -17,13 +17,14 @@ public class Turn {
 	
 	public void updateTurn (int die1, int die2, Player player) {
 		if (die1 == die2) {
-			this.sameDice++;
-			if (this.sameDice == 3) {
+			Turn.sameDice++;
+			if (Turn.sameDice == 3) {
 				tripleTurn(player);			
 			} else {
 				handleTurn(die1, die2, player);
 			}
 		} else {
+			Turn.sameDice = 0;
 			handleTurn(die1, die2, player);
 			if (Game.getWhosTurn() == GUI_GUI.getNumberOfPlayers()) {
 				Game.setWhosTurn(1);
@@ -52,7 +53,7 @@ public class Turn {
 		player.setCurrentField(10);
 		player.setJailed(true);
 		GUI_Create.getFields(player.getCurrentField()).setCar(GUI_Create.getGuiPlayers(Game.getWhosTurn()), true);
-		this.sameDice = 0;
+		Turn.sameDice = 0;
 		if (Game.getWhosTurn()== GUI_GUI.getNumberOfPlayers()) {
 			Game.setWhosTurn(1);
 		}
