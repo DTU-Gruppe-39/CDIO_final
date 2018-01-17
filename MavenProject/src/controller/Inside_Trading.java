@@ -11,6 +11,8 @@ public class Inside_Trading {
 			this.whosTurn = whosturn;
 			this.Fields = fields;
 		}
+		
+		//best to set in building class
 	public boolean hasPawnedOnColor(int fieldnumber) {
 		boolean hasPawned;
 		int pawned = 0;
@@ -111,6 +113,4 @@ public class Inside_Trading {
 			return 0;
 		}
 	}
-	
-	
 }

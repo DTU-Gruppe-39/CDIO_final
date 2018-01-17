@@ -11,7 +11,7 @@ public class Turn {
 	Jail jail = new Jail();
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	LandOnField landOnField = new LandOnField(Game.getWhosTurn(), Game.getFields());
-	private int sameDice = 0;
+	private static int sameDice = 0;
 	
 	
 	
