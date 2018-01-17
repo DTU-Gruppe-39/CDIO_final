@@ -111,6 +111,4 @@ public class Inside_Trading {
 			return 0;
 		}
 	}
-	
-	
 }

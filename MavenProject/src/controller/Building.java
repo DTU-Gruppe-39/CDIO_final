@@ -10,10 +10,12 @@ import entity.Player;
 public class Building {
 	int whosTurn;
 	int [][] Fields;
+
 	public Building(int whosturn, int [][]fields) {
 		this.whosTurn = whosturn;
 		this.Fields = fields;
 	}
+	
 	Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
 	
 	public void buyBuildings(int fieldnumber, Player player, boolean pawnedOnColor) {
