@@ -60,6 +60,7 @@ public class Turn {
 		else {
 			Game.increasWhosTurn();
 		}
+		GUI_GUI.gui.showMessage("                        Du har slået 2 ens 3 gange i træk og er derfor røget i fængsel");
 	}	
 	
 	
