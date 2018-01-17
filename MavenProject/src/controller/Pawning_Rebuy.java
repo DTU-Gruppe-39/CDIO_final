@@ -2,6 +2,7 @@ package controller;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
+import entity.Miscellaneous;
 import entity.Player;
 
 public class Pawning_Rebuy {
@@ -74,9 +75,10 @@ public class Pawning_Rebuy {
 		return refinedFields;
 	}
 	
-	public void setPawned(int fieldnumber, boolean houseOnColor) {
+	public void setPawned(int fieldnumber) {
 		//		GUI_GUI.getFields(ListOfPlayers.getPlayers(whosTurn).getCurrentField()).setDescription("Ejes af: " + ListOfPlayers.getPlayers(whosTurn).getName());
-		if (houseOnColor) {
+		Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
+		if (misc.hasHousesOnColor(fieldnumber)) {
 			GUI_GUI.gui.showMessage("                            Du kan ikke pantsætte grunde med huse. Sælg dine huse først");
 		} else {
 			GUI_Create.displayOwner(fieldnumber, "("+ListOfPlayers.getPlayers(Game.getWhosTurn()).getName()+")");

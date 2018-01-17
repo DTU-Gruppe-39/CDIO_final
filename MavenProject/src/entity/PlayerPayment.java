@@ -22,7 +22,7 @@ public class PlayerPayment {
 		if (this.misc.doubleRent(field) && this.Fields[field][9] == 0 && this.Fields[field][2] != 9 && this.Fields[field][2] != 10) {
 			//Multiply rent by 2
 			while(this.PawReb.pawnableFields().length != 0 && this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
-				this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));							
+				this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()));							
 			}
 //			if (this.misc.currentPlayer().getBalance()<(2 * this.misc.rent(field))) {
 //				ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(this.misc.currentPlayer().getBalance());
@@ -38,7 +38,7 @@ public class PlayerPayment {
 			//Pay normal rent
 			if (this.misc.currentPlayer().isDead()==false && ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).isDead()== false) { //Er det nødvendigt at tjekke om ejeren er død?
 				while(this.PawReb.pawnableFields().length != 0 && this.misc.currentPlayer().getBalance()<=(this.misc.rent(field))) {
-					this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));	
+					this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()));	
 				}
 				if (this.misc.currentPlayer().getBalance()<(this.misc.rent(field))) {
 					ListOfPlayers.getPlayers(this.misc.ownerOfCurrentField()).setNewBalance(this.misc.currentPlayer().getBalance());

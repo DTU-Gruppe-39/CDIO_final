@@ -64,7 +64,7 @@ public class Game {
 				case "Pantsæt grunde":
 					System.out.println("3"); //Printout to console for log purposes.
 					if (PawReb.pawnableFields().length != 0) {							
-						PawReb.setPawned(misc.titleToInt(PawReb.choosePawn()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()));
+						PawReb.setPawned(misc.titleToInt(PawReb.choosePawn()));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Du ejer ikke nogen grunde");
 					}
@@ -80,7 +80,7 @@ public class Game {
 				case "Indbyrdes handel": //Printout to console for log purposes.
 					System.out.println("5");
 					if (InTr.opponentsFields().length != 0) {							
-						InTr.buyUsed(misc.titleToInt(InTr.chooseProperty()), misc.hasHousesOnColor(ListOfPlayers.getPlayers(whosTurn).getCurrentField()), ListOfPlayers.getPlayers(whosTurn));
+						InTr.buyUsed(misc.titleToInt(InTr.chooseProperty()), ListOfPlayers.getPlayers(whosTurn));
 					} else {
 						GUI_GUI.gui.showMessage("                                            Dine modstandere ejer ikke nogen grunde");
 					}

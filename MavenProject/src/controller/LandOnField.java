@@ -77,7 +77,7 @@ public class LandOnField {
 				//Buy field if it is ownable
 				if (this.Fields[field][5] == 1 && GUI_GUI.displayBuyChoice()==true) {
 					if(player.getBalance()<=this.Fields[player.getCurrentField()][6]) {
-						this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()), this.misc.hasHousesOnColor(field));
+						this.PawReb.setPawned(this.misc.titleToInt(this.PawReb.choosePawn()));
 					}
 					else {
 						player.setNewBalance(-(this.Fields[player.getCurrentField()][6]));

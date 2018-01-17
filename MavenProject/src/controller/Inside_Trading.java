@@ -2,6 +2,7 @@ package controller;
 
 import boundary.GUI_Create;
 import boundary.GUI_GUI;
+import entity.Miscellaneous;
 import entity.Player;
 
 public class Inside_Trading {
@@ -59,8 +60,9 @@ public class Inside_Trading {
 		return refinedFields;
 	}
 	
-	public void buyUsed(int fieldnumber, boolean hasBuildingsOnColor, Player player) {
-		if (hasBuildingsOnColor) {
+	public void buyUsed(int fieldnumber, Player player) {
+		Miscellaneous misc = new Miscellaneous(Game.getWhosTurn(), Game.getFields());
+		if (misc.hasHousesOnColor(fieldnumber)) {
 			GUI_GUI.gui.showMessage("Sælg alle huse på grunde med samme farve, som den valgte grund, før du kan lave indbyrdes handel");
 		} else {
 			int decidedPrice = choosePrice(Fields[fieldnumber][4], player);
