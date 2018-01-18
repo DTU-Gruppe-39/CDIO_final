@@ -138,6 +138,67 @@ public class TwoDice {
 		System.out.println(Arrays.deepToString(run1));
 		setScriptedRun(run1);
 	}
+	
+	public void setupRunChance() {
+		int [][] run1  = new int [12][3];
+		scriptedRun = new int [12][3];
+		//Spiller1
+		run1 [0][1] = 1;
+		run1 [0][2] = 1;
+	
+		//Spiller1
+		run1 [1][1] = 2;
+		run1 [1][2] = 3;
+	
+		
+		//Spiller2
+		run1 [2][1] = 1;
+		run1 [2][2] = 1;
+		
+		
+		//Spiller2
+		run1 [3][1] = 2;
+		run1 [3][2] = 3;
+
+		//Spiller3
+		run1 [4][1] = 1;
+		run1 [4][2] = 1;
+
+		//Spiller3
+		run1 [5][1] = 2;
+		run1 [5][2] = 3;
+
+		//Spiller4
+		run1 [6][1] = 1;
+		run1 [6][2] = 1;
+
+		//Spiller4
+		run1 [7][1] = 2;
+		run1 [7][2] = 3;
+
+		//Spiller5
+		run1 [8][1] = 1;
+		run1 [8][2] = 1;
+
+		//Spiller5
+		run1 [9][1] = 2;
+		run1 [9][2] = 3;
+
+		//Spiller6
+		run1 [10][1] = 1;
+		run1 [10][2] = 1;
+
+		//Spiller6
+		run1 [11][1] = 2;
+		run1 [11][2] = 3;
+
+		
+
+
+		
+		System.out.println(Arrays.deepToString(run1));
+		setScriptedRun(run1);
+	}
 
 
 	public int[][] getScriptedRun() {
