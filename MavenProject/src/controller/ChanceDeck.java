@@ -18,64 +18,34 @@ public class ChanceDeck {
 	private static int jailInDeck = 2;
 	private static int nextDraw = -1;
 
-//	public static void CreateCards() throws IOException{
-//		Chancecard[] Card;
-//		Card = new Chancecard[21];
-//		readText();
-//		Card[0] = new RecieveCard("Chance1", 200);
-//		Card[1] = new RecieveCard("Chance2", 500);
-//		Card[2] = new RecieveCard("Chance3", 1000);
-//		Card[3] = new RecieveCard("Chance4", 1000);
-//		Card[4] = new RecieveCard("Chance5", 1000);
-//		Card[5] = new RecieveCard("Chance6", 1000);
-//		Card[6] = new RecieveCard("Chance7", 1000);
-//		Card[7] = new RecieveCard("Chance8", 1000);
-//		Card[8] = new RecieveCard("Chance9", 3000);
-//		Card[9] = new PayCard("Chance10", -200);
-//		Card[10] = new PayCard("Chance11", -200);
-//		Card[11] = new PayCard("Chance12", -1000);	
-//		Card[12] = new PayCard("Chance13", -1000);
-//		Card[13] = new PayCard("Chance14", -2000);
-//		Card[14] = new PayCard("Chance15", -3000);
-//		Card[15] = new PayCard("Chance16", -3000);
-//		Card[16] = new JailCard("Chance17");
-//		Card[17] = new JailCard("Chance18");
-//		Card[18] = new MoveCard("Chance19", 30);
-//		Card[19] = new MoveCard("Chance20", 30);
-//		Card[20] = new MoveCard("Chance21", 0);
-//
-//		setCards(Card);
-//	}
 	public static void CreateCards() throws IOException{
 		Chancecard[] Card;
 		Card = new Chancecard[21];
 		readText();
 		Card[0] = new RecieveCard("Chance1", 200);
-		Card[1] = new PayCard("Chance12", -1000);
-		Card[2] = new MoveCard("Chance19", 30);
-		Card[3] = new JailCard("Chance17");
-		Card[4] = new MoveCard("Chance20", 30);
-		Card[5] = new RecieveCard("Chance7", 1000);
-		Card[6] = new MoveCard("Chance21", 0);
+		Card[1] = new RecieveCard("Chance2", 500);
+		Card[2] = new RecieveCard("Chance3", 1000);
+		Card[3] = new RecieveCard("Chance4", 1000);
+		Card[4] = new RecieveCard("Chance5", 1000);
+		Card[5] = new RecieveCard("Chance6", 1000);
+		Card[6] = new RecieveCard("Chance7", 1000);
 		Card[7] = new RecieveCard("Chance8", 1000);
 		Card[8] = new RecieveCard("Chance9", 3000);
 		Card[9] = new PayCard("Chance10", -200);
 		Card[10] = new PayCard("Chance11", -200);
-		Card[11] = new RecieveCard("Chance2", 500);
+		Card[11] = new PayCard("Chance12", -1000);	
 		Card[12] = new PayCard("Chance13", -1000);
 		Card[13] = new PayCard("Chance14", -2000);
 		Card[14] = new PayCard("Chance15", -3000);
 		Card[15] = new PayCard("Chance16", -3000);
-		Card[16] = new RecieveCard("Chance3", 1000);
+		Card[16] = new JailCard("Chance17");
 		Card[17] = new JailCard("Chance18");
-		Card[18] = new RecieveCard("Chance4", 1000);
-		Card[19] = new RecieveCard("Chance5", 1000);
-		Card[20] = new RecieveCard("Chance6", 1000);
+		Card[18] = new MoveCard("Chance19", 30);
+		Card[19] = new MoveCard("Chance20", 30);
+		Card[20] = new MoveCard("Chance21", 0);
 
-		setCards(Card);
 	}
-	
-	
+
 
 	public static void shuffle() {
 		for(int c = 0; c < 3; c++) {
