@@ -44,6 +44,7 @@ public class ChanceDeck {
 		Card[19] = new MoveCard("Chance20", 30);
 		Card[20] = new MoveCard("Chance21", 0);
 
+		setCards(Card);
 	}
 
 
