@@ -140,8 +140,8 @@ public class TwoDice {
 	}
 	
 	public void setupRunChance() {
-		int [][] run1  = new int [12][3];
-		scriptedRun = new int [12][3];
+		int [][] run1  = new int [16][3];
+		scriptedRun = new int [16][3];
 		//Spiller1
 		run1 [0][1] = 1;
 		run1 [0][2] = 1;
@@ -192,7 +192,17 @@ public class TwoDice {
 		run1 [11][1] = 2;
 		run1 [11][2] = 3;
 
+		run1 [12][1] = 2;
+		run1 [12][2] = 3;
 		
+		run1 [13][1] = 2;
+		run1 [13][2] = 3;
+		
+		run1 [14][1] = 2;
+		run1 [14][2] = 3;
+		
+		run1 [15][1] = 2;
+		run1 [15][2] = 3;
 
 
 		
