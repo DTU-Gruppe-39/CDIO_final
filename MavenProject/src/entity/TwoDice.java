@@ -45,8 +45,8 @@ public class TwoDice {
 	}
 	
 	public void setupRunOne() {
-		int [][] run1  = new int [21][3];
-		scriptedRun = new int [21][3];
+		int [][] run1  = new int [23][3];
+		scriptedRun = new int [23][3];
 		//Spiller1
 		run1 [0][1] = 1;
 		run1 [0][2] = 2;
@@ -132,6 +132,14 @@ public class TwoDice {
 		//Pay rent shipping
 		run1 [20][1] = 6;
 		run1 [20][2] = 4;
+		
+		//Buy Hellerupvej
+		run1 [21][1] = 1;
+		run1 [21][2] = 2;
+		
+		//Die on Hellerupvej
+		run1 [22][1] = 1;
+		run1 [22][2] = 2;
 
 
 		
